@@ -9,34 +9,34 @@
   <meta name="description" content="今回の投稿では、SharePoint Online における SharePoint 2010 形式ワークフローの廃止 (MC217999) に際して、移行先となる Power Automate を簡単に紹介します。 これまで移行先の Power Automate の採用を決定できない一つの要因に、Power Automate に慣れていないことが挙げられていることがあると思います。Power Au">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Power Automate で簡単な承認フローを作成する">
-<meta property="og:url" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/index.html">
+<meta property="og:url" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/index.html">
 <meta property="og:site_name" content="Japan SharePoint Support Blog">
 <meta property="og:description" content="今回の投稿では、SharePoint Online における SharePoint 2010 形式ワークフローの廃止 (MC217999) に際して、移行先となる Power Automate を簡単に紹介します。 これまで移行先の Power Automate の採用を決定できない一つの要因に、Power Automate に慣れていないことが挙げられていることがあると思います。Power Au">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/PA01.png">
-<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/PA02.png">
-<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/PA03.png">
-<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/PA04.png">
-<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/PA05.png">
-<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/PA06.png">
-<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/PA07.png">
-<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/PA08.png">
-<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/PA09.png">
-<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/PA10.png">
-<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/PA11.png">
-<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/PA12.png">
-<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/PA13.png">
-<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/PA14.png">
-<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/PA15.png">
-<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/PA16.png">
-<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/PA17.png">
-<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/PA18.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/PA01.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/PA02.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/PA03.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/PA04.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/PA05.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/PA06.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/PA07.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/PA08.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/PA09.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/PA10.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/PA11.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/PA12.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/PA13.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/PA14.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/PA15.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/PA16.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/PA17.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/PA18.png">
 <meta property="article:published_time" content="2020-07-09T15:00:00.000Z">
-<meta property="article:modified_time" content="2021-05-17T06:03:51.553Z">
+<meta property="article:modified_time" content="2021-05-17T06:15:19.461Z">
 <meta property="article:author" content="SharePoint Support Japan">
 <meta property="article:tag" content="SharePoint Online">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/PA01.png">
+<meta name="twitter:image" content="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/PA01.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan SharePoint Support Blog" type="application/atom+xml">
   
@@ -69,9 +69,9 @@
         <a id="main-nav-toggle" class="nav-icon"></a>
         <div id="ms-logo"></div>
         
-          <a class="main-nav-link" href="/newblog/">Home</a>
+          <a class="main-nav-link" href="/blog/">Home</a>
         
-          <a class="main-nav-link" href="/newblog/archives">Archives</a>
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
         
         <a class="main-nav-link" href="https://cssjpn.github.io/" target="_blank" rel="noopener">サポート情報</a>
       </nav>
@@ -81,7 +81,7 @@
         
       </nav>
       <div id="search-form-wrap">
-        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpspsupport.github.io/newblog"></form>
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpspsupport.github.io/blog"></form>
       </div>
     </div>
     <div id="header-title" class="inner">
@@ -119,9 +119,9 @@
 </a>
         
         
-        <a href="https://github.com/jpspsupport/newblog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+74e49d22-6739-5ec8-9fd8-ab248d5c55d3%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BPower+Automate+%E3%81%A7%E7%B0%A1%E5%8D%98%E3%81%AA%E6%89%BF%E8%AA%8D%E3%83%95%E3%83%AD%E3%83%BC%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fnewblog%2Fsharepoint-online%2Fintroduction-to-power-automate%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-online%2Fintroduction-to-power-automate.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fnewblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-online%2Fintroduction-to-power-automate.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jpspsupport/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+c9620547-cb9d-5604-b019-18fe80b51eba%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BPower+Automate+%E3%81%A7%E7%B0%A1%E5%8D%98%E3%81%AA%E6%89%BF%E8%AA%8D%E3%83%95%E3%83%AD%E3%83%BC%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fblog%2Fsharepoint-online%2Fintroduction-to-power-automate%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-online%2Fintroduction-to-power-automate.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-online%2Fintroduction-to-power-automate.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/" data-id="ckos7c6rv00040lo21a2ugdav" class="article-share-link">共有</a>
+        <a data-url="https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/" data-id="ckos7qxag00040mk43cf5ewzm" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -136,36 +136,36 @@
 <p>タイトル : ガイダンス: SharePoint で従来のワークフローからパワー自動化フローに移行する<br>アドレス : <a href="https://docs.microsoft.com/ja-jp/sharepoint/dev/business-apps/power-automate/guidance/migrate-from-classic-workflows-to-power-automate-flows" target="_blank" rel="noopener">https://docs.microsoft.com/ja-jp/sharepoint/dev/business-apps/power-automate/guidance/migrate-from-classic-workflows-to-power-automate-flows</a></p>
 <h2 id="ウォークスルー"><a href="#ウォークスルー" class="headerlink" title="ウォークスルー"></a>ウォークスルー</h2><p>それでは、実際に Power Automate で処理を作成していき、操作に慣れることを目指しましょう。</p>
 <h3 id="1-コマンド-バーより-自動化-–-Power-Automate-–-フローの作成-をクリックします。"><a href="#1-コマンド-バーより-自動化-–-Power-Automate-–-フローの作成-をクリックします。" class="headerlink" title="1. コマンド バーより [自動化] – [Power Automate] – [フローの作成] をクリックします。"></a>1. コマンド バーより [自動化] – [Power Automate] – [フローの作成] をクリックします。</h3><p>モダン UI で、リストやライブラリを表示すると、コマンドバーに [自動化] というメニューがあります。SharePoint は、ここからフローの作成を開始できます。</p>
-<p><img src="/newblog/sharepoint-online/introduction-to-power-automate/PA01.png" alt="PowerAutomate01"></p>
+<p><img src="/blog/sharepoint-online/introduction-to-power-automate/PA01.png" alt="PowerAutomate01"></p>
 <h3 id="2-画面右に現れるフローの作成ペインにて-詳細の表示-を展開し、-新しいファイルが-SharePoint-に追加されたときに、カスタムアクションを完了する-をクリックしてフローの作成を開始します。"><a href="#2-画面右に現れるフローの作成ペインにて-詳細の表示-を展開し、-新しいファイルが-SharePoint-に追加されたときに、カスタムアクションを完了する-をクリックしてフローの作成を開始します。" class="headerlink" title="2. 画面右に現れるフローの作成ペインにて [詳細の表示] を展開し、[新しいファイルが SharePoint に追加されたときに、カスタムアクションを完了する] をクリックしてフローの作成を開始します。"></a>2. 画面右に現れるフローの作成ペインにて [詳細の表示] を展開し、[新しいファイルが SharePoint に追加されたときに、カスタムアクションを完了する] をクリックしてフローの作成を開始します。</h3><p>Power Automate では、シナリオに合わせてテンプレートを選択して、フローの作成を行うことができます。<br>そのため、SharePoint へのコネクターや、必要最小限の処理が含まれた状態で、フローを作成できるため生産的です。</p>
-<p><img src="/newblog/sharepoint-online/introduction-to-power-automate/PA02.png" alt="PowerAutomate02"><br><img src="/newblog/sharepoint-online/introduction-to-power-automate/PA03.png" alt="PowerAutomate03"></p>
-<h3 id="3-続行-をクリックします。"><a href="#3-続行-をクリックします。" class="headerlink" title="3. [続行] をクリックします。"></a>3. [続行] をクリックします。</h3><p><img src="/newblog/sharepoint-online/introduction-to-power-automate/PA04.png" alt="PowerAutomate04"></p>
+<p><img src="/blog/sharepoint-online/introduction-to-power-automate/PA02.png" alt="PowerAutomate02"><br><img src="/blog/sharepoint-online/introduction-to-power-automate/PA03.png" alt="PowerAutomate03"></p>
+<h3 id="3-続行-をクリックします。"><a href="#3-続行-をクリックします。" class="headerlink" title="3. [続行] をクリックします。"></a>3. [続行] をクリックします。</h3><p><img src="/blog/sharepoint-online/introduction-to-power-automate/PA04.png" alt="PowerAutomate04"></p>
 <h3 id="4-フローの編集画面に遷移しました。-新しいステップ-をクリックして後続の処理を追加していきます。"><a href="#4-フローの編集画面に遷移しました。-新しいステップ-をクリックして後続の処理を追加していきます。" class="headerlink" title="4. フローの編集画面に遷移しました。[+ 新しいステップ] をクリックして後続の処理を追加していきます。"></a>4. フローの編集画面に遷移しました。[+ 新しいステップ] をクリックして後続の処理を追加していきます。</h3><p>ライブラリにファイルがアップロードされて処理が開始するという部分ができあがった状態でスタートします。当初の設定値などは、色々と観察してみてください。</p>
-<p><img src="/newblog/sharepoint-online/introduction-to-power-automate/PA05.png" alt="PowerAutomate05"></p>
+<p><img src="/blog/sharepoint-online/introduction-to-power-automate/PA05.png" alt="PowerAutomate05"></p>
 <h4 id="補足"><a href="#補足" class="headerlink" title="補足"></a>補足</h4><p>処理の最後ではなく、途中にアクションを差し込む場合は、アクション間にある線をポイントすると (+) マークが表れます。</p>
-<p><img src="/newblog/sharepoint-online/introduction-to-power-automate/PA06.png" alt="PowerAutomate06"></p>
+<p><img src="/blog/sharepoint-online/introduction-to-power-automate/PA06.png" alt="PowerAutomate06"></p>
 <p>さらに [アクションの追加] を押すと、アクションが挿入できます。</p>
-<p><img src="/newblog/sharepoint-online/introduction-to-power-automate/PA07.png" alt="PowerAutomate07"></p>
-<h3 id="5-アクション選択画面で-“承認”-を検索し、-開始して承認を待機-を選択します。"><a href="#5-アクション選択画面で-“承認”-を検索し、-開始して承認を待機-を選択します。" class="headerlink" title="5. アクション選択画面で “承認” を検索し、[開始して承認を待機] を選択します。"></a>5. アクション選択画面で “承認” を検索し、[開始して承認を待機] を選択します。</h3><p><img src="/newblog/sharepoint-online/introduction-to-power-automate/PA08.png" alt="PowerAutomate08"></p>
+<p><img src="/blog/sharepoint-online/introduction-to-power-automate/PA07.png" alt="PowerAutomate07"></p>
+<h3 id="5-アクション選択画面で-“承認”-を検索し、-開始して承認を待機-を選択します。"><a href="#5-アクション選択画面で-“承認”-を検索し、-開始して承認を待機-を選択します。" class="headerlink" title="5. アクション選択画面で “承認” を検索し、[開始して承認を待機] を選択します。"></a>5. アクション選択画面で “承認” を検索し、[開始して承認を待機] を選択します。</h3><p><img src="/blog/sharepoint-online/introduction-to-power-automate/PA08.png" alt="PowerAutomate08"></p>
 <p>アクションについては、画面上側にサービス、下側にトリガーとアクションが表示されます。<br>検索機能はそれぞれに適用されます。ここでは “承認” を検索していますが、”承認” サービスだけではなく、承認というキーワードに該当するアクションを持つ各種サービスと、そのトリガーやアクションがすべて表示されています。<br>どのようなサービス、そしてそのトリガーやアクションが使用できるかは、公開情報を調べても結構ですし、ご自身で色々と検索しながら確認することもできます。</p>
-<h3 id="6-“承認の種類”-にて、”カスタム応答-–-1-つの応答を待機”-をクリックします。"><a href="#6-“承認の種類”-にて、”カスタム応答-–-1-つの応答を待機”-をクリックします。" class="headerlink" title="6. “承認の種類” にて、”カスタム応答 – 1 つの応答を待機” をクリックします。"></a>6. “承認の種類” にて、”カスタム応答 – 1 つの応答を待機” をクリックします。</h3><p><img src="/newblog/sharepoint-online/introduction-to-power-automate/PA09.png" alt="PowerAutomate09"></p>
-<h3 id="7-“開始して承認を待機”-アクションの詳細を指定していきます。"><a href="#7-“開始して承認を待機”-アクションの詳細を指定していきます。" class="headerlink" title="7. “開始して承認を待機” アクションの詳細を指定していきます。"></a>7. “開始して承認を待機” アクションの詳細を指定していきます。</h3><p><img src="/newblog/sharepoint-online/introduction-to-power-automate/PA10.png" alt="PowerAutomate10"></p>
+<h3 id="6-“承認の種類”-にて、”カスタム応答-–-1-つの応答を待機”-をクリックします。"><a href="#6-“承認の種類”-にて、”カスタム応答-–-1-つの応答を待機”-をクリックします。" class="headerlink" title="6. “承認の種類” にて、”カスタム応答 – 1 つの応答を待機” をクリックします。"></a>6. “承認の種類” にて、”カスタム応答 – 1 つの応答を待機” をクリックします。</h3><p><img src="/blog/sharepoint-online/introduction-to-power-automate/PA09.png" alt="PowerAutomate09"></p>
+<h3 id="7-“開始して承認を待機”-アクションの詳細を指定していきます。"><a href="#7-“開始して承認を待機”-アクションの詳細を指定していきます。" class="headerlink" title="7. “開始して承認を待機” アクションの詳細を指定していきます。"></a>7. “開始して承認を待機” アクションの詳細を指定していきます。</h3><p><img src="/blog/sharepoint-online/introduction-to-power-automate/PA10.png" alt="PowerAutomate10"></p>
 <p>応答オプションには、承認者が選択する応答の選択肢 (例 承認、却下) を定義します。</p>
 <p>各種エディターについてですが、アクションの各プロパティに直接文字入力をすると文字列の固定値が指定されます。<br>動的なコンテンツ (値) を扱いたい場合は、入力項目にフォーカスを当て、画面右下の吹き出しコンテンツから値を選択して使います。</p>
-<h3 id="8-同じ要領で-新しいステップ-をクリックして-“条件”-アクションを追加します。"><a href="#8-同じ要領で-新しいステップ-をクリックして-“条件”-アクションを追加します。" class="headerlink" title="8. 同じ要領で [+ 新しいステップ] をクリックして “条件” アクションを追加します。"></a>8. 同じ要領で [+ 新しいステップ] をクリックして “条件” アクションを追加します。</h3><p><img src="/newblog/sharepoint-online/introduction-to-power-automate/PA11.png" alt="PowerAutomate11"></p>
-<h3 id="9-条件の左辺より順に、動的な値から-“応答”-“次の値に等しい”-文字列直接入力にて-“承認”-などと指定します。"><a href="#9-条件の左辺より順に、動的な値から-“応答”-“次の値に等しい”-文字列直接入力にて-“承認”-などと指定します。" class="headerlink" title="9. 条件の左辺より順に、動的な値から “応答”, “次の値に等しい”, 文字列直接入力にて “承認” などと指定します。"></a>9. 条件の左辺より順に、動的な値から “応答”, “次の値に等しい”, 文字列直接入力にて “承認” などと指定します。</h3><p><img src="/newblog/sharepoint-online/introduction-to-power-automate/PA12.png" alt="PowerAutomate12"></p>
+<h3 id="8-同じ要領で-新しいステップ-をクリックして-“条件”-アクションを追加します。"><a href="#8-同じ要領で-新しいステップ-をクリックして-“条件”-アクションを追加します。" class="headerlink" title="8. 同じ要領で [+ 新しいステップ] をクリックして “条件” アクションを追加します。"></a>8. 同じ要領で [+ 新しいステップ] をクリックして “条件” アクションを追加します。</h3><p><img src="/blog/sharepoint-online/introduction-to-power-automate/PA11.png" alt="PowerAutomate11"></p>
+<h3 id="9-条件の左辺より順に、動的な値から-“応答”-“次の値に等しい”-文字列直接入力にて-“承認”-などと指定します。"><a href="#9-条件の左辺より順に、動的な値から-“応答”-“次の値に等しい”-文字列直接入力にて-“承認”-などと指定します。" class="headerlink" title="9. 条件の左辺より順に、動的な値から “応答”, “次の値に等しい”, 文字列直接入力にて “承認” などと指定します。"></a>9. 条件の左辺より順に、動的な値から “応答”, “次の値に等しい”, 文字列直接入力にて “承認” などと指定します。</h3><p><img src="/blog/sharepoint-online/introduction-to-power-automate/PA12.png" alt="PowerAutomate12"></p>
 <p>1 つの応答を待機するモデルであれば、”結果” という値に、承認者が選択した値が入ってきます。<br>この値が “承認” ならば “はい” の方へ、そうでなければ “いいえ” の方に流すようにします。</p>
-<h3 id="10-はい、いいえのそれぞれのブロックにて、-アクションの追加-をクリックし、”項目の更新”-アクションを挿入します。"><a href="#10-はい、いいえのそれぞれのブロックにて、-アクションの追加-をクリックし、”項目の更新”-アクションを挿入します。" class="headerlink" title="10. はい、いいえのそれぞれのブロックにて、[アクションの追加] をクリックし、”項目の更新” アクションを挿入します。"></a>10. はい、いいえのそれぞれのブロックにて、[アクションの追加] をクリックし、”項目の更新” アクションを挿入します。</h3><p><img src="/newblog/sharepoint-online/introduction-to-power-automate/PA13.png" alt="PowerAutomate13"></p>
-<h3 id="11-それぞれ、承認済みか却下という値を列に書き込むに今回のサンプルはとどめます。"><a href="#11-それぞれ、承認済みか却下という値を列に書き込むに今回のサンプルはとどめます。" class="headerlink" title="11. それぞれ、承認済みか却下という値を列に書き込むに今回のサンプルはとどめます。"></a>11. それぞれ、承認済みか却下という値を列に書き込むに今回のサンプルはとどめます。</h3><p><img src="/newblog/sharepoint-online/introduction-to-power-automate/PA14.png" alt="PowerAutomate14"></p>
+<h3 id="10-はい、いいえのそれぞれのブロックにて、-アクションの追加-をクリックし、”項目の更新”-アクションを挿入します。"><a href="#10-はい、いいえのそれぞれのブロックにて、-アクションの追加-をクリックし、”項目の更新”-アクションを挿入します。" class="headerlink" title="10. はい、いいえのそれぞれのブロックにて、[アクションの追加] をクリックし、”項目の更新” アクションを挿入します。"></a>10. はい、いいえのそれぞれのブロックにて、[アクションの追加] をクリックし、”項目の更新” アクションを挿入します。</h3><p><img src="/blog/sharepoint-online/introduction-to-power-automate/PA13.png" alt="PowerAutomate13"></p>
+<h3 id="11-それぞれ、承認済みか却下という値を列に書き込むに今回のサンプルはとどめます。"><a href="#11-それぞれ、承認済みか却下という値を列に書き込むに今回のサンプルはとどめます。" class="headerlink" title="11. それぞれ、承認済みか却下という値を列に書き込むに今回のサンプルはとどめます。"></a>11. それぞれ、承認済みか却下という値を列に書き込むに今回のサンプルはとどめます。</h3><p><img src="/blog/sharepoint-online/introduction-to-power-automate/PA14.png" alt="PowerAutomate14"></p>
 <h2 id="実行確認"><a href="#実行確認" class="headerlink" title="実行確認"></a>実行確認</h2><p>ユーザー エクスペリエンスを確認してみましょう。</p>
 <p>ファイルをアップロードしてみてください。<br>しばらくすると承認者宛に以下のようなメールが届きます。</p>
-<p><img src="/newblog/sharepoint-online/introduction-to-power-automate/PA15.png" alt="PowerAutomate15"></p>
+<p><img src="/blog/sharepoint-online/introduction-to-power-automate/PA15.png" alt="PowerAutomate15"></p>
 <p>そこで [承認] を選択して、[送信] をクリックすると、承認処理が完了です。</p>
-<p><img src="/newblog/sharepoint-online/introduction-to-power-automate/PA16.png" alt="PowerAutomate16"></p>
+<p><img src="/blog/sharepoint-online/introduction-to-power-automate/PA16.png" alt="PowerAutomate16"></p>
 <p>Result 列に承認済みが記録されました。</p>
-<p><img src="/newblog/sharepoint-online/introduction-to-power-automate/PA17.png" alt="PowerAutomate17"></p>
+<p><img src="/blog/sharepoint-online/introduction-to-power-automate/PA17.png" alt="PowerAutomate17"></p>
 <h2 id="その他、トラブルシューティング等"><a href="#その他、トラブルシューティング等" class="headerlink" title="その他、トラブルシューティング等"></a>その他、トラブルシューティング等</h2><p>エラーがある場合は、フローの編集画面から [左矢印] をクリックして、概要ページ内にある実行履歴をクリックします。<br>この画面内に失敗のエントリーがあれば、それをクリックしてトラブルシューティングすることができます。</p>
-<p><img src="/newblog/sharepoint-online/introduction-to-power-automate/PA18.png" alt="PowerAutomate18"></p>
+<p><img src="/blog/sharepoint-online/introduction-to-power-automate/PA18.png" alt="PowerAutomate18"></p>
 <p>初めてのテクノロジーにおいても、スモール スタートで利用開始し、そこから少しずつテストしながら追加していくことで、ソリューションを作成できるものと考えております。<br>是非移行作業を進める上で、上記資料を準備にお役立てください。</p>
 
       
@@ -183,7 +183,7 @@
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>
 
         
-        <a href="https://github.com/jpspsupport/newblog/edit/main/articles/sharepoint-online/introduction-to-power-automate.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jpspsupport/blog/edit/main/articles/sharepoint-online/introduction-to-power-automate.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
