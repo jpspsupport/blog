@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>TLS 1.0 や 1.1 廃止による TokenHelper アプリ専用トークン取得動作への影響について | Japan SharePoint Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Microsoft 365 においては、メッセージ センターや各公開情報に記載の通り、TLS 1.0 と 1.1 を廃止し、新しい暗号化技術を基準とすることで、お客様データのセキュリティ保護を向上する動きを拡大しております。全世界のお客様を想定すると一部に限定されることを想定してはおりますが、特に旧バージョンのオペレーティング システムや .NET Framework (4.5 以下) 基盤をご利">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TLS 1.0 や 1.1 廃止による TokenHelper アプリ専用トークン取得動作への影響について">
+<meta property="og:url" content="https://jpspsupport.github.io/newblog/sharepoint-online/impact-of-tokenhelper-from-disabling-tls1.0/index.html">
+<meta property="og:site_name" content="Japan SharePoint Support Blog">
+<meta property="og:description" content="Microsoft 365 においては、メッセージ センターや各公開情報に記載の通り、TLS 1.0 と 1.1 を廃止し、新しい暗号化技術を基準とすることで、お客様データのセキュリティ保護を向上する動きを拡大しております。全世界のお客様を想定すると一部に限定されることを想定してはおりますが、特に旧バージョンのオペレーティング システムや .NET Framework (4.5 以下) 基盤をご利">
+<meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2021-03-24T15:00:00.000Z">
+<meta property="article:modified_time" content="2021-05-17T05:43:26.374Z">
+<meta property="article:author" content="SharePoint Support Japan">
+<meta property="article:tag" content="SharePoint Online">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan SharePoint Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/newblog/">Home</a>
+        
+          <a class="main-nav-link" href="/newblog/archives">Archives</a>
+        
+        <a class="main-nav-link" href="https://cssjpn.github.io/" target="_blank" rel="noopener">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpspsupport.github.io/newblog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan SharePoint Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの SharePoint に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-sharepoint-online/impact-of-tokenhelper-from-disabling-tls1.0" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      TLS 1.0 や 1.1 廃止による TokenHelper アプリ専用トークン取得動作への影響について
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2021-03-24T15:00:00.000Z" itemprop="datePublished">2021-03-25</time>
+</a>
+        
+        
+        <a href="https://github.com/jpspsupport/newblog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+67a64290-b090-50bc-ae2d-3c16c038238b%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BTLS+1.0+%E3%82%84+1.1+%E5%BB%83%E6%AD%A2%E3%81%AB%E3%82%88%E3%82%8B+TokenHelper+%E3%82%A2%E3%83%97%E3%83%AA%E5%B0%82%E7%94%A8%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E5%8F%96%E5%BE%97%E5%8B%95%E4%BD%9C%E3%81%B8%E3%81%AE%E5%BD%B1%E9%9F%BF%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fnewblog%2Fsharepoint-online%2Fimpact-of-tokenhelper-from-disabling-tls1.0%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-online%2Fimpact-of-tokenhelper-from-disabling-tls1.0.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fnewblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-online%2Fimpact-of-tokenhelper-from-disabling-tls1.0.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpspsupport.github.io/newblog/sharepoint-online/impact-of-tokenhelper-from-disabling-tls1.0/" data-id="ckos6lwqw00020mp11236fyk6" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Microsoft 365 においては、メッセージ センターや各公開情報に記載の通り、TLS 1.0 と 1.1 を廃止し、新しい暗号化技術を基準とすることで、お客様データのセキュリティ保護を向上する動きを拡大しております。<br>全世界のお客様を想定すると一部に限定されることを想定してはおりますが、特に旧バージョンのオペレーティング システムや .NET Framework (4.5 以下) 基盤をご利用の場合は、ご自身のシステムが影響を受けないか今一度ご確認ください。</p>
+<p>一般的な HTTPS 通信においては、トランスポート層において TLS プロトコルはクライアントとサーバーで対応バージョン等の情報を交換し、ハンドシェイクを実施します。該当処理の確立後は、当該暗号化技術の上で上位層 (アプリケーション層を含む) の通信を開始していく流れです。<br>TLS 1.0 や 1.1 が廃止が適応されると、クライアントから TLS 1.0 を要求した際に、Microsoft 365 の各種サーバーがこれを拒否し、トランスポート層で通信が遮断される動作となります。</p>
+<p>このような遮断を受けた時、.NET アプリケーション側で確認する典型的なエラーは以下となります。</p>
+<h3 id="典型的な例外の例"><a href="#典型的な例外の例" class="headerlink" title="典型的な例外の例"></a>典型的な例外の例</h3><p><code>System.Net.WebException: The underlying connection was closed: An unexpected error occurred on a send. --&gt; System.IO.IOException: Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host. --&gt; System.Net.Sockets.SocketException: An existing connection was forcibly closed by the remote host.</code></p>
+<p>HttpWebRequest.GetResponse メソッドや、Client Side Object Model (CSOM) などでは、上記のようなエラーで、通信が遮断される動作が想定されます。<br>なお、TokenHelper などでアプリ専用トークンをご利用の場合は、少し異なったエラーが発生します。</p>
+<h3 id="TokenHelper-アプリ専用トークン取得時の例"><a href="#TokenHelper-アプリ専用トークン取得時の例" class="headerlink" title="TokenHelper アプリ専用トークン取得時の例"></a>TokenHelper アプリ専用トークン取得時の例</h3><p><code>Microsoft.IdentityModel.SecurityTokenService.RequestFailedException: Token request failed. ---&gt; System.Net.WebException: The remote server returned an error: (401) Unauthorized.at System.Net.HttpWebRequest.GetResponse() at Microsoft.IdentityModel.S2S.Protocols.OAuth2.OAuth2WebRequest.GetResponse() at Microsoft.IdentityModel.S2S.Protocols.OAuth2.OAuth2S2SClient.Issue(String securityTokenServiceUrl OAuth2AccessTokenRequest oauth2Request) --- End of inner exception stack trace --- at Microsoft.IdentityModel.S2S.Protocols.OAuth2.OAuth2S2SClient.Issue(String securityTokenServiceUrl OAuth2AccessTokenRequest oauth2Request) at SampleNameSpace.TokenHelper.GetAppOnlyAccessToken(String targetPrincipalName String targetHost String targetRealm)</code></p>
+<p>上記エラーが発生したとしても、対処方法としては TLS 1.2 を有効化する対応を実施ください。</p>
+<h3 id="対処策"><a href="#対処策" class="headerlink" title="対処策"></a>対処策</h3><p>公開情報ご確認の上、上記のようなエラーが発生した場合は TLS 1.0 および 1.1 無効化による影響を疑い、対処を実施ください。</p>
+<p>タイトル : TLS 1.2 を有効にする方法<br>アドレス : <a href="https://docs.microsoft.com/ja-jp/mem/configmgr/core/plan-design/security/enable-tls-1-2" target="_blank" rel="noopener">https://docs.microsoft.com/ja-jp/mem/configmgr/core/plan-design/security/enable-tls-1-2</a></p>
+<p>なお、Azure App Service 上のアプリで .NET Framework 4.5 以下をご使用の場合は、対象のフレームワークバージョンを 4.6 以上に上げることが推奨です。<br>ただし、参照アセンブリ等、依存関係の理由により難しい場合は、以下のコードを一行だけアプリケーションのなるべく早い段階の処理として加えることをお勧めします。<br>下記更新対象の値は static プロパティとしてアプリケーション全体をスコープとして影響し、アウトバウンドの TLS バージョンを 1.2 に指定します。 </p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;</span><br></pre></td></tr></table></figure>
+
+<h3 id="詳細説明"><a href="#詳細説明" class="headerlink" title="詳細説明"></a>詳細説明</h3><p>TokenHelper では、Realm を取得し、ClientID, ClientSecret および Realm を使用して、アクセストークンを取得する流れとなります。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Get the realm for the URL</span></span><br><span class="line"><span class="keyword">string</span> realm = TokenHelper.GetRealmFromTargetUrl(<span class="keyword">new</span> Uri(siteUrl));</span><br><span class="line"></span><br><span class="line"><span class="comment">//Get the access token for the URL.  </span></span><br><span class="line"><span class="keyword">string</span> accessToken = TokenHelper.GetAppOnlyAccessToken(TokenHelper.SharePointPrincipal, <span class="keyword">new</span> Uri(siteUrl).Authority, realm).AccessToken;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Create a client context object based on the retrieved access token</span></span><br><span class="line"><span class="keyword">using</span> (ClientContext cc = TokenHelper.GetClientContextWithAccessToken(siteUrl, accessToken))</span><br><span class="line">&#123;</span><br><span class="line">    cc.Load(cc.Web, p =&gt; p.Title);</span><br><span class="line">    cc.ExecuteQuery();</span><br><span class="line">    Console.WriteLine(cc.Web.Title);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>エラーが発生する流れとして、まずは TLS によりトランスポート層で拒否されることにより、TokenHelper.GetReamFromTargetUrl メソッド内で上記典型的な例外 : WebException (内部例外は IOException と SocketException) が返されます。<br>しかし、GetRealmFromTargetUrl メソッドは WebException をメソッド外部にスローしない実装です。該当リクエストは HTTP 応答 401 が返ることを想定したコードであるため、内部で例外を補足し、HTTP 応答ヘッダー WWW-Authenticate の値から Realm の情報を読み取ろうとします。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">string</span> <span class="title">GetRealmFromTargetUrl</span>(<span class="params">Uri targetApplicationUri</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	WebRequest request = WebRequest.Create(targetApplicationUri + <span class="string">"/_vti_bin/client.svc"</span>);</span><br><span class="line">	request.Headers.Add(<span class="string">"Authorization: Bearer "</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">try</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">using</span> (request.GetResponse())</span><br><span class="line">		&#123;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">catch</span> (WebException e)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (e.Response == <span class="literal">null</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">string</span> bearerResponseHeader = e.Response.Headers[<span class="string">"WWW-Authenticate"</span>];</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">string</span>.IsNullOrEmpty(bearerResponseHeader))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">const</span> <span class="keyword">string</span> bearer = <span class="string">"Bearer realm=\""</span>;</span><br><span class="line">		<span class="keyword">int</span> bearerIndex = bearerResponseHeader.IndexOf(bearer, StringComparison.Ordinal);</span><br><span class="line">		<span class="keyword">if</span> (bearerIndex &lt; <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span> realmIndex = bearerIndex + bearer.Length;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (bearerResponseHeader.Length &gt;= realmIndex + <span class="number">36</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">string</span> targetRealm = bearerResponseHeader.Substring(realmIndex, <span class="number">36</span>);</span><br><span class="line"></span><br><span class="line">			Guid realmGuid;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> (Guid.TryParse(targetRealm, <span class="keyword">out</span> realmGuid))</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> targetRealm;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>しかし、トランスポート層で通信が拒否されます。アプリケーション層での通信は実行されないため、SharePoint Online サーバーから HTTP 応答ヘッダー WWW-Authenticate などの値は返されません。このことにより例外オブジェクトの HTTP ヘッダーから Realm が取得できず、Realm が null として返されます。</p>
+<p>その結果、次の GetAppOnlyAccessToken メソッドに targetRealm が null が渡されます。<br>ACS に渡されるクライアント ID は、ClientID@Realm の形式で渡されます。この値が不正な形式 (ClientID@) となるため、HTTP 応答コード 401 と共に RequestFailedException が返されます。</p>
+<p>もちろん、RequestFailedException 単体を見た場合、アプリケーションへの変更により、Client ID が使用できなくなった場合や、Client Secret の有効期限が切れた等の別事象も切り分ける必要はあります。<br>その際には、最新の Windows 端末等より、Connect-PnPOnline コマンドを実行して、アプリ定義自体に問題がないことを切り分けるのも有効な手段です。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Connect-PnPOnline</span> https://&#123;tenant&#125;.sharepoint.com <span class="literal">-ClientId</span> &lt;クライアント ID&gt; <span class="literal">-ClientSecret</span> &lt;クライアント シークレット&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="参考情報"><a href="#参考情報" class="headerlink" title="参考情報"></a>参考情報</h2><p>タイトル : Microsoft 365 の TLS 1.0 と 1.1 を無効にする<br>アドレス : <a href="https://docs.microsoft.com/ja-jp/microsoft-365/compliance/tls-1.0-and-1.1-deprecation-for-office-365?view=o365-worldwide" target="_blank" rel="noopener">https://docs.microsoft.com/ja-jp/microsoft-365/compliance/tls-1.0-and-1.1-deprecation-for-office-365?view=o365-worldwide</a></p>
+<p>タイトル : Office 365 および Office 365 GCC での TLS 1.2 の準備<br>アドレス : <a href="https://docs.microsoft.com/ja-jp/microsoft-365/compliance/prepare-tls-1.2-in-office-365?view=o365-worldwide" target="_blank" rel="noopener">https://docs.microsoft.com/ja-jp/microsoft-365/compliance/prepare-tls-1.2-in-office-365?view=o365-worldwide</a></p>
+<p>今回の投稿は以上です。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>
+
+        
+        <a href="https://github.com/jpspsupport/newblog/edit/main/articles/sharepoint-online/impact-of-tokenhelper-from-disabling-tls1.0.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../power-automate-assign-permission/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Power Automate で SharePoint リスト アイテムに対して個別のアクセス権を付与する方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">TLS 1.0 や 1.1 廃止による TokenHelper アプリ専用トークン取得動作への影響について</a>
+          </li>
+        
+          <li>
+            <a href="../power-automate-assign-permission/">Power Automate で SharePoint リスト アイテムに対して個別のアクセス権を付与する方法</a>
+          </li>
+        
+          <li>
+            <a href="../introduction-to-power-automate/">Power Automate で簡単な承認フローを作成する</a>
+          </li>
+        
+          <li>
+            <a href="../use-sp-modernization-scanner/">SharePoint Modernization Scanner を使用して、移行対象のワークフローを抽出する</a>
+          </li>
+        
+          <li>
+            <a href="../Testing-backoff-logic/">HTTP 調整のリトライロジックのテスト方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/">SharePoint Online</a><span class="tag-list-count">7</span><ul></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/03/">2021 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/07/">2020 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/05/">2020 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/04/">2020 / 04</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/SharePoint-Online/" style="font-size: 10px;">SharePoint Online</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 SharePoint Support Japan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

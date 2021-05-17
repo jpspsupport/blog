@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Power Automate で SharePoint リスト アイテムに対して個別のアクセス権を付与する方法 | Japan SharePoint Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今回の投稿では、SharePoint Online における SharePoint 2010 形式ワークフローの廃止 (MC217999) に際して、移行先となる Power Automate を簡単に紹介します。 移行プロジェクトにおいて、最も技術的な懸案事項に指定されているものに、個別アクセス権の付与が数多く上げられております。アイテムごとにアクセス権を付与する運用は、パフォーマンスを考慮した">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Power Automate で SharePoint リスト アイテムに対して個別のアクセス権を付与する方法">
+<meta property="og:url" content="https://jpspsupport.github.io/newblog/sharepoint-online/power-automate-assign-permission/index.html">
+<meta property="og:site_name" content="Japan SharePoint Support Blog">
+<meta property="og:description" content="今回の投稿では、SharePoint Online における SharePoint 2010 形式ワークフローの廃止 (MC217999) に際して、移行先となる Power Automate を簡単に紹介します。 移行プロジェクトにおいて、最も技術的な懸案事項に指定されているものに、個別アクセス権の付与が数多く上げられております。アイテムごとにアクセス権を付与する運用は、パフォーマンスを考慮した">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/power-automate-assign-permission/PAPERM00.png">
+<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/power-automate-assign-permission/PAPERM01.png">
+<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/power-automate-assign-permission/PAPERM02.png">
+<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/power-automate-assign-permission/PAPERM03.png">
+<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/power-automate-assign-permission/PAPERM04.png">
+<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/power-automate-assign-permission/PAPERM05.png">
+<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/power-automate-assign-permission/PAPERM06.png">
+<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/power-automate-assign-permission/PAPERM07.png">
+<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/power-automate-assign-permission/PAPERM08.png">
+<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/power-automate-assign-permission/PAPERM09.png">
+<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/power-automate-assign-permission/PAPERM10.png">
+<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/power-automate-assign-permission/PAPERM11.png">
+<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/power-automate-assign-permission/PAPERM12.png">
+<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/power-automate-assign-permission/PAPERM13.png">
+<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/power-automate-assign-permission/PAPERM14.png">
+<meta property="article:published_time" content="2020-07-13T15:00:00.000Z">
+<meta property="article:modified_time" content="2021-05-17T05:43:26.382Z">
+<meta property="article:author" content="SharePoint Support Japan">
+<meta property="article:tag" content="SharePoint Online">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/power-automate-assign-permission/PAPERM00.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan SharePoint Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/newblog/">Home</a>
+        
+          <a class="main-nav-link" href="/newblog/archives">Archives</a>
+        
+        <a class="main-nav-link" href="https://cssjpn.github.io/" target="_blank" rel="noopener">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpspsupport.github.io/newblog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan SharePoint Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの SharePoint に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-sharepoint-online/power-automate-assign-permission" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Power Automate で SharePoint リスト アイテムに対して個別のアクセス権を付与する方法
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2020-07-13T15:00:00.000Z" itemprop="datePublished">2020-07-14</time>
+</a>
+        
+        
+        <a href="https://github.com/jpspsupport/newblog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+583cb868-b668-5272-bad3-b5a353e7535e%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BPower+Automate+%E3%81%A7+SharePoint+%E3%83%AA%E3%82%B9%E3%83%88+%E3%82%A2%E3%82%A4%E3%83%86%E3%83%A0%E3%81%AB%E5%AF%BE%E3%81%97%E3%81%A6%E5%80%8B%E5%88%A5%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E6%A8%A9%E3%82%92%E4%BB%98%E4%B8%8E%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fnewblog%2Fsharepoint-online%2Fpower-automate-assign-permission%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-online%2Fpower-automate-assign-permission.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fnewblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-online%2Fpower-automate-assign-permission.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpspsupport.github.io/newblog/sharepoint-online/power-automate-assign-permission/" data-id="ckos6lwr700090mp1ebm128w9" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今回の投稿では、SharePoint Online における <a href="https://support.microsoft.com/ja-jp/office/1ca3fff8-9985-410a-85aa-8120f626965f?ui=ja-jp&rs=ja-jp&ad=jp" target="_blank" rel="noopener">SharePoint 2010 形式ワークフローの廃止</a> (MC217999) に際して、移行先となる Power Automate を簡単に紹介します。</p>
+<p>移行プロジェクトにおいて、最も技術的な懸案事項に指定されているものに、個別アクセス権の付与が数多く上げられております。アイテムごとにアクセス権を付与する運用は、パフォーマンスを考慮した場合は得策ではありません。しかしながら、多くのユーザーが SharePoint 2010 形式ワークフローを利用する一つの根強い理由として挙げられているため、ここに Power Automate による回避策を記載します。</p>
+<p>なお、前提として <a href="https://docs.microsoft.com/ja-jp/office365/servicedescriptions/sharepoint-online-service-description/sharepoint-online-limits" target="_blank" rel="noopener">SharePoint の制限</a> には、リストまたはライブラリ内のアイテムに対する固有の権限は 5,000 までと指定されております。そのため、固有のアクセス権を割り当てる運用を実施する場合、リストまたはライブラリ内のアイテムが 5,000 を超えないようキャパシティ プランをお願いします。</p>
+<h2 id="公開情報より"><a href="#公開情報より" class="headerlink" title="公開情報より"></a>公開情報より</h2><p>公開情報には、アイテムまたはフォルダーへのアクセスを許可する、中止するといったアクションに対して、条件付きで可能との記載があります。</p>
+<p>タイトル : Guidance: Migrate from classic workflows to Power Automate flows in SharePoint<br>アドレス : <a href="https://docs.microsoft.com/en-us/sharepoint/dev/business-apps/power-automate/guidance/migrate-from-classic-workflows-to-power-automate-flows" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/sharepoint/dev/business-apps/power-automate/guidance/migrate-from-classic-workflows-to-power-automate-flows</a></p>
+<p><img src="/newblog/sharepoint-online/power-automate-assign-permission/PAPERM00.png" alt="PublicArticle"></p>
+<p>モダン UI のアクセス許可もクラシックのアクセス許可に影響するので、特に大きな問題はありません。以下のように落ち着いてソリューションを実施しましょう。</p>
+<h2 id="ウォークスルー"><a href="#ウォークスルー" class="headerlink" title="ウォークスルー"></a>ウォークスルー</h2><h3 id="1-まずは、モダン-UI-のリストやライブラリから、-自動化-–-Power-Automate-–-フローの作成-よりフローを作成していきます。"><a href="#1-まずは、モダン-UI-のリストやライブラリから、-自動化-–-Power-Automate-–-フローの作成-よりフローを作成していきます。" class="headerlink" title="1. まずは、モダン UI のリストやライブラリから、[自動化] – [Power Automate] – [フローの作成] よりフローを作成していきます。"></a>1. まずは、モダン UI のリストやライブラリから、[自動化] – [Power Automate] – [フローの作成] よりフローを作成していきます。</h3><p><img src="/newblog/sharepoint-online/power-automate-assign-permission/PAPERM01.png" alt="HowToStartPA"></p>
+<h3 id="2-フローの作成ペインにて、-詳細の表示-–-既存の-SharePoint-リスト項目が修正されたときに、カスタム-アクションを完了する-をクリックします。"><a href="#2-フローの作成ペインにて、-詳細の表示-–-既存の-SharePoint-リスト項目が修正されたときに、カスタム-アクションを完了する-をクリックします。" class="headerlink" title="2. フローの作成ペインにて、[詳細の表示] – [既存の SharePoint リスト項目が修正されたときに、カスタム アクションを完了する] をクリックします。"></a>2. フローの作成ペインにて、[詳細の表示] – [既存の SharePoint リスト項目が修正されたときに、カスタム アクションを完了する] をクリックします。</h3><p><img src="/newblog/sharepoint-online/power-automate-assign-permission/PAPERM02.png" alt="HowToStartPA2"></p>
+<p><img src="/newblog/sharepoint-online/power-automate-assign-permission/PAPERM03.png" alt="HowToStartPA2"></p>
+<h3 id="3-続行-をクリックします。"><a href="#3-続行-をクリックします。" class="headerlink" title="3. [続行] をクリックします。"></a>3. [続行] をクリックします。</h3><p>画像ではマスクしていますが、ここに表示されるユーザーの権限で処理が実行されます。<br>サイト コレクションの管理者権限等、十分なアクセス権をフローの作成者に与えてください。</p>
+<p><img src="/newblog/sharepoint-online/power-automate-assign-permission/PAPERM04.png" alt="HowToStartPA3"></p>
+<h3 id="4-フローの編集画面に遷移しました。-新しいステップ-をクリックして後続の処理を追加していきます。"><a href="#4-フローの編集画面に遷移しました。-新しいステップ-をクリックして後続の処理を追加していきます。" class="headerlink" title="4. フローの編集画面に遷移しました。[+ 新しいステップ] をクリックして後続の処理を追加していきます。"></a>4. フローの編集画面に遷移しました。[+ 新しいステップ] をクリックして後続の処理を追加していきます。</h3><p><img src="/newblog/sharepoint-online/power-automate-assign-permission/PAPERM05.png" alt="HowToStartPA4"></p>
+<h3 id="5-親のアクセス権を継承しない場合は、-アイテムまたはファイルの共有を停止します-を選択します。"><a href="#5-親のアクセス権を継承しない場合は、-アイテムまたはファイルの共有を停止します-を選択します。" class="headerlink" title="5. 親のアクセス権を継承しない場合は、[アイテムまたはファイルの共有を停止します] を選択します。"></a>5. 親のアクセス権を継承しない場合は、[アイテムまたはファイルの共有を停止します] を選択します。</h3><p><img src="/newblog/sharepoint-online/power-automate-assign-permission/PAPERM06.png" alt="BreakRoleInheritance1"></p>
+<h3 id="6-“リストまたはライブラリ”-と-“ID”-に動的なコンテンツ-値-を設定します。"><a href="#6-“リストまたはライブラリ”-と-“ID”-に動的なコンテンツ-値-を設定します。" class="headerlink" title="6. “リストまたはライブラリ” と “ID” に動的なコンテンツ (値) を設定します。"></a>6. “リストまたはライブラリ” と “ID” に動的なコンテンツ (値) を設定します。</h3><p><img src="/newblog/sharepoint-online/power-automate-assign-permission/PAPERM07.png" alt="BreakRoleInheritance2"></p>
+<h3 id="7-実際にアクセス権を適用していきます。アクション選択画面で-アイテムまたはフォルダーへのアクセス権の付与-をクリックします。"><a href="#7-実際にアクセス権を適用していきます。アクション選択画面で-アイテムまたはフォルダーへのアクセス権の付与-をクリックします。" class="headerlink" title="7. 実際にアクセス権を適用していきます。アクション選択画面で [アイテムまたはフォルダーへのアクセス権の付与] をクリックします。"></a>7. 実際にアクセス権を適用していきます。アクション選択画面で [アイテムまたはフォルダーへのアクセス権の付与] をクリックします。</h3><p><img src="/newblog/sharepoint-online/power-automate-assign-permission/PAPERM08.png" alt="RoleAssignmentsAdd1"></p>
+<h3 id="8-受信者にはアクセス権を与えるユーザーを指定し、ロールには権限レベルを指定します。"><a href="#8-受信者にはアクセス権を与えるユーザーを指定し、ロールには権限レベルを指定します。" class="headerlink" title="8. 受信者にはアクセス権を与えるユーザーを指定し、ロールには権限レベルを指定します。"></a>8. 受信者にはアクセス権を与えるユーザーを指定し、ロールには権限レベルを指定します。</h3><p>この例では、リストに追加されたユーザー列である、”共同編集者” を動的なコンテンツ (値) から指定しています。<br>ロールとしては、Can edit と Can view のいずれかをプルダウンから選択します。</p>
+<p><img src="/newblog/sharepoint-online/power-automate-assign-permission/PAPERM09.png" alt="RoleAssignmentsAdd2"></p>
+<p>これで、最低限アクセス許可を与えるフローの作成は完成です。</p>
+<h2 id="編集や閲覧以外のアクセス許可を付与する方法"><a href="#編集や閲覧以外のアクセス許可を付与する方法" class="headerlink" title="編集や閲覧以外のアクセス許可を付与する方法"></a>編集や閲覧以外のアクセス許可を付与する方法</h2><p>アクション側の入力項目において、ロールには Can edit と Can View が 2 択で表示されますが、[カスタム値の入力] をクリックして、他のアクセス権 (ロール) を付与することは可能であることを確認しています。</p>
+<p><img src="/newblog/sharepoint-online/power-automate-assign-permission/PAPERM10.png" alt="OtherRoleDefs1"></p>
+<p>この部分のみ、少し複雑な手順となりますが、併せて以下に記載します。</p>
+<h3 id="1-必要とするロール定義の-ID-を取得します。"><a href="#1-必要とするロール定義の-ID-を取得します。" class="headerlink" title="1. 必要とするロール定義の ID を取得します。"></a>1. 必要とするロール定義の ID を取得します。</h3><p>以下の a か b のいずれかの方法をご利用ください。</p>
+<h4 id="a-PowerShell-を使用する場合"><a href="#a-PowerShell-を使用する場合" class="headerlink" title="a. PowerShell を使用する場合"></a>a. PowerShell を使用する場合</h4><p>a-1. PnP PowerShell をお持ちでない場合は<a href="https://docs.microsoft.com/ja-jp/powershell/sharepoint/sharepoint-pnp/sharepoint-pnp-cmdlets?view=sharepoint-ps" target="_blank" rel="noopener">入手</a>します。<br>a-2. Connect-PnPOnline &lt;サイト URL&gt; を実行します。<br>a-3. Get-PnPRoleDefinition を実行して、サイトに存在するロールの定義を一覧表示します。<br>a-4. Get-PnPRoleDefinition -Identity &lt;ロール名&gt; | select Id を実行して Id を抜き出します。</p>
+<p>以下の例では、フルコントロールの Id として 1073741829 を取得します。</p>
+<p><img src="/newblog/sharepoint-online/power-automate-assign-permission/PAPERM11.png" alt="OtherRoleDefs2"></p>
+<h4 id="b-REST-を使用する場合"><a href="#b-REST-を使用する場合" class="headerlink" title="b. REST を使用する場合"></a>b. REST を使用する場合</h4><p>b-1. ブラウザーで SharePoint のページを表示します。<br>b-2. サイト URL 配下を以下のように変更します。<br><a href="https://tenant.sharepoint.com/sites/site/_api/web/roledefinitions" target="_blank" rel="noopener">https://tenant.sharepoint.com/sites/site/_api/web/roledefinitions</a><br>b-3. XML でロール名が表示されるので、ロール名に対応する Id を取得します。</p>
+<p>以下の例では “フル コントロール” の ID として 1073741829 を取得します。</p>
+<p><img src="/newblog/sharepoint-online/power-automate-assign-permission/PAPERM12.png" alt="OtherRoleDefs3"></p>
+<p>IE などのブラウザーでは、フィード画面が表示される場合があります。その場合、[Alt] キーを押し、[ファイル] - [名前を付けて保存] をクリックして結果をローカル ファイルに保存すると、ブラウザー側に返されている XML のデータが保存されます。</p>
+<h3 id="2-“アイテムまたはフォルダーへのアクセス権の付与”-のアクションにて、role-ID-値-を文字列で指定します。"><a href="#2-“アイテムまたはフォルダーへのアクセス権の付与”-のアクションにて、role-ID-値-を文字列で指定します。" class="headerlink" title="2. “アイテムまたはフォルダーへのアクセス権の付与” のアクションにて、role:ID 値 を文字列で指定します。"></a>2. “アイテムまたはフォルダーへのアクセス権の付与” のアクションにて、role:ID 値 を文字列で指定します。</h3><p><img src="/newblog/sharepoint-online/power-automate-assign-permission/PAPERM13.png" alt="OtherRoleDefs4"></p>
+<h2 id="実行結果"><a href="#実行結果" class="headerlink" title="実行結果"></a>実行結果</h2><p>リストにアイテムを投稿すると、共同編集者列のユーザーにアクセス許可が付与される動作を確認できます。</p>
+<p><img src="/newblog/sharepoint-online/power-automate-assign-permission/PAPERM14.png" alt="TETSUOCANEDITNOW"></p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>
+
+        
+        <a href="https://github.com/jpspsupport/newblog/edit/main/articles/sharepoint-online/power-automate-assign-permission.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../impact-of-tokenhelper-from-disabling-tls1.0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">次の記事</strong>
+      <div class="article-nav-title">
+        
+          TLS 1.0 や 1.1 廃止による TokenHelper アプリ専用トークン取得動作への影響について
+        
+      </div>
+    </a>
+  
+  
+    <a href="../introduction-to-power-automate/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Power Automate で簡単な承認フローを作成する</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="../impact-of-tokenhelper-from-disabling-tls1.0/">TLS 1.0 や 1.1 廃止による TokenHelper アプリ専用トークン取得動作への影響について</a>
+          </li>
+        
+          <li>
+            <a href="">Power Automate で SharePoint リスト アイテムに対して個別のアクセス権を付与する方法</a>
+          </li>
+        
+          <li>
+            <a href="../introduction-to-power-automate/">Power Automate で簡単な承認フローを作成する</a>
+          </li>
+        
+          <li>
+            <a href="../use-sp-modernization-scanner/">SharePoint Modernization Scanner を使用して、移行対象のワークフローを抽出する</a>
+          </li>
+        
+          <li>
+            <a href="../Testing-backoff-logic/">HTTP 調整のリトライロジックのテスト方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/">SharePoint Online</a><span class="tag-list-count">7</span><ul></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/03/">2021 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/07/">2020 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/05/">2020 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/04/">2020 / 04</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/SharePoint-Online/" style="font-size: 10px;">SharePoint Online</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 SharePoint Support Japan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

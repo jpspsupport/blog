@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>HTTP 調整のリトライロジックのテスト方法 | Japan SharePoint Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="背景HTTP 調整リトライ ロジックを実装した際に、特に弊社公開記事に記載されたカスタムコードを変更している場合は、論理テストを実施していただく必要があります。 残念ながら、SharePoint Online に対して明示的に調整を発生させることはできないため、現実的なシナリオに即したテストなどを実施することはできません。テストのためにクラウド側に不要な負荷をかけることも適切ではない行動となります">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP 調整のリトライロジックのテスト方法">
+<meta property="og:url" content="https://jpspsupport.github.io/newblog/sharepoint-online/Testing-backoff-logic/index.html">
+<meta property="og:site_name" content="Japan SharePoint Support Blog">
+<meta property="og:description" content="背景HTTP 調整リトライ ロジックを実装した際に、特に弊社公開記事に記載されたカスタムコードを変更している場合は、論理テストを実施していただく必要があります。 残念ながら、SharePoint Online に対して明示的に調整を発生させることはできないため、現実的なシナリオに即したテストなどを実施することはできません。テストのためにクラウド側に不要な負荷をかけることも適切ではない行動となります">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/Testing-backoff-logic/Fiddler1.png">
+<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/Testing-backoff-logic/Fiddler2.png">
+<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/Testing-backoff-logic/Fiddler3-1.png">
+<meta property="og:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/Testing-backoff-logic/Fiddler4.png">
+<meta property="article:published_time" content="2020-06-07T15:00:00.000Z">
+<meta property="article:modified_time" content="2021-05-17T05:43:26.374Z">
+<meta property="article:author" content="SharePoint Support Japan">
+<meta property="article:tag" content="SharePoint Online">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpspsupport.github.io/newblog/sharepoint-online/Testing-backoff-logic/Fiddler1.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan SharePoint Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/newblog/">Home</a>
+        
+          <a class="main-nav-link" href="/newblog/archives">Archives</a>
+        
+        <a class="main-nav-link" href="https://cssjpn.github.io/" target="_blank" rel="noopener">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpspsupport.github.io/newblog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan SharePoint Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの SharePoint に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-sharepoint-online/Testing-backoff-logic" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HTTP 調整のリトライロジックのテスト方法
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2020-06-07T15:00:00.000Z" itemprop="datePublished">2020-06-08</time>
+</a>
+        
+        
+        <a href="https://github.com/jpspsupport/newblog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+ebfe07fa-431d-5a5c-b0fc-4040fca63f35%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BHTTP+%E8%AA%BF%E6%95%B4%E3%81%AE%E3%83%AA%E3%83%88%E3%83%A9%E3%82%A4%E3%83%AD%E3%82%B8%E3%83%83%E3%82%AF%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fnewblog%2Fsharepoint-online%2FTesting-backoff-logic%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-online%2FTesting-backoff-logic.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fnewblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-online%2FTesting-backoff-logic.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpspsupport.github.io/newblog/sharepoint-online/Testing-backoff-logic/" data-id="ckos6lwqu00010mp1e5529ccp" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>HTTP 調整リトライ ロジックを実装した際に、特に弊社公開記事に記載されたカスタムコードを変更している場合は、論理テストを実施していただく必要があります。</p>
+<p>残念ながら、SharePoint Online に対して明示的に調整を発生させることはできないため、現実的なシナリオに即したテストなどを実施することはできません。<br>テストのためにクラウド側に不要な負荷をかけることも適切ではない行動となります。<br>そのため、基本的には論理テストを実施し、様々な想定シナリオに対するロジック テストをパスした後で、テスト済みのコードをマスターに組み込むという方法が現実的です。</p>
+<p>今回の記事では、その疑似的な論理テストを実施する方法の 1 つをご紹介します。</p>
+<h1 id="対処策"><a href="#対処策" class="headerlink" title="対処策"></a>対処策</h1><p>Fiddler の AutoResponder を使用して、CSOM などの通信に対して、任意の HTTP 応答を返して動作検証する方法があります。</p>
+<p>まず、Fiddler を起動し、トレースを取得しておきます。</p>
+<p><img src="/newblog/sharepoint-online/Testing-backoff-logic/Fiddler1.png" alt="Fiddler1"></p>
+<p>1) 応答を書き換えたい通信を、画面左ペインから選択します。<br>2) [AutoResponder] タブをクリックします。<br>3) Enable Rules と Unmatched requests passthrough がチェックされていることを確認します。<br>4) [Add Rule] をクリックします。</p>
+<p>次に緑の欄の設定に移ります。</p>
+<p><img src="/newblog/sharepoint-online/Testing-backoff-logic/Fiddler2.png" alt="Fiddler2"></p>
+<p>5) Rule Editor の下のセレクトボックスで [Create New Response…] をプルダウンから選択します。<br>6) [Save] をクリックすると、ダイアログがポップアップされます。</p>
+<p><img src="/newblog/sharepoint-online/Testing-backoff-logic/Fiddler3-1.png" alt="Fiddler3-1"></p>
+<p>7) [Raw] タブをクリックします。<br>8) HTTP 応答のステータス コードに 429 TOO MANY REQUESTS を指定します。<br>9) HTTP 応答ヘッダーに Retry-After を指定して、任意の数値を指定します。<br> テスト用ですので、短い値でも問題ありません。</p>
+<p>10) [Save] をクリックします。<br>11) ダイアログを [x] を押して閉じます。</p>
+<p>この後、Fiddler を起動してロジックをテストしてください。指定された間隔でリトライが実行されることが確認できます。</p>
+<p><img src="/newblog/sharepoint-online/Testing-backoff-logic/Fiddler4.png" alt="Fiddler4"></p>
+<h1 id="参考リンク"><a href="#参考リンク" class="headerlink" title="参考リンク"></a>参考リンク</h1><p>タイトル : SharePoint Online で調整またはブロックを回避する方法<br>アドレス : <a href="https://docs.microsoft.com/ja-jp/sharepoint/dev/general-development/how-to-avoid-getting-throttled-or-blocked-in-sharepoint-online" target="_blank" rel="noopener">https://docs.microsoft.com/ja-jp/sharepoint/dev/general-development/how-to-avoid-getting-throttled-or-blocked-in-sharepoint-online</a></p>
+<p>タイトル : SharePoint Online の HTTP 調整 (応答コード 429, 503) に関して<br>アドレス : <a href="https://social.msdn.microsoft.com/Forums/ja-JP/8e5a4116-c96a-4d3e-9bbf-6efb852b5d88/sharepoint-online-12398-http-3551925972-2454031572124671254012489-429-503?forum=sharepointsupportteamja" target="_blank" rel="noopener">https://social.msdn.microsoft.com/Forums/ja-JP/8e5a4116-c96a-4d3e-9bbf-6efb852b5d88/sharepoint-online-12398-http-3551925972-2454031572124671254012489-429-503?forum=sharepointsupportteamja</a></p>
+<p>タイトル : [再改訂版] SharePoint Online HTTP 調整 (応答コード : 429) 対策の増分バックオフ リトライ<br>アドレス : <a href="https://social.msdn.microsoft.com/Forums/sqlserver/ja-JP/21e2a628-44be-4541-bca9-b81c484ff59b/20877259133533029256-sharepoint-online-http-3551925972?forum=sharepointsupportteamja" target="_blank" rel="noopener">https://social.msdn.microsoft.com/Forums/sqlserver/ja-JP/21e2a628-44be-4541-bca9-b81c484ff59b/20877259133533029256-sharepoint-online-http-3551925972?forum=sharepointsupportteamja</a></p>
+<p>タイトル : jpspsupport/CSOMRetrySample<br>アドレス : <a href="https://github.com/jpspsupport/CSOMRetrySample" target="_blank" rel="noopener">https://github.com/jpspsupport/CSOMRetrySample</a></p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>
+
+        
+        <a href="https://github.com/jpspsupport/newblog/edit/main/articles/sharepoint-online/Testing-backoff-logic.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../use-sp-modernization-scanner/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">次の記事</strong>
+      <div class="article-nav-title">
+        
+          SharePoint Modernization Scanner を使用して、移行対象のワークフローを抽出する
+        
+      </div>
+    </a>
+  
+  
+    <a href="../pnp-powershell-with-app-only-token/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">PnP PowerShell でテナントのフルコントロール権限を使用して接続する方法について</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="../impact-of-tokenhelper-from-disabling-tls1.0/">TLS 1.0 や 1.1 廃止による TokenHelper アプリ専用トークン取得動作への影響について</a>
+          </li>
+        
+          <li>
+            <a href="../power-automate-assign-permission/">Power Automate で SharePoint リスト アイテムに対して個別のアクセス権を付与する方法</a>
+          </li>
+        
+          <li>
+            <a href="../introduction-to-power-automate/">Power Automate で簡単な承認フローを作成する</a>
+          </li>
+        
+          <li>
+            <a href="../use-sp-modernization-scanner/">SharePoint Modernization Scanner を使用して、移行対象のワークフローを抽出する</a>
+          </li>
+        
+          <li>
+            <a href="">HTTP 調整のリトライロジックのテスト方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/">SharePoint Online</a><span class="tag-list-count">7</span><ul></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/03/">2021 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/07/">2020 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/05/">2020 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/04/">2020 / 04</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/SharePoint-Online/" style="font-size: 10px;">SharePoint Online</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 SharePoint Support Japan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

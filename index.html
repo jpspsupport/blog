@@ -4,20 +4,22 @@
   <meta charset="utf-8">
   
   
-  <title>Japan CSS Support Example Blog</title>
+  <title>Japan SharePoint Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Japan CSS Support Example Blog">
+  <meta name="description" content="日本マイクロソフトの SharePoint に関するサポート情報のブログです。">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Japan CSS Support Example Blog">
-<meta property="og:url" content="https://cssjpn.github.io/example-blog/index.html">
-<meta property="og:site_name" content="Japan CSS Support Example Blog">
-<meta property="og:description" content="Japan CSS Support Example Blog">
+<meta property="og:title" content="Japan SharePoint Support Blog">
+<meta property="og:url" content="https://jpspsupport.github.io/newblog/index.html">
+<meta property="og:site_name" content="Japan SharePoint Support Blog">
+<meta property="og:description" content="日本マイクロソフトの SharePoint に関するサポート情報のブログです。">
 <meta property="og:locale" content="ja_JP">
-<meta property="article:author" content="CSS Japan">
-<meta property="article:tag" content="Information">
+<meta property="article:author" content="SharePoint Support Japan">
+<meta property="article:tag" content="SharePoint Online">
+<meta property="article:tag" content="SharePoint Server">
+<meta property="article:tag" content="OneDrive for Business">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="atom.xml" title="Japan CSS Support Example Blog" type="application/atom+xml">
+    <link rel="alternate" href="atom.xml" title="Japan SharePoint Support Blog" type="application/atom+xml">
   
 
   <link rel="icon" href="favicon.ico">
@@ -48,11 +50,11 @@
         <a id="main-nav-toggle" class="nav-icon"></a>
         <div id="ms-logo"></div>
         
-          <a class="main-nav-link" href="/blog/">Home</a>
+          <a class="main-nav-link" href="/newblog/">Home</a>
         
-          <a class="main-nav-link" href="/blog/archives">Archives</a>
+          <a class="main-nav-link" href="/newblog/archives">Archives</a>
         
-        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/" target="_blank" rel="noopener">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -60,16 +62,16 @@
         
       </nav>
       <div id="search-form-wrap">
-        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://cssjpn.github.io/example-blog"></form>
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpspsupport.github.io/newblog"></form>
       </div>
     </div>
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="index.html" id="logo">Japan CSS Support Example Blog</a>
+        <a href="index.html" id="logo">Japan SharePoint Support Blog</a>
       </h1>
       
         <h2 id="subtitle-wrap">
-          <a href="index.html" id="subtitle">Japan CSS Support Example Blog</a>
+          <a href="index.html" id="subtitle">日本マイクロソフトの SharePoint に関するサポート情報のブログです。</a>
         </h2>
       
     </div>
@@ -79,13 +81,13 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-information/test" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-sharepoint-online/impact-of-tokenhelper-from-disabling-tls1.0" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
     <!-- post date -->
     <div class="article-meta">
-      <a href="information/test/" class="article-date">
-  <time datetime="2020-12-21T06:00:00.000Z" itemprop="datePublished">2020-12-21</time>
+      <a href="sharepoint-online/impact-of-tokenhelper-from-disabling-tls1.0/" class="article-date">
+  <time datetime="2021-03-24T15:00:00.000Z" itemprop="datePublished">2021-03-25</time>
 </a>
       
     </div>
@@ -97,7 +99,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="information/test/">Example article</a>
+      <a class="article-title" href="sharepoint-online/impact-of-tokenhelper-from-disabling-tls1.0/">TLS 1.0 や 1.1 廃止による TokenHelper アプリ専用トークン取得動作への影響について</a>
     </h1>
   
 
@@ -107,20 +109,386 @@
     <!-- post caption -->
     <div class="article-entry" itemprop="articleBody">
       
-        hello, world!
-...
+        Microsoft 365 においては、メッセージ センターや各公開情報に記載の通り、TLS 1.0 と 1.1 を廃止し、新しい暗号化技術を基準とすることで、お客様データのセキュリティ保護を向上する動きを拡大しております。全世界のお客様を想定すると一部に限定されることを想定してはおりますが、特に旧バージョンのオペレーティング システムや .NET Framework (4.5 以下) 基盤をご利用の場合は、ご自身のシステムが影響を受けないか今一度ご確認ください。
+一般的な HTTPS 通信においては、トランスポート層において TLS プロトコルはクライアントとサーバーで対応バージョン等の情報を交換し、ハンドシェイクを実施します。該当処理の確立後は、当該暗号化技術の上で上位層 (アプリケーション層を含む) の通信を開始していく流れです。TLS 1.0 や 1.1 が廃止が適応されると、クラ...
         <p class="article-readmore">
-          <a href="information/test/">Read more</a>
+          <a href="sharepoint-online/impact-of-tokenhelper-from-disabling-tls1.0/">Read more</a>
         </p>
       
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://cssjpn.github.io/example-blog/information/test/" data-id="ckos4e5gg00000mo97bwf2ym3" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpspsupport.github.io/newblog/sharepoint-online/impact-of-tokenhelper-from-disabling-tls1.0/" data-id="ckos6lwqw00020mp11236fyk6" class="article-share-link">共有</a-->
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Information/" rel="tag">Information</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>
 
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sharepoint-online/power-automate-assign-permission" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    <!-- post date -->
+    <div class="article-meta">
+      <a href="sharepoint-online/power-automate-assign-permission/" class="article-date">
+  <time datetime="2020-07-13T15:00:00.000Z" itemprop="datePublished">2020-07-14</time>
+</a>
+      
+    </div>
+
+    
+    <!-- post title -->
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="sharepoint-online/power-automate-assign-permission/">Power Automate で SharePoint リスト アイテムに対して個別のアクセス権を付与する方法</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- post caption -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        今回の投稿では、SharePoint Online における SharePoint 2010 形式ワークフローの廃止 (MC217999) に際して、移行先となる Power Automate を簡単に紹介します。
+移行プロジェクトにおいて、最も技術的な懸案事項に指定されているものに、個別アクセス権の付与が数多く上げられております。アイテムごとにアクセス権を付与する運用は、パフォーマンスを考慮した場合は得策ではありません。しかしながら、多くのユーザーが SharePoint 2010 形式ワークフローを利用する一つの根強い理由として挙げられているため、ここに Power Automate による回避策を記載します。
+なお、前提として SharePoint の制限 には、リストまたはライブラリ内のアイテムに対する固有の権限は 5,000 までと指定されております。そのため、固有のアクセス権を...
+        <p class="article-readmore">
+          <a href="sharepoint-online/power-automate-assign-permission/">Read more</a>
+        </p>
+      
+    </div>
+
+    <footer class="article-footer">
+      <!--a data-url="https://jpspsupport.github.io/newblog/sharepoint-online/power-automate-assign-permission/" data-id="ckos6lwr700090mp1ebm128w9" class="article-share-link">共有</a-->
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sharepoint-online/introduction-to-power-automate" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    <!-- post date -->
+    <div class="article-meta">
+      <a href="sharepoint-online/introduction-to-power-automate/" class="article-date">
+  <time datetime="2020-07-09T15:00:00.000Z" itemprop="datePublished">2020-07-10</time>
+</a>
+      
+    </div>
+
+    
+    <!-- post title -->
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="sharepoint-online/introduction-to-power-automate/">Power Automate で簡単な承認フローを作成する</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- post caption -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        今回の投稿では、SharePoint Online における SharePoint 2010 形式ワークフローの廃止 (MC217999) に際して、移行先となる Power Automate を簡単に紹介します。
+これまで移行先の Power Automate の採用を決定できない一つの要因に、Power Automate に慣れていないことが挙げられていることがあると思います。Power Automate の承認ワークフローを作成する方法は、様々な方々がすでに画面付きで手順を公開しておりますので、新たに作成する方法はないかと当初は考えました。しかしながら、初学の場合においては資料との相性等もあるかと思いますので、少しでも参考資料の選択肢が多い方がいいと思います。
+そこで、本投稿でも手順を紹介します。現行バージョンの Power Automate でのご説明になりますが高度なものは作成せ...
+        <p class="article-readmore">
+          <a href="sharepoint-online/introduction-to-power-automate/">Read more</a>
+        </p>
+      
+    </div>
+
+    <footer class="article-footer">
+      <!--a data-url="https://jpspsupport.github.io/newblog/sharepoint-online/introduction-to-power-automate/" data-id="ckos6lwr000040mp13yvjgqzo" class="article-share-link">共有</a-->
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sharepoint-online/use-sp-modernization-scanner" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    <!-- post date -->
+    <div class="article-meta">
+      <a href="sharepoint-online/use-sp-modernization-scanner/" class="article-date">
+  <time datetime="2020-07-08T15:00:00.000Z" itemprop="datePublished">2020-07-09</time>
+</a>
+      
+    </div>
+
+    
+    <!-- post title -->
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="sharepoint-online/use-sp-modernization-scanner/">SharePoint Modernization Scanner を使用して、移行対象のワークフローを抽出する</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- post caption -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        今回の投稿では、SharePoint Online における SharePoint 2010 形式ワークフローの廃止 (MC217999) に際しての計画段階において、移行対象のワークフローを抽出する方法を詳細に記載します。
+そのためのツールとして、SharePoint Modernization Scanner (SharePoint モダン化スキャナー) が公開されています。
+最初に、移行する SharePoint 2010 形式ワークフローの全体像をつかむことは必須の作業となります。これをもとに、技術的な課題項目を整理したり、工数を見積もるという作業が派生してくると思います。本投稿では、できる限りスムーズに移行検討作業に移れるよう、現バージョンの SharePoint モダン化スキャナーによる操作イメージを画面付きで紹介します。
+1. 最初に下記サイトからツールをダウンロードします。...
+        <p class="article-readmore">
+          <a href="sharepoint-online/use-sp-modernization-scanner/">Read more</a>
+        </p>
+      
+    </div>
+
+    <footer class="article-footer">
+      <!--a data-url="https://jpspsupport.github.io/newblog/sharepoint-online/use-sp-modernization-scanner/" data-id="ckos6lwr9000b0mp11w44c9xx" class="article-share-link">共有</a-->
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sharepoint-online/Testing-backoff-logic" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    <!-- post date -->
+    <div class="article-meta">
+      <a href="sharepoint-online/Testing-backoff-logic/" class="article-date">
+  <time datetime="2020-06-07T15:00:00.000Z" itemprop="datePublished">2020-06-08</time>
+</a>
+      
+    </div>
+
+    
+    <!-- post title -->
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="sharepoint-online/Testing-backoff-logic/">HTTP 調整のリトライロジックのテスト方法</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- post caption -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        背景HTTP 調整リトライ ロジックを実装した際に、特に弊社公開記事に記載されたカスタムコードを変更している場合は、論理テストを実施していただく必要があります。
+残念ながら、SharePoint Online に対して明示的に調整を発生させることはできないため、現実的なシナリオに即したテストなどを実施することはできません。テストのためにクラウド側に不要な負荷をかけることも適切ではない行動となります。そのため、基本的には論理テストを実施し、様々な想定シナリオに対するロジック テストをパスした後で、テスト済みのコードをマスターに組み込むという方法が現実的です。
+今回の記事では、その疑似的な論理テストを実施する方法の 1 つをご紹介します。
+対処策Fiddler の AutoResponder を使用して、CSOM などの通信に対して、任意の HTTP 応答を返して動作検証する方法があります。
+...
+        <p class="article-readmore">
+          <a href="sharepoint-online/Testing-backoff-logic/">Read more</a>
+        </p>
+      
+    </div>
+
+    <footer class="article-footer">
+      <!--a data-url="https://jpspsupport.github.io/newblog/sharepoint-online/Testing-backoff-logic/" data-id="ckos6lwqu00010mp1e5529ccp" class="article-share-link">共有</a-->
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sharepoint-online/pnp-powershell-with-app-only-token" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    <!-- post date -->
+    <div class="article-meta">
+      <a href="sharepoint-online/pnp-powershell-with-app-only-token/" class="article-date">
+  <time datetime="2020-05-20T15:00:00.000Z" itemprop="datePublished">2020-05-21</time>
+</a>
+      
+    </div>
+
+    
+    <!-- post title -->
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="sharepoint-online/pnp-powershell-with-app-only-token/">PnP PowerShell でテナントのフルコントロール権限を使用して接続する方法について</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- post caption -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        背景テナント管理者として、PowerShell でテナント全体のサイト コンテンツに対し、何らかの操作を実施しようとした際には、アクセス権の問題が頻繁に浮上します。
+Office 365 管理センターで指定した全体管理者または SharePoint 管理者の権限がある場合、あらゆる設定を実施することは可能です。しかし、サイト コレクション管理者を別の管理者に委任している場合、自身に該当サイトの管理者権限が与えられていないと、そのままの状態でサイトの変更をしたりコンテンツを閲覧できるわけではありません。
+
+このような状況においては、何かテナント単位で各サイトに対する作業を実施しようとした際に、一時的に自分に各サイト コレクションの管理者権限を付与してから作業せざるを得ない状況に陥ります。SharePoint 管理ポータルや、Set-SPOUser -IsSiteCollectionAdmin...
+        <p class="article-readmore">
+          <a href="sharepoint-online/pnp-powershell-with-app-only-token/">Read more</a>
+        </p>
+      
+    </div>
+
+    <footer class="article-footer">
+      <!--a data-url="https://jpspsupport.github.io/newblog/sharepoint-online/pnp-powershell-with-app-only-token/" data-id="ckos6lwr400060mp18vy2acml" class="article-share-link">共有</a-->
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sharepoint-online/modern-experience-advantage" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    <!-- post date -->
+    <div class="article-meta">
+      <a href="sharepoint-online/modern-experience-advantage/" class="article-date">
+  <time datetime="2020-04-20T15:00:00.000Z" itemprop="datePublished">2020-04-21</time>
+</a>
+      
+    </div>
+
+    
+    <!-- post title -->
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="sharepoint-online/modern-experience-advantage/">SharePoint Online でモダン エクスペリエンスを利用するメリット</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- post caption -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+この記事は、以前の SharePoint サポート フォーラムの投稿を移行したものです。元の記事の最新の更新情報については、本内容をご参照ください。
+
+SharePoint Online は複数の機能において、現在モダン エクスペリエンス/クラシック エクスペリエンスの 2 種類を提供しています。
+クラシック エクスペリエンスを廃止する予定は現時点ではありませんが、SharePoint Online においてはモダン エクスペリエンスの利用を推奨しています。
+今回はモダン エクスペリエンスが推奨される背景を紹介します。今後 SharePoint Online を快適にご利用頂くためにはモダン エクスペリエンスの利用を推奨していますので、本稿の内容を参考に、モダン エクスペリエンスの採用や移行を検討いただけると幸いです。
+
+
+モダン エクスペリエンスが提供された背景SharePoint は...
+        <p class="article-readmore">
+          <a href="sharepoint-online/modern-experience-advantage/">Read more</a>
+        </p>
+      
+    </div>
+
+    <footer class="article-footer">
+      <!--a data-url="https://jpspsupport.github.io/newblog/sharepoint-online/modern-experience-advantage/" data-id="ckos6lwr100050mp1cigl33t5" class="article-share-link">共有</a-->
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-general/welcome" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    <!-- post date -->
+    <div class="article-meta">
+      <a href="general/welcome/" class="article-date">
+  <time datetime="2020-04-13T15:00:00.000Z" itemprop="datePublished">2020-04-14</time>
+</a>
+      
+    </div>
+
+    
+    <!-- post title -->
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="general/welcome/">SharePoint Support チームのブログへようこそ</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- post caption -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+本記事は Technet Blog の更新停止に伴い、もともとばらばらに存在していた記事を一つのブログに集約／移行したものです。元の記事の最新の更新情報については、本ブログの投稿をご参照ください。
+
+こんにちは。SharePoint Support チームのブログです。
+わたしたちサポートチームでは下記の製品のサポートを行っており、それぞれの製品に関する情報を本ブログで発信していきたいと考えています。
+
+SharePoint Online と OneDrive for Business
+SharePoint Server (オンプレミス)
+Microsoft Stream
+
+なお、本ブログは弊社の公式見解ではなく、予告なく変更される場合があります。もし公式な見解が必要な場合は、弊社ドキュメント (https://docs.microsoft.com/ や https://support....
+        <p class="article-readmore">
+          <a href="general/welcome/">Read more</a>
+        </p>
+      
+    </div>
+
+    <footer class="article-footer">
+      <!--a data-url="https://jpspsupport.github.io/newblog/general/welcome/" data-id="ckos6lwqo00000mp1gl7y4s6w" class="article-share-link">共有</a-->
+      
+      
     </footer>
   </div>
   
@@ -140,7 +508,23 @@
       <ul>
         
           <li>
-            <a href="information/test/">Example article</a>
+            <a href="sharepoint-online/impact-of-tokenhelper-from-disabling-tls1.0/">TLS 1.0 や 1.1 廃止による TokenHelper アプリ専用トークン取得動作への影響について</a>
+          </li>
+        
+          <li>
+            <a href="sharepoint-online/power-automate-assign-permission/">Power Automate で SharePoint リスト アイテムに対して個別のアクセス権を付与する方法</a>
+          </li>
+        
+          <li>
+            <a href="sharepoint-online/introduction-to-power-automate/">Power Automate で簡単な承認フローを作成する</a>
+          </li>
+        
+          <li>
+            <a href="sharepoint-online/use-sp-modernization-scanner/">SharePoint Modernization Scanner を使用して、移行対象のワークフローを抽出する</a>
+          </li>
+        
+          <li>
+            <a href="sharepoint-online/Testing-backoff-logic/">HTTP 調整のリトライロジックのテスト方法</a>
           </li>
         
       </ul>
@@ -152,8 +536,8 @@
   <div class="widget-wrap">
     <h3 class="widget-title">タグ</h3>
     <div class="widget">
-      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="tags/Information/" rel="tag">Information</a></li></ul>  -->
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="tags/Information/">Information</a><span class="tag-list-count">1</span><ul></ul></li></ul>
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="tags/SharePoint-Online/">SharePoint Online</a><span class="tag-list-count">7</span><ul></ul></li></ul>
     </div>
   </div>
 
@@ -163,7 +547,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="archives/2020/12/">2020 / 12</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="archives/2021/03/">2021 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2020/07/">2020 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2020/05/">2020 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2020/04/">2020 / 04</a></li></ul>
     </div>
   </div>
 
@@ -173,7 +557,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">タグクラウド</h3>
     <div class="widget tagcloud">
-      <a href="tags/Information/" style="font-size: 10px;">Information</a>
+      <a href="tags/SharePoint-Online/" style="font-size: 10px;">SharePoint Online</a>
     </div>
   </div>
 
@@ -185,7 +569,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2021 CSS Japan<br>
+      &copy; 2021 SharePoint Support Japan<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
