@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/use-sp-modernization-scanner/SMS09.png">
 <meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/use-sp-modernization-scanner/SMS10.png">
 <meta property="article:published_time" content="2020-07-08T15:00:00.000Z">
-<meta property="article:modified_time" content="2021-05-17T06:15:19.473Z">
+<meta property="article:modified_time" content="2021-07-13T07:19:39.742Z">
 <meta property="article:author" content="SharePoint Support Japan">
 <meta property="article:tag" content="SharePoint Online">
 <meta name="twitter:card" content="summary">
@@ -48,7 +48,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   <div id="container">
@@ -66,7 +66,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" href="https://cssjpn.github.io/" target="_blank" rel="noopener">サポート情報</a>
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -114,15 +114,15 @@
         
         <a href="https://github.com/jpspsupport/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+bdf8ad98-132c-5723-a456-a85f68f0f09f%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSharePoint+Modernization+Scanner+%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%80%81%E7%A7%BB%E8%A1%8C%E5%AF%BE%E8%B1%A1%E3%81%AE%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC%E3%82%92%E6%8A%BD%E5%87%BA%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fblog%2Fsharepoint-online%2Fuse-sp-modernization-scanner%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-online%2Fuse-sp-modernization-scanner.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-online%2Fuse-sp-modernization-scanner.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpspsupport.github.io/blog/sharepoint-online/use-sp-modernization-scanner/" data-id="ckos7qxam000b0mk48yrnfkso" class="article-share-link">共有</a>
+        <a data-url="https://jpspsupport.github.io/blog/sharepoint-online/use-sp-modernization-scanner/" data-id="ckr1q57m2000e0nml3thr9yv0" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今回の投稿では、SharePoint Online における <a href="https://support.microsoft.com/ja-jp/office/1ca3fff8-9985-410a-85aa-8120f626965f?ui=ja-jp&rs=ja-jp&ad=jp" target="_blank" rel="noopener">SharePoint 2010 形式ワークフローの廃止</a> (MC217999) に際しての計画段階において、移行対象のワークフローを抽出する方法を詳細に記載します。</p>
+        <p>今回の投稿では、SharePoint Online における <a target="_blank" rel="noopener" href="https://support.microsoft.com/ja-jp/office/1ca3fff8-9985-410a-85aa-8120f626965f?ui=ja-jp&rs=ja-jp&ad=jp">SharePoint 2010 形式ワークフローの廃止</a> (MC217999) に際しての計画段階において、移行対象のワークフローを抽出する方法を詳細に記載します。</p>
 <p>そのためのツールとして、SharePoint Modernization Scanner (SharePoint モダン化スキャナー) が公開されています。</p>
 <p>最初に、移行する SharePoint 2010 形式ワークフローの全体像をつかむことは必須の作業となります。これをもとに、技術的な課題項目を整理したり、工数を見積もるという作業が派生してくると思います。<br>本投稿では、できる限りスムーズに移行検討作業に移れるよう、現バージョンの SharePoint モダン化スキャナーによる操作イメージを画面付きで紹介します。</p>
-<h2 id="1-最初に下記サイトからツールをダウンロードします。"><a href="#1-最初に下記サイトからツールをダウンロードします。" class="headerlink" title="1. 最初に下記サイトからツールをダウンロードします。"></a>1. 最初に下記サイトからツールをダウンロードします。</h2><p>タイトル : SharePoint モダン化スキャナーを使い始める<br>アドレス : <a href="https://docs.microsoft.com/ja-jp/sharepoint/dev/transform/modernize-scanner" target="_blank" rel="noopener">https://docs.microsoft.com/ja-jp/sharepoint/dev/transform/modernize-scanner</a></p>
+<h2 id="1-最初に下記サイトからツールをダウンロードします。"><a href="#1-最初に下記サイトからツールをダウンロードします。" class="headerlink" title="1. 最初に下記サイトからツールをダウンロードします。"></a>1. 最初に下記サイトからツールをダウンロードします。</h2><p>タイトル : SharePoint モダン化スキャナーを使い始める<br>アドレス : <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/sharepoint/dev/transform/modernize-scanner">https://docs.microsoft.com/ja-jp/sharepoint/dev/transform/modernize-scanner</a></p>
 <p><img src="/blog/sharepoint-online/use-sp-modernization-scanner/SMS01.png" alt="DownloadSMS"></p>
 <h2 id="2-ダウンロードしたツールを実行します。"><a href="#2-ダウンロードしたツールを実行します。" class="headerlink" title="2. ダウンロードしたツールを実行します。"></a>2. ダウンロードしたツールを実行します。</h2><p><img src="/blog/sharepoint-online/use-sp-modernization-scanner/SMS02.png" alt="RunSMS"></p>
 <h3 id="2-1-クライアント-ID-とクライアント-シークレットを用意します。"><a href="#2-1-クライアント-ID-とクライアント-シークレットを用意します。" class="headerlink" title="2-1. クライアント ID とクライアント シークレットを用意します。"></a>2-1. クライアント ID とクライアント シークレットを用意します。</h3><p>Selected Authentication Option ですが、テナント全体に対して実行する場合は、あらかじめテナント内の全サイト コレクションにアクセス可能なユーザーが用意できない場合は、アプリ専用トークンを利用することが現実的です。<br>アプリ専用トークンの種類は 2 種類あります。一般的にはライフサイクルを考慮した場合、継続的なアプリケーションの開発や利用を想定した場合は Azure AD App Only が推奨されますが、どちらでも現時点での機能面に変わりはないため、今回の一時的な利用においては操作が簡単な Azure ACS App Only のシナリオを進めていただくことで問題はありません。</p>
@@ -201,6 +201,10 @@
       <ul>
         
           <li>
+            <a href="../managementshell-clientcomponentsSDK/">SharePoint Online 管理シェルは SharePoint Online Client Components SDK がインストールされた端末で使用できません</a>
+          </li>
+        
+          <li>
             <a href="../impact-of-tokenhelper-from-disabling-tls1.0/">TLS 1.0 や 1.1 廃止による TokenHelper アプリ専用トークン取得動作への影響について</a>
           </li>
         
@@ -216,10 +220,6 @@
             <a href="">SharePoint Modernization Scanner を使用して、移行対象のワークフローを抽出する</a>
           </li>
         
-          <li>
-            <a href="../Testing-backoff-logic/">HTTP 調整のリトライロジックのテスト方法</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -230,7 +230,7 @@
     <h3 class="widget-title">タグ</h3>
     <div class="widget">
       <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>  -->
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/">SharePoint Online</a><span class="tag-list-count">7</span><ul></ul></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/">SharePoint Online</a><span class="tag-list-count">8</span><ul></ul></li></ul>
     </div>
   </div>
 
@@ -240,7 +240,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/03/">2021 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/07/">2020 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/05/">2020 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/04/">2020 / 04</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/07/">2021 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/03/">2021 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/07/">2020 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/05/">2020 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/04/">2020 / 04</a></li></ul>
     </div>
   </div>
 

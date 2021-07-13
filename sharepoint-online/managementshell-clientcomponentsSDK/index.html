@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>SharePoint Online 管理シェルは SharePoint Online Client Components SDK がインストールされた端末で使用できません | Japan SharePoint Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="SharePoint Online 管理シェル (SharePoint Online Management Shell) と SharePoint Client Component SDK を同じ端末上にインストールした場合、SharePoint Online 管理シェルの起動時にモジュールの読み込みに失敗し、エラーが発生します。  このエラーは、Windows PowerShell 上で “Mi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SharePoint Online 管理シェルは SharePoint Online Client Components SDK がインストールされた端末で使用できません">
+<meta property="og:url" content="https://jpspsupport.github.io/blog/sharepoint-online/managementshell-clientcomponentsSDK/index.html">
+<meta property="og:site_name" content="Japan SharePoint Support Blog">
+<meta property="og:description" content="SharePoint Online 管理シェル (SharePoint Online Management Shell) と SharePoint Client Component SDK を同じ端末上にインストールした場合、SharePoint Online 管理シェルの起動時にモジュールの読み込みに失敗し、エラーが発生します。  このエラーは、Windows PowerShell 上で “Mi">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/managementshell-clientcomponentsSDK/SPOManagementShell.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/managementshell-clientcomponentsSDK/WindowsPowerShell.png">
+<meta property="article:published_time" content="2021-07-12T15:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-13T07:19:39.738Z">
+<meta property="article:author" content="SharePoint Support Japan">
+<meta property="article:tag" content="SharePoint Online">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpspsupport.github.io/blog/sharepoint-online/managementshell-clientcomponentsSDK/SPOManagementShell.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan SharePoint Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpspsupport.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan SharePoint Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの SharePoint に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-sharepoint-online/managementshell-clientcomponentsSDK" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SharePoint Online 管理シェルは SharePoint Online Client Components SDK がインストールされた端末で使用できません
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2021-07-12T15:00:00.000Z" itemprop="datePublished">2021-07-13</time>
+</a>
+        
+        
+        <a href="https://github.com/jpspsupport/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+413e09cb-03ec-504b-a58e-098c113b071c%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSharePoint+Online+%E7%AE%A1%E7%90%86%E3%82%B7%E3%82%A7%E3%83%AB%E3%81%AF+SharePoint+Online+Client+Components+SDK+%E3%81%8C%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%95%E3%82%8C%E3%81%9F%E7%AB%AF%E6%9C%AB%E3%81%A7%E4%BD%BF%E7%94%A8%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%9B%E3%82%93%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fblog%2Fsharepoint-online%2Fmanagementshell-clientcomponentsSDK%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-online%2Fmanagementshell-clientcomponentsSDK.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-online%2Fmanagementshell-clientcomponentsSDK.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpspsupport.github.io/blog/sharepoint-online/managementshell-clientcomponentsSDK/" data-id="ckr1q57lu00050nml9bp7eps0" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>SharePoint Online 管理シェル (SharePoint Online Management Shell) と SharePoint Client Component SDK を同じ端末上にインストールした場合、SharePoint Online 管理シェルの起動時にモジュールの読み込みに失敗し、エラーが発生します。</p>
+<p><img src="/blog/sharepoint-online/managementshell-clientcomponentsSDK/SPOManagementShell.png" alt="SharePoint Online 管理シェル起動時のエラー"></p>
+<p>このエラーは、Windows PowerShell 上で “Microsoft.Online.SharePoint.PowerShell” モジュールを指定してインポートした場合にも同様に発生します。</p>
+<p><img src="/blog/sharepoint-online/managementshell-clientcomponentsSDK/WindowsPowerShell.png" alt="Windows PowerShell のモジュール読み込み時のエラー"></p>
+<p>&lt;エラー メッセージの抜粋&gt;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Import-Module : Could not load type &#x27;Microsoft.SharePoint.Client.Publishing.PortalLaunch.PortalLaunchRedirectionType&#x27;</span><br><span class="line">from assembly &#x27;Microsoft.SharePoint.Client.Publishing, Version=16.0.0.0, Culture=neutral,</span><br><span class="line">PublicKeyToken=71e9bce111e9429c&#x27;.</span><br><span class="line">At line:1 char:1</span><br><span class="line">+ Import-Module Microsoft.Online.SharePoint.PowerShell -DisableNameChec ...</span><br><span class="line">+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">    + CategoryInfo          : NotSpecified: (:) [Import-Module], TypeLoadException</span><br><span class="line">    + FullyQualifiedErrorId : System.TypeLoadException,Microsoft.PowerShell.Commands.ImportModuleCommand</span><br></pre></td></tr></table></figure>
+
+<p>エラーを回避して SharePoint Online 管理シェルを利用するには、SharePoint Online Client Components SDK をアンインストールする必要があります。<br>本内容は、以下の公開情報にも記載されております。</p>
+<p>タイトル : SharePoint Online 管理シェルを使用して作業を開始する<br>アドレス : <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/powershell/sharepoint/sharepoint-online/connect-sharepoint-online?view=sharepoint-ps">https://docs.microsoft.com/ja-jp/powershell/sharepoint/sharepoint-online/connect-sharepoint-online?view=sharepoint-ps</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SharePoint Online 管理シェル モジュールと SharePoint クライアント コンポーネント SDK の間には既知の問題があります。この SDK では、両方が同じコンピューターにインストールされている場合、モジュールの読み込みに失敗します。 この問題が発生した場合は、SharePoint クライアント コンポーネント SDK をアンインストールします。</span><br></pre></td></tr></table></figure>
+
+<h2 id="SharePoint-Online-Client-Components-SDK-のアンインストール手順"><a href="#SharePoint-Online-Client-Components-SDK-のアンインストール手順" class="headerlink" title="SharePoint Online Client Components SDK のアンインストール手順"></a>SharePoint Online Client Components SDK のアンインストール手順</h2><ol>
+<li>[コントロール パネル] で [プログラム] &gt; [プログラムのアンインストール] をクリックします。</li>
+<li>“SharePoint Client Components” を右クリックして、[アンインストール] をクリックします。<br>※ これにより、SDK によってグローバル アセンブリ キャッシュ (GAC) に配置された CSOM アセンブリが削除されます。</li>
+<li> SharePoint Online 管理シェルを再起動して、エラーが解消されることをご確認ください。</li>
+</ol>
+<p>端末上で SharePoint CSOM と SharePoint Online 管理シェルの両方を使用する必要がある場合は、SharePoint Online Client Components SDK でインストールされる CSOM パッケージを NuGet パッケージとしてウェブからダウンロードすることで、SharePoint Online 管理シェルと CSOM を同じ端末上で利用することが出来ます。</p>
+<h2 id="CSOM-パッケージをダウンロードする"><a href="#CSOM-パッケージをダウンロードする" class="headerlink" title="CSOM パッケージをダウンロードする"></a>CSOM パッケージをダウンロードする</h2><ol>
+<li>インターネットに接続可能な端末で、下記サイトから Microsoft.SharePointOnline.CSOM パッケージをダウンロードします。</li>
+</ol>
+<p>タイトル : Microsoft.SharePointOnline.CSOM<br>アドレス : <a target="_blank" rel="noopener" href="https://www.nuget.org/packages/Microsoft.SharePointOnline.CSOM">https://www.nuget.org/packages/Microsoft.SharePointOnline.CSOM</a></p>
+<ol start="2">
+<li>.nupkg ファイルの拡張子を .zip に変更します。</li>
+<li>.zip ファイルを展開します。</li>
+<li>lib\net45 フォルダー内の DLL を任意の場所にコピーします。(C:\CSOM\lib\net45\ 等)</li>
+<li>ご利用のアプリケーションで CSOM アセンブリを読み込めることをご確認ください。<br>※パスを指定してアセンブリを読み込んでいた場合は、必要に応じてパスを変更ください。</li>
+</ol>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>
+
+        
+        <a href="https://github.com/jpspsupport/blog/edit/main/articles/sharepoint-online/managementshell-clientcomponentsSDK.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../impact-of-tokenhelper-from-disabling-tls1.0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">TLS 1.0 や 1.1 廃止による TokenHelper アプリ専用トークン取得動作への影響について</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">SharePoint Online 管理シェルは SharePoint Online Client Components SDK がインストールされた端末で使用できません</a>
+          </li>
+        
+          <li>
+            <a href="../impact-of-tokenhelper-from-disabling-tls1.0/">TLS 1.0 や 1.1 廃止による TokenHelper アプリ専用トークン取得動作への影響について</a>
+          </li>
+        
+          <li>
+            <a href="../power-automate-assign-permission/">Power Automate で SharePoint リスト アイテムに対して個別のアクセス権を付与する方法</a>
+          </li>
+        
+          <li>
+            <a href="../introduction-to-power-automate/">Power Automate で簡単な承認フローを作成する</a>
+          </li>
+        
+          <li>
+            <a href="../use-sp-modernization-scanner/">SharePoint Modernization Scanner を使用して、移行対象のワークフローを抽出する</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/">SharePoint Online</a><span class="tag-list-count">8</span><ul></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/07/">2021 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/03/">2021 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/07/">2020 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/05/">2020 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/04/">2020 / 04</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/SharePoint-Online/" style="font-size: 10px;">SharePoint Online</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 SharePoint Support Japan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

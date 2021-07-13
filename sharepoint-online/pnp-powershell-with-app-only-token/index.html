@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/pnp-powershell-with-app-only-token/appinv.png">
 <meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/pnp-powershell-with-app-only-token/appinv2.png">
 <meta property="article:published_time" content="2020-05-20T15:00:00.000Z">
-<meta property="article:modified_time" content="2021-05-17T06:15:19.469Z">
+<meta property="article:modified_time" content="2021-07-13T07:19:39.738Z">
 <meta property="article:author" content="SharePoint Support Japan">
 <meta property="article:tag" content="SharePoint Online">
 <meta name="twitter:card" content="summary">
@@ -41,7 +41,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   <div id="container">
@@ -59,7 +59,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" href="https://cssjpn.github.io/" target="_blank" rel="noopener">サポート情報</a>
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -107,7 +107,7 @@
         
         <a href="https://github.com/jpspsupport/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+99674e88-9223-50fe-bdfb-c2ab57e84d74%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BPnP+PowerShell+%E3%81%A7%E3%83%86%E3%83%8A%E3%83%B3%E3%83%88%E3%81%AE%E3%83%95%E3%83%AB%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E6%A8%A9%E9%99%90%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E6%8E%A5%E7%B6%9A%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fblog%2Fsharepoint-online%2Fpnp-powershell-with-app-only-token%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-online%2Fpnp-powershell-with-app-only-token.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-online%2Fpnp-powershell-with-app-only-token.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpspsupport.github.io/blog/sharepoint-online/pnp-powershell-with-app-only-token/" data-id="ckos7qxai00060mk4d9m403sm" class="article-share-link">共有</a>
+        <a data-url="https://jpspsupport.github.io/blog/sharepoint-online/pnp-powershell-with-app-only-token/" data-id="ckr1q57ly00090nmldmjl1q3m" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -117,25 +117,25 @@
 <p><img src="/blog/sharepoint-online/pnp-powershell-with-app-only-token/SiteCollectionAdminImage.png" alt="SiteCollectionAdminImage"></p>
 <p>このような状況においては、何かテナント単位で各サイトに対する作業を実施しようとした際に、一時的に自分に各サイト コレクションの管理者権限を付与してから作業せざるを得ない状況に陥ります。SharePoint 管理ポータルや、Set-SPOUser -IsSiteCollectionAdmin $true などで設定は可能です。<br>しかし、多くのサイト コレクションの列挙など、一般的にこの追加実装や作業は、時間がかかることが予測されます。</p>
 <h1 id="対処策"><a href="#対処策" class="headerlink" title="対処策"></a>対処策</h1><p>アプリ専用トークンを使用して、アプリにテナントに対する管理者権限を割り当てることができます。手順は以下のサイトにも記載があります。より詳細な情報については確認ください。</p>
-<p>タイトル : SharePoint アプリ専用のアクセスを許可する<br>アドレス : <a href="https://docs.microsoft.com/ja-jp/sharepoint/dev/solution-guidance/security-apponly-azureacs" target="_blank" rel="noopener">https://docs.microsoft.com/ja-jp/sharepoint/dev/solution-guidance/security-apponly-azureacs</a></p>
+<p>タイトル : SharePoint アプリ専用のアクセスを許可する<br>アドレス : <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/sharepoint/dev/solution-guidance/security-apponly-azureacs">https://docs.microsoft.com/ja-jp/sharepoint/dev/solution-guidance/security-apponly-azureacs</a></p>
 <h2 id="手順"><a href="#手順" class="headerlink" title="手順"></a>手順</h2><h3 id="1-ブラウザーで-https-tenant-sharepoint-com-layouts-15-appregnew-aspx-を呼び出します。"><a href="#1-ブラウザーで-https-tenant-sharepoint-com-layouts-15-appregnew-aspx-を呼び出します。" class="headerlink" title="1) ブラウザーで https://{tenant}.sharepoint.com/_layouts/15/appregnew.aspx を呼び出します。"></a>1) ブラウザーで https://{tenant}.sharepoint.com/_layouts/15/appregnew.aspx を呼び出します。</h3><p>{tenant} の部分は、ご利用のテナント プリフィックスに基づいたアドレスに変えてください。</p>
 <h4 id="イメージ"><a href="#イメージ" class="headerlink" title="イメージ"></a>イメージ</h4><p><img src="/blog/sharepoint-online/pnp-powershell-with-app-only-token/appregnew.png" alt="AppRegNew"></p>
 <p> 1-1) クライアント ID とクライアント シークレットにて、それぞれ [生成] をクリックします。<br> 1-2) タイトルに任意の名前をしています。<br> 1-3) アプリドメインとリダイレクト先の URI には、指定のようにダミー値を記載します。<br>  (サーバー利用しませんので、ダミーで問題ありません。)<br> 1-4) [作成] をクリックします。<br> <strong>1-5) 次の画面で表示されるアプリの情報を厳重に保管してください。</strong></p>
 <h3 id="2-次にブラウザーで-https-tenant-admin-sharepoint-com-layouts-15-appinv-aspx-を呼び出します。"><a href="#2-次にブラウザーで-https-tenant-admin-sharepoint-com-layouts-15-appinv-aspx-を呼び出します。" class="headerlink" title="2) 次にブラウザーで https://{tenant}-admin.sharepoint.com/_layouts/15/appinv.aspx を呼び出します。**"></a>2) 次にブラウザーで https://{tenant}-admin.sharepoint.com/_layouts/15/appinv.aspx を呼び出します。**</h3><p> 2-1) アプリ ID に、先ほど登録したクライアント ID を入力して、アプリの情報を呼び出します。<br> 2-2) アプリのアクセス許可を付与するために XML を記載します。</p>
- <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">AppPermissionRequests</span> <span class="attr">AllowAppOnlyPolicy</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">AppPermissionRequest</span> <span class="attr">Scope</span>=<span class="string">"http://sharepoint/content/tenant"</span> <span class="attr">Right</span>=<span class="string">"FullControl"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">AppPermissionRequests</span>&gt;</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">AppPermissionRequests</span> <span class="attr">AllowAppOnlyPolicy</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">AppPermissionRequest</span> <span class="attr">Scope</span>=<span class="string">&quot;http://sharepoint/content/tenant&quot;</span> <span class="attr">Right</span>=<span class="string">&quot;FullControl&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">AppPermissionRequests</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p> 2-3) [作成] をクリックします。 </p>
 <h4 id="イメージ-1"><a href="#イメージ-1" class="headerlink" title="イメージ"></a>イメージ</h4><p><img src="/blog/sharepoint-online/pnp-powershell-with-app-only-token/appinv.png" alt="AppInv"></p>
 <p> 2-4) [信頼する] をクリックします。</p>
 <h4 id="イメージ-2"><a href="#イメージ-2" class="headerlink" title="イメージ"></a>イメージ</h4><p><img src="/blog/sharepoint-online/pnp-powershell-with-app-only-token/appinv2.png" alt="AppInv2"></p>
-<p> 2-5) テナントでレガシーのアプリ専用トークンを有効化します。<br>   2020 年夏頃以降に新規作成したテナントにおいて、アプリ専用トークンが既定で無効化されている場合があります。その場合は <a href="https://support.microsoft.com/ja-jp/office/c16941c3-19b4-4710-8056-34c034493429" target="_blank" rel="noopener">SharePoint Online 管理シェル</a> を使用してテナントの設定を変更ください。</p>
+<p> 2-5) テナントでレガシーのアプリ専用トークンを有効化します。<br>   2020 年夏頃以降に新規作成したテナントにおいて、アプリ専用トークンが既定で無効化されている場合があります。その場合は <a target="_blank" rel="noopener" href="https://support.microsoft.com/ja-jp/office/c16941c3-19b4-4710-8056-34c034493429">SharePoint Online 管理シェル</a> を使用してテナントの設定を変更ください。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Set-SPOTenant</span> <span class="literal">-DisableCustomAppAuthentication</span> <span class="variable">$FALSE</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="3-PnP-PowerShell-で以下のように接続します。後は、続けてコマンドレットを実行ください。"><a href="#3-PnP-PowerShell-で以下のように接続します。後は、続けてコマンドレットを実行ください。" class="headerlink" title="3) PnP PowerShell で以下のように接続します。後は、続けてコマンドレットを実行ください。"></a>3) PnP PowerShell で以下のように接続します。後は、続けてコマンドレットを実行ください。</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Connect-PnPOnline</span> https://&#123;tenant&#125;.sharepoint.com <span class="literal">-ClientId</span> &lt;クライアント ID&gt; <span class="literal">-ClientSecret</span> &lt;クライアント シークレット&gt;</span><br></pre></td></tr></table></figure>
 
 <h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>アプリ専用トークンは、非常に強力です。しかし、クライアント ID やシークレットとなる情報に尽きましては、管理者アカウント・パスワードと同様、厳重に管理してくださいますようお願いします。</p>
 <h1 id="その他"><a href="#その他" class="headerlink" title="その他"></a>その他</h1><p>Get-PnPContext コマンドを実行することで、ClientContext オブジェクトを取得できるため、このオブジェクトから利用できる様々な処理を実行することが可能です。<br>運用シナリオに応じて、CSOM 標準で用意されているコマンドレットとは別の処理を実行することができます。</p>
-<h1 id="参考リンク"><a href="#参考リンク" class="headerlink" title="参考リンク"></a>参考リンク</h1><p>タイトル : SharePoint PnP の位置づけ<br>アドレス : <a href="https://social.msdn.microsoft.com/Forums/ja-JP/f19d79d3-c6e4-4914-9a8b-580c5efdbf9e/sharepoint-pnp1239820301326222018412369?forum=sharepointsupportteamja" target="_blank" rel="noopener">https://social.msdn.microsoft.com/Forums/ja-JP/f19d79d3-c6e4-4914-9a8b-580c5efdbf9e/sharepoint-pnp1239820301326222018412369?forum=sharepointsupportteamja</a></p>
+<h1 id="参考リンク"><a href="#参考リンク" class="headerlink" title="参考リンク"></a>参考リンク</h1><p>タイトル : SharePoint PnP の位置づけ<br>アドレス : <a target="_blank" rel="noopener" href="https://social.msdn.microsoft.com/Forums/ja-JP/f19d79d3-c6e4-4914-9a8b-580c5efdbf9e/sharepoint-pnp1239820301326222018412369?forum=sharepointsupportteamja">https://social.msdn.microsoft.com/Forums/ja-JP/f19d79d3-c6e4-4914-9a8b-580c5efdbf9e/sharepoint-pnp1239820301326222018412369?forum=sharepointsupportteamja</a></p>
 
       
       
@@ -191,6 +191,10 @@
       <ul>
         
           <li>
+            <a href="../managementshell-clientcomponentsSDK/">SharePoint Online 管理シェルは SharePoint Online Client Components SDK がインストールされた端末で使用できません</a>
+          </li>
+        
+          <li>
             <a href="../impact-of-tokenhelper-from-disabling-tls1.0/">TLS 1.0 や 1.1 廃止による TokenHelper アプリ専用トークン取得動作への影響について</a>
           </li>
         
@@ -206,10 +210,6 @@
             <a href="../use-sp-modernization-scanner/">SharePoint Modernization Scanner を使用して、移行対象のワークフローを抽出する</a>
           </li>
         
-          <li>
-            <a href="../Testing-backoff-logic/">HTTP 調整のリトライロジックのテスト方法</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -220,7 +220,7 @@
     <h3 class="widget-title">タグ</h3>
     <div class="widget">
       <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>  -->
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/">SharePoint Online</a><span class="tag-list-count">7</span><ul></ul></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/">SharePoint Online</a><span class="tag-list-count">8</span><ul></ul></li></ul>
     </div>
   </div>
 
@@ -230,7 +230,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/03/">2021 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/07/">2020 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/05/">2020 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/04/">2020 / 04</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/07/">2021 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/03/">2021 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/07/">2020 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/05/">2020 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/04/">2020 / 04</a></li></ul>
     </div>
   </div>
 
