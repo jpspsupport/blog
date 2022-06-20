@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>構成キャッシュの再作成 (SharePoint Server) | Japan SharePoint Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本投稿は、以前の SharePoint サポート フォーラムの投稿 を元に、内容を一部加筆・修正したものとなります。   本投稿は、オンプレミスの SharePoint Server 2013, SharePoint Server 2016, SharePoint Server 2019, SharePoint Server Subscription Edition に適用されます。Micros">
+<meta property="og:type" content="article">
+<meta property="og:title" content="構成キャッシュの再作成 (SharePoint Server)">
+<meta property="og:url" content="https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/index.html">
+<meta property="og:site_name" content="Japan SharePoint Support Blog">
+<meta property="og:description" content="本投稿は、以前の SharePoint サポート フォーラムの投稿 を元に、内容を一部加筆・修正したものとなります。   本投稿は、オンプレミスの SharePoint Server 2013, SharePoint Server 2016, SharePoint Server 2019, SharePoint Server Subscription Edition に適用されます。Micros">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/01_stop-timer-service.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/02_regedit.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/03_config_cache_folder.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/04_cache_ini_before.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/05_cache_ini_after.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/06_start-timer-service.png">
+<meta property="article:published_time" content="2022-06-19T15:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-20T04:12:12.503Z">
+<meta property="article:author" content="SharePoint Support Japan">
+<meta property="article:tag" content="SharePoint Server">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/01_stop-timer-service.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan SharePoint Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpspsupport.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan SharePoint Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの SharePoint に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-sharepoint-server/clear-configcache" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      構成キャッシュの再作成 (SharePoint Server)
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2022-06-19T15:00:00.000Z" itemprop="datePublished">2022-06-20</time>
+</a>
+        
+        
+        <a href="https://github.com/jpspsupport/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+e633b98b-02d3-5ffb-b6bc-94f8a50b5c7d%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E6%A7%8B%E6%88%90%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%81%AE%E5%86%8D%E4%BD%9C%E6%88%90+%28SharePoint+Server%29%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fblog%2Fsharepoint-server%2Fclear-configcache%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-server%2Fclear-configcache.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-server%2Fclear-configcache.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/" data-id="cl4m81h8q000g0nqj067gdi7q" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>本投稿は、以前の <a target="_blank" rel="noopener" href="https://social.msdn.microsoft.com/Forums/ja-JP/590627a7-d369-47b2-bfc8-7726d7cf9342/2708325104124611251512483124711251712398208772031625104?forum=sharepointsupportteamja" title="構成キャッシュの再作成">SharePoint サポート フォーラムの投稿</a> を元に、内容を一部加筆・修正したものとなります。</p>
+</blockquote>
+<blockquote>
+<p>本投稿は、オンプレミスの SharePoint Server 2013, SharePoint Server 2016, SharePoint Server 2019, SharePoint Server Subscription Edition に適用されます。Microsoft 365 の SharePoint Online には適用されませんので、ご注意ください。</p>
+</blockquote>
+<p>SharePoint Server では、パフォーマンスの観点から、SharePoint の構成データベース (SharePoint_Config) のデータの大部分を、SharePoint サーバー上のローカルのファイル システム内に XML ファイルとしてキャッシュ (構成キャッシュ) を保持しています。</p>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/sharepoint/technical-reference/database-types-and-descriptions#configuration" title="データベースの種類と説明 (SharePoint Server)">データベースの種類と説明 (SharePoint Server)</a></p>
+<p>構成キャッシュは、SharePoint Timer Service (SPTimerV4 / OWSTIMER.EXE) によるタイマー ジョブの実行の際に使用するキャッシュ情報となります。この構成キャッシュの内容に不整合が生じた場合、様々な問題が発生することが過去事例より確認されております。</p>
+<p>&lt;一例&gt;</p>
+<ul>
+<li>SharePoint の各タイマー ジョブが正常に実行されない (“即時の通知” による通知メールが送信されない、SharePoint の診断ログの出力レベルの変更コマンド内容が正常に反映されない、ソリューションの取り消しが行えない、等)</li>
+<li>検索関連の問題が発生する (クロールが開始・完了しない、インデックス リセットが行えない、検索トポロジーの変更ができない、等)</li>
+<li>サイトのアクセスが行えない</li>
+<li>新規のサイト コレクションを作成できない</li>
+</ul>
+<p>上記の事象は、あくまでも構成キャッシュの不整合によって発生した事象の一例となります。弊社サポートにお問合せいただいた際に、構成キャッシュの不整合が疑われるような状況の場合、はじめに弊社サポートからは構成キャッシュの再作成を依頼させていただくことがございます。<br>本投稿では、構成キャッシュの再作成の手順について、具体的な手順をご案内いたします。</p>
+<hr>
+<p>目次</p>
+<ul>
+<li><a href="#%E6%89%8B%E5%8B%95%E3%81%AB%E3%82%88%E3%82%8B%E6%A7%8B%E6%88%90%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%81%AE%E5%86%8D%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86">手動による構成キャッシュの再作成手順</a><ul>
+<li><a href="#%E4%BD%9C%E6%A5%AD%E3%81%AB%E3%82%88%E3%82%8B%E5%BD%B1%E9%9F%BF">作業による影響</a></li>
+<li><a href="#%E4%BD%9C%E6%A5%AD%E5%AF%BE%E8%B1%A1">作業対象</a></li>
+<li><a href="#%E4%BD%9C%E6%A5%AD%E6%89%8B%E9%A0%86">作業手順</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9F%E6%A7%8B%E6%88%90%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%81%AE%E5%86%8D%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86">スクリプトを使用した構成キャッシュの再作成手順</a><ul>
+<li><a href="#%E4%BD%9C%E6%A5%AD%E3%81%AB%E3%82%88%E3%82%8B%E5%BD%B1%E9%9F%BF-1">作業による影響</a></li>
+<li><a href="#%E4%BD%9C%E6%A5%AD%E5%AF%BE%E8%B1%A1-1">作業対象</a></li>
+<li><a href="#%E4%BD%9C%E6%A5%AD%E6%89%8B%E9%A0%86-1">作業手順</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A7%8B%E6%88%90%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%81%AE%E4%B8%8D%E6%95%B4%E5%90%88%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%99%E3%82%8B%E8%A6%81%E5%9B%A0">構成キャッシュの不整合が発生する要因</a></li>
+</ul>
+<hr>
+<h2 id="手動による構成キャッシュの再作成手順"><a href="#手動による構成キャッシュの再作成手順" class="headerlink" title="手動による構成キャッシュの再作成手順"></a>手動による構成キャッシュの再作成手順</h2><p>ここでは、手動による構成キャッシュの再作成手順をご案内いたします。</p>
+<h3 id="作業による影響"><a href="#作業による影響" class="headerlink" title="作業による影響"></a>作業による影響</h3><p>SharePoint Server 2016 においては、キャッシュのクリアを実施中にユーザーアクセスが発生した際に、サイトアクセスに失敗するといった事例を確認しております。<br>SharePoint Server 2016 以外の SharePoint Server 製品では同様の事例は確認されておりませんが、構成キャッシュの削除によってページが正常に表示されない事象が発生した場合に備え、構成キャッシュの再作成の手順を実施後に IISRESET コマンドによる IIS の再起動を実施いただくことを推奨しております。<br>IISREST コマンドの実施中は、ユーザーがサイトにアクセス出来なくなるため、ユーザーのご利用の少ない時間帯や営業時間外にご実施ください。<br>また、タイマーサービスの停止中には、一時的にタイマー ジョブが実行されません。このため、作業時間帯にクロールの開始などがスケジュールされていた場合、これらのスケジュールは実行されませんのでご注意ください。<br>ただし、これらは一時的な影響であり、次回のスケジュール時にサービスが再開されていれば問題ございません。</p>
+<h3 id="作業対象"><a href="#作業対象" class="headerlink" title="作業対象"></a>作業対象</h3><p>ローカルの管理者権限を持つアカウントで作業対象の SharePoint サーバーにログオンを行い、<a href="#%E4%BD%9C%E6%A5%AD%E6%89%8B%E9%A0%86">作業手順</a> に記載されている手順を SharePoint サーバーごとに (1 台ずつ) 実施します。</p>
+<h3 id="作業手順"><a href="#作業手順" class="headerlink" title="作業手順"></a>作業手順</h3><ol>
+<li><p>SharePoint サーバー上で動作している SharePoint Timer Service を停止します。</p>
+<ul>
+<li>1-1) [管理ツール] から [サービス] を起動します。</li>
+<li>1-2) サービスの一覧から、”SharePoint Timer Service” を右クリックして、さらに [停止] をクリックします。<br><img src="/blog/sharepoint-server/clear-configcache/01_stop-timer-service.png" alt="SharePoint Timer Service の停止"></li>
+</ul>
+</li>
+<li><p>SharePoint サーバーのローカルのファイル システムに保存されている構成キャッシュ ファイルを削除します。</p>
+<ul>
+<li><p>2-1) レジストリ エディターを起動します。</p>
+</li>
+<li><p>2-2) 下記のレジストリの値 (GUID) を確認します。</p>
+<p>  ※本手順で確認したレジストリの値は、同じファーム内の別の SharePoint サーバーでも同一の値となりますため、これ以降の SharePoint サーバーではレジストリの値を確認する必要はございません。 </p>
+<ul>
+<li>SharePoint Server 2013 の場合: <code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Shared Tools\Web ServerExtensions\15.0\Secure\ConfigDB\Id</code></li>
+<li>SharePoint Server 2016, SharePoint Server 2019, SharePoint Server Subscription Edition の場合: <code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Shared Tools\Web ServerExtensions\16.0\Secure\ConfigDB\Id</code></li>
+</ul>
+<p>  <img src="/blog/sharepoint-server/clear-configcache/02_regedit.png" alt="構成データベースの ID を確認 (regedit)"></p>
+</li>
+<li><p>2-3) エクスプローラー上で、下記のパスに移動します。下記の画面ショットの通り、XML ファイルが大量に存在するフォルダとなります。</p>
+<p>  <code>%ALLUSERSPROFILE%\Microsoft\SharePoint\Config\&lt;上記手順 2-2 で確認したレジストリの値&gt;</code></p>
+<p>  例) <code>C:\ProgramData\Microsoft\SharePoint\Config\0ae0b94c-5232-4ba9-add3-2b61d7deb90</code><br>  <img src="/blog/sharepoint-server/clear-configcache/03_config_cache_folder.png" alt="構成キャッシュのフォルダ"></p>
+</li>
+<li><p>2-3) 上記のフォルダ内の XML ファイルを全て削除します。なお、この際に、同フォルダ内に存在する cache.ini ファイルを誤って削除しないように注意します。</p>
+</li>
+<li><p>2-4) XML ファイルの削除後、cache.ini ファイルをメモ帳で開きます。</p>
+</li>
+<li><p>2-5) cache.ini ファイル内の 1 行目の数値を 1 に変更し、上書き保存をしてファイルを閉じます。<br>  <img src="/blog/sharepoint-server/clear-configcache/04_cache_ini_before.png" alt="cache.ini の編集前"><br>  <img src="/blog/sharepoint-server/clear-configcache/05_cache_ini_after.png" alt="cache.ini の編集後"></p>
+</li>
+</ul>
+</li>
+<li><p>停止した SharePoint Timer Service を再開します。</p>
+<ul>
+<li>3-1) [管理ツール] から [サービス] を起動します。</li>
+<li>3-2 サービスの一覧から、”SharePoint Timer Service” を右クリックして、さらに [開始] をクリックします。<br>  <img src="/blog/sharepoint-server/clear-configcache/06_start-timer-service.png" alt="SharePoint Timer Service の再開"></li>
+</ul>
+</li>
+<li><p>ご利用の SharePoint Server 製品が SharePoint Server 2016 の場合、IIS の再起動を行います。</p>
+<ul>
+<li><p>4-1) コマンド プロンプトを管理者権限で起動します。</p>
+</li>
+<li><p>4-2) <code>iisreset /noforce</code> コマンドを実行し、IIS の再起動を行います。</p>
+<p>  <em>※IIS の再起動が完了するまで、一時的にユーザーがサイトにアクセス出来なくなるため、ご注意ください。</em></p>
+</li>
+</ul>
+</li>
+<li><p>動作確認を行います。</p>
+<ul>
+<li><p>5-1) 手順 2.3 で移動した構成キャッシュのフォルダ上に、再度 XML ファイルが再作成されていることを確認します。</p>
+</li>
+<li><p>5-2) cache.ini ファイルを開き、1 以外の数値となっていることを確認します。</p>
+<p>  ※SharePoint Timer Service の再起動後、数分間は cache.ini がロックされた状態になります。その場合は少し時間を空けてから再度ご確認ください。</p>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="スクリプトを使用した構成キャッシュの再作成手順"><a href="#スクリプトを使用した構成キャッシュの再作成手順" class="headerlink" title="スクリプトを使用した構成キャッシュの再作成手順"></a>スクリプトを使用した構成キャッシュの再作成手順</h2><p>ここでは、<a href="#%E6%89%8B%E5%8B%95%E3%81%AB%E3%82%88%E3%82%8B%E6%A7%8B%E6%88%90%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%81%AE%E5%86%8D%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86">手動による構成キャッシュの再作成手順</a> と同等の手順を実施するための PowerShell スクリプトをご案内いたします。<br>なお、本スクリプトでは、<a href="#%E6%89%8B%E5%8B%95%E3%81%AB%E3%82%88%E3%82%8B%E6%A7%8B%E6%88%90%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%81%AE%E5%86%8D%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86">手動による構成キャッシュの再作成手順</a> における IISRESET コマンド (手順 4-2) の処理は含まれておりませんため、管理者様にて別途ご実施いただく必要がございます。</p>
+<h3 id="作業による影響-1"><a href="#作業による影響-1" class="headerlink" title="作業による影響"></a>作業による影響</h3><p><a href="#%E6%89%8B%E5%8B%95%E3%81%AB%E3%82%88%E3%82%8B%E6%A7%8B%E6%88%90%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%81%AE%E5%86%8D%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86">手動による構成キャッシュの再作成手順</a> をご参考ください。</p>
+<h3 id="作業対象-1"><a href="#作業対象-1" class="headerlink" title="作業対象"></a>作業対象</h3><p>ローカルの管理者権限を持ったファーム アカウントで作業対象の SharePoint サーバーにログオンを行い、<a href="#%E4%BD%9C%E6%A5%AD%E6%89%8B%E9%A0%86-1">作業手順</a> に記載されている手順を SharePoint サーバーごとに (1 台ずつ) 実施します。</p>
+<h3 id="作業手順-1"><a href="#作業手順-1" class="headerlink" title="作業手順"></a>作業手順</h3><ol>
+<li><p>スクリプトを GitHub から入手し、作業対象の SharePoint サーバーに配置します。</p>
+<ul>
+<li><p>1-1) 以下の URL にアクセスし、画面右上の [Code] - [Download Zip] でダウンロードした zip ファイルに含まれる Clear-SPConfigCache.ps1 を、作業対象の SharePoint サーバー上に展開します。</p>
+<p>  <a target="_blank" rel="noopener" href="https://github.com/jpspsupport/Clear-SPConfigCache">https://github.com/jpspsupport/Clear-SPConfigCache</a></p>
+<p>  ※以降の手順では、SharePoint サーバー上のローカルの “C:\temp” に展開したことを想定します。(C:\temp\Clear-SPConfigCache.ps1)</p>
+</li>
+<li><p>1-2) [スタート] メニューから、[Microsoft SharePoint Products] 内の [SharePoint 管理シェル] を右クリックして [管理者として実行] をクリックします。(管理シェルの名称は、ご利用の製品バージョンに読み替えます。)</p>
+</li>
+<li><p>1-3) 下記のコマンドによってスクリプトを実行します。</p>
+<blockquote>
+<p>C:\temp\Clear-SPConfigCache.ps1</p>
+</blockquote>
+<p>  ※PowerShell のスクリプト実行ポリシーによっては、インターネットから入手したスクリプトの実行が制限されている可能性がございます。その場合、下記のコマンドによって、一時的にスクリプトの実行ポリシーを変更した状態でスクリプトを実行します。</p>
+<blockquote>
+<p>powershell -ExecutionPolicy Bypass -Command “C:\temp\Clear-SPConfigCache.ps1”</p>
+</blockquote>
+</li>
+<li><p>1-4) スクリプトの実行時に、下記のようなメッセージが管理シェル上に出力され構成キャッシュが削除されます。</p>
+<p>  ※SharePoint Server 2016 の場合、最後に IIS の再起動を促すメッセージ (Run ‘iisreset /noforce’ manually.) が表示されます。</p>
+<blockquote>
+<p> Stop SharPoint Timer Service.<br> Succeeded to stop SharPoint Timer Service.<br> Clear configuration cache files of ‘SharePoint_Config’ (&lt;GUID&gt;).<br> Delete 1807 XML files.<br> Deleted.<br> Modifiy cache.ini file.<br> Succeeded to modify cache.ini file.<br> Succeeded to clear configuration cache files of ‘SharePoint_Config’ (&lt;GUID&gt;).<br> Restart SharPoint Timer Service.<br> Succeeded to restart SharPoint Timer Service.<br> Run ‘iisreset /noforce’ manually.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>ご利用の SharePoint Server 製品が SharePoint Server 2016 の場合、IIS の再起動を行います。</p>
+<ul>
+<li><p>2-1) コマンド プロンプトを管理者権限で起動します。</p>
+</li>
+<li><p>2-2) <code>iisreset /noforce</code> コマンドを実行し、IIS の再起動を行います。</p>
+<p>  <em>※IIS の再起動が完了するまで、一時的にユーザーがサイトにアクセス出来なくなるため、ご注意ください。</em></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="構成キャッシュの不整合が発生する要因"><a href="#構成キャッシュの不整合が発生する要因" class="headerlink" title="構成キャッシュの不整合が発生する要因"></a>構成キャッシュの不整合が発生する要因</h2><p>構成キャッシュの不整合が発生する状況といたしましては、SharePoint のプロセスがキャッシュに書き込みを行うタイミングで、SharePoint 以外のプロセスがキャッシュ ファイル (またはフォルダ) をロックしているため、書き込みに失敗した状況が考えられます。<br>しかしながら、過去 (構成キャッシュの不整合が発生したタイミング) に遡ってログを取得することは不可能であり、構成キャッシュに不整合が発生する具体的な原因を、不整合が発生した後から特定できません。<br>構成キャッシュの不整合が発生する要因といたしましては、キャッシュのフォルダがウィルス対策ソフトの監視対象になっている場合、キャッシュ ファイルの更新などに失敗することが報告されております。<br>このため、以下の技術情報をご参考いただき、ご利用のウィルス対策ソフトで除外設定についてご確認ください。</p>
+<p><a target="_blank" rel="noopener" href="https://support.microsoft.com/en-us/office/certain-folders-may-have-to-be-excluded-from-antivirus-scanning-when-you-use-file-level-antivirus-software-in-sharepoint-01cbc532-a24e-4bba-8d67-0b1ed733a3d9?ui=en-us&rs=en-us&ad=us" title="Certain folders may have to be excluded from antivirus scanning when you use file-level antivirus software in SharePoint">Certain folders may have to be excluded from antivirus scanning when you use file-level antivirus software in SharePoint</a></p>
+<p>※ SharePoint Server 2013 をご利用の場合は、SharePoint Foundation 2013 に記載のフォルダについても除外対象設定を実施ください。</p>
+<hr>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SharePoint-Server/" rel="tag">SharePoint Server</a></li></ul>
+
+        
+        <a href="https://github.com/jpspsupport/blog/edit/main/articles/sharepoint-server/clear-configcache.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../../sharepoint-online/managementshell-clientcomponentsSDK/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">SharePoint Online 管理シェルは SharePoint Online Client Components SDK がインストールされた端末で使用できません</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">構成キャッシュの再作成 (SharePoint Server)</a>
+          </li>
+        
+          <li>
+            <a href="../../sharepoint-online/managementshell-clientcomponentsSDK/">SharePoint Online 管理シェルは SharePoint Online Client Components SDK がインストールされた端末で使用できません</a>
+          </li>
+        
+          <li>
+            <a href="../../sharepoint-online/impact-of-tokenhelper-from-disabling-tls1.0/">TLS 1.0 や 1.1 廃止による TokenHelper アプリ専用トークン取得動作への影響について</a>
+          </li>
+        
+          <li>
+            <a href="../../sharepoint-online/power-automate-assign-permission/">Power Automate で SharePoint リスト アイテムに対して個別のアクセス権を付与する方法</a>
+          </li>
+        
+          <li>
+            <a href="../../sharepoint-online/introduction-to-power-automate/">Power Automate で簡単な承認フローを作成する</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Server/" rel="tag">SharePoint Server</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/">SharePoint Online</a><span class="tag-list-count">8</span><ul></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Server/">SharePoint Server</a><span class="tag-list-count">1</span><ul></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/07/">2021 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/03/">2021 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/07/">2020 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/05/">2020 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/04/">2020 / 04</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/SharePoint-Online/" style="font-size: 20px;">SharePoint Online</a> <a href="../../tags/SharePoint-Server/" style="font-size: 10px;">SharePoint Server</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 SharePoint Support Japan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
