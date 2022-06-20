@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/05_cache_ini_after.png">
 <meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/06_start-timer-service.png">
 <meta property="article:published_time" content="2022-06-19T15:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-20T04:12:12.503Z">
+<meta property="article:modified_time" content="2022-06-20T09:41:53.402Z">
 <meta property="article:author" content="SharePoint Support Japan">
 <meta property="article:tag" content="SharePoint Server">
 <meta name="twitter:card" content="summary">
@@ -109,7 +109,7 @@
         
         <a href="https://github.com/jpspsupport/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+e633b98b-02d3-5ffb-b6bc-94f8a50b5c7d%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E6%A7%8B%E6%88%90%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%81%AE%E5%86%8D%E4%BD%9C%E6%88%90+%28SharePoint+Server%29%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fblog%2Fsharepoint-server%2Fclear-configcache%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-server%2Fclear-configcache.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-server%2Fclear-configcache.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/" data-id="cl4m81h8q000g0nqj067gdi7q" class="article-share-link">共有</a>
+        <a data-url="https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/" data-id="cl4mjtgeq000g0nt4dg7a9ji1" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -156,8 +156,9 @@
 <li><p>SharePoint サーバー上で動作している SharePoint Timer Service を停止します。</p>
 <ul>
 <li>1-1) [管理ツール] から [サービス] を起動します。</li>
-<li>1-2) サービスの一覧から、”SharePoint Timer Service” を右クリックして、さらに [停止] をクリックします。<br><img src="/blog/sharepoint-server/clear-configcache/01_stop-timer-service.png" alt="SharePoint Timer Service の停止"></li>
+<li>1-2) サービスの一覧から、”SharePoint Timer Service” を右クリックして、さらに [停止] をクリックします。</li>
 </ul>
+<p> <img src="/blog/sharepoint-server/clear-configcache/01_stop-timer-service.png" alt="SharePoint Timer Service の停止"></p>
 </li>
 <li><p>SharePoint サーバーのローカルのファイル システムに保存されている構成キャッシュ ファイルを削除します。</p>
 <ul>
@@ -173,37 +174,42 @@
 </li>
 <li><p>2-3) エクスプローラー上で、下記のパスに移動します。下記の画面ショットの通り、XML ファイルが大量に存在するフォルダとなります。</p>
 <p>  <code>%ALLUSERSPROFILE%\Microsoft\SharePoint\Config\&lt;上記手順 2-2 で確認したレジストリの値&gt;</code></p>
-<p>  例) <code>C:\ProgramData\Microsoft\SharePoint\Config\0ae0b94c-5232-4ba9-add3-2b61d7deb90</code><br>  <img src="/blog/sharepoint-server/clear-configcache/03_config_cache_folder.png" alt="構成キャッシュのフォルダ"></p>
+<p>  例) <code>C:\ProgramData\Microsoft\SharePoint\Config\0ae0b94c-5232-4ba9-add3-2b61d7deb90</code></p>
+<p>  <img src="/blog/sharepoint-server/clear-configcache/03_config_cache_folder.png" alt="構成キャッシュのフォルダ"></p>
 </li>
-<li><p>2-3) 上記のフォルダ内の XML ファイルを全て削除します。なお、この際に、同フォルダ内に存在する cache.ini ファイルを誤って削除しないように注意します。</p>
+<li><p>2-4) 上記のフォルダ内の XML ファイルを全て削除します。なお、この際に、同フォルダ内に存在する cache.ini ファイルを誤って削除しないように注意します。</p>
 </li>
-<li><p>2-4) XML ファイルの削除後、cache.ini ファイルをメモ帳で開きます。</p>
+<li><p>2-5) XML ファイルの削除後、cache.ini ファイルをメモ帳で開きます。</p>
 </li>
-<li><p>2-5) cache.ini ファイル内の 1 行目の数値を 1 に変更し、上書き保存をしてファイルを閉じます。<br>  <img src="/blog/sharepoint-server/clear-configcache/04_cache_ini_before.png" alt="cache.ini の編集前"><br>  <img src="/blog/sharepoint-server/clear-configcache/05_cache_ini_after.png" alt="cache.ini の編集後"></p>
+<li><p>2-6) cache.ini ファイル内の 1 行目の数値を 1 に変更し、上書き保存をしてファイルを閉じます。</p>
+<p>  <img src="/blog/sharepoint-server/clear-configcache/04_cache_ini_before.png" alt="cache.ini の編集前"><br>  <img src="/blog/sharepoint-server/clear-configcache/05_cache_ini_after.png" alt="cache.ini の編集後"></p>
 </li>
 </ul>
 </li>
 <li><p>停止した SharePoint Timer Service を再開します。</p>
 <ul>
-<li>3-1) [管理ツール] から [サービス] を起動します。</li>
-<li>3-2 サービスの一覧から、”SharePoint Timer Service” を右クリックして、さらに [開始] をクリックします。<br>  <img src="/blog/sharepoint-server/clear-configcache/06_start-timer-service.png" alt="SharePoint Timer Service の再開"></li>
-</ul>
+<li><p>3-1) [管理ツール] から [サービス] を起動します。</p>
 </li>
-<li><p>ご利用の SharePoint Server 製品が SharePoint Server 2016 の場合、IIS の再起動を行います。</p>
-<ul>
-<li><p>4-1) コマンド プロンプトを管理者権限で起動します。</p>
-</li>
-<li><p>4-2) <code>iisreset /noforce</code> コマンドを実行し、IIS の再起動を行います。</p>
-<p>  <em>※IIS の再起動が完了するまで、一時的にユーザーがサイトにアクセス出来なくなるため、ご注意ください。</em></p>
+<li><p>3-2 サービスの一覧から、”SharePoint Timer Service” を右クリックして、さらに [開始] をクリックします。</p>
+<p>  <img src="/blog/sharepoint-server/clear-configcache/06_start-timer-service.png" alt="SharePoint Timer Service の再開"></p>
 </li>
 </ul>
 </li>
-<li><p>動作確認を行います。</p>
+<li><p>構成キャッシュの再作成が行われていることを確認します。</p>
 <ul>
-<li><p>5-1) 手順 2.3 で移動した構成キャッシュのフォルダ上に、再度 XML ファイルが再作成されていることを確認します。</p>
+<li><p>4-1) 手順 2-3 で移動した構成キャッシュのフォルダ上に、再度 XML ファイルが再作成されていることを確認します。</p>
 </li>
-<li><p>5-2) cache.ini ファイルを開き、1 以外の数値となっていることを確認します。</p>
+<li><p>4-2) cache.ini ファイルを開き、1 以外の数値となっていることを確認します。</p>
 <p>  ※SharePoint Timer Service の再起動後、数分間は cache.ini がロックされた状態になります。その場合は少し時間を空けてから再度ご確認ください。</p>
+</li>
+</ul>
+</li>
+<li><p>IIS の再起動を行います。</p>
+<ul>
+<li><p>5-1) コマンド プロンプトを管理者権限で起動します。</p>
+</li>
+<li><p>5-2) <code>iisreset /noforce</code> コマンドを実行し、IIS の再起動を行います。</p>
+<p>  <em>※IIS の再起動が完了するまで、一時的にユーザーがサイトにアクセス出来なくなるため、ご注意ください。</em></p>
 </li>
 </ul>
 </li>
@@ -231,14 +237,14 @@
 </blockquote>
 </li>
 <li><p>1-4) スクリプトの実行時に、下記のようなメッセージが管理シェル上に出力され構成キャッシュが削除されます。</p>
-<p>  ※SharePoint Server 2016 の場合、最後に IIS の再起動を促すメッセージ (Run ‘iisreset /noforce’ manually.) が表示されます。</p>
+<p>  ※最後に IIS の再起動を促すメッセージ (Run ‘iisreset /noforce’ manually.) が表示されますが、このタイミングでは IIS の再起動は行われておりません。</p>
 <blockquote>
-<p> Stop SharPoint Timer Service.<br> Succeeded to stop SharPoint Timer Service.<br> Clear configuration cache files of ‘SharePoint_Config’ (&lt;GUID&gt;).<br> Delete 1807 XML files.<br> Deleted.<br> Modifiy cache.ini file.<br> Succeeded to modify cache.ini file.<br> Succeeded to clear configuration cache files of ‘SharePoint_Config’ (&lt;GUID&gt;).<br> Restart SharPoint Timer Service.<br> Succeeded to restart SharPoint Timer Service.<br> Run ‘iisreset /noforce’ manually.</p>
+<p> Stopping SharePoint Timer Service …<br> Succeeded to stop SharePoint Timer Service.<br> Clearing configuration cache files of ‘SharePoint_Config’ (&lt;GUID&gt;) …<br> Deleting &lt;number of XML files&gt; XML files …<br> Deleted.<br> Modifying cache.ini file …<br> Succeeded to modify cache.ini file.<br> Succeeded to clear configuration cache files of ‘SharePoint_Config’ (&lt;GUID&gt;).<br> Restarting SharePoint Timer Service …<br> Succeeded to restart SharePoint Timer Service.<br> Run ‘iisreset /noforce’ manually.</p>
 </blockquote>
 </li>
 </ul>
 </li>
-<li><p>ご利用の SharePoint Server 製品が SharePoint Server 2016 の場合、IIS の再起動を行います。</p>
+<li><p>IIS の再起動を行います。</p>
 <ul>
 <li><p>2-1) コマンド プロンプトを管理者権限で起動します。</p>
 </li>
