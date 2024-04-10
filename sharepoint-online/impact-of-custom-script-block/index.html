@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>(MC714186) カスタム スクリプトのブロックによる影響について | Japan SharePoint Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="この投稿では、Microsoft 365 管理センターのメッセージ センターに MC714186 として掲載されている、SharePoint Online のカスタム スクリプトの無効化について記載します。多くの場合はカスタム スクリプトのブロックによる既存スクリプトへの影響はありませんが、特定の SharePoint Framework ソリューション（requiresCustomScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(MC714186) カスタム スクリプトのブロックによる影響について">
+<meta property="og:url" content="https://jpspsupport.github.io/blog/sharepoint-online/impact-of-custom-script-block/index.html">
+<meta property="og:site_name" content="Japan SharePoint Support Blog">
+<meta property="og:description" content="この投稿では、Microsoft 365 管理センターのメッセージ センターに MC714186 として掲載されている、SharePoint Online のカスタム スクリプトの無効化について記載します。多くの場合はカスタム スクリプトのブロックによる既存スクリプトへの影響はありませんが、特定の SharePoint Framework ソリューション（requiresCustomScript">
+<meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2024-04-09T15:00:00.000Z">
+<meta property="article:modified_time" content="2024-04-10T04:38:41.475Z">
+<meta property="article:author" content="SharePoint Support Japan">
+<meta property="article:tag" content="SharePoint Online">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan SharePoint Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpspsupport.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan SharePoint Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの SharePoint に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-sharepoint-online/impact-of-custom-script-block" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      (MC714186) カスタム スクリプトのブロックによる影響について
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2024-04-09T15:00:00.000Z" itemprop="datePublished">2024-04-10</time>
+</a>
+        
+        
+        <a href="https://github.com/jpspsupport/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+fad56aa9-ff1a-5056-85da-9a4f27318501%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%28MC714186%29+%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0+%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%81%AE%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF%E3%81%AB%E3%82%88%E3%82%8B%E5%BD%B1%E9%9F%BF%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fblog%2Fsharepoint-online%2Fimpact-of-custom-script-block%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-online%2Fimpact-of-custom-script-block.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-online%2Fimpact-of-custom-script-block.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpspsupport.github.io/blog/sharepoint-online/impact-of-custom-script-block/" data-id="clutbls6600020ntd7nyjenbl" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>この投稿では、Microsoft 365 管理センターのメッセージ センターに MC714186 として掲載されている、SharePoint Online のカスタム スクリプトの無効化について記載します。<br>多くの場合はカスタム スクリプトのブロックによる既存スクリプトへの影響はありませんが、特定の SharePoint Framework ソリューション（requiresCustomScript プロパティが True に設定されたソリューション）をご利用の場合は、影響を受ける可能性がありますのでご確認ください。<br>※カスタム スクリプトのブロックに関する最新の情報は、メッセージ センターにて MC714186 をご確認ください。</p>
+<span id="more"></span>
+
+<h2 id="カスタム-スクリプトのブロックの概要"><a href="#カスタム-スクリプトのブロックの概要" class="headerlink" title="カスタム スクリプトのブロックの概要"></a>カスタム スクリプトのブロックの概要</h2><p>SharePoint サイトでは、管理者がカスタム スクリプトの実行を許可することで、ページへのスクリプトの追加や、スクリプトが含まれるファイルのアップロード、ソリューションの追加など、柔軟にサイトをカスタマイズできるようになります。(※1)<br>しかしながら、サイトの編集権限を持つ一般ユーザーが容易にスクリプトを常時追加できるようになるため、悪意のあるスクリプトが挿入されるなどのセキュリティへの注意が必要です。(※2)<br>このようなセキュリティ リスクを軽減するため、今後(※3)は一部のテンプレートを除くすべてのサイト(※4)で、カスタム スクリプトの編集が自動的にブロックされるように変更されます。<br>サイトへのスクリプトの追加、変更、または削除が必要となった場合は、テナント管理者がサイトのカスタム スクリプトを一時的に許可（有効化）することで、以前と同様にスクリプトを追加することができます。<br>カスタム スクリプトの有効化後は、24 時間以内に再び自動で無効化されます。セキュリティ強化を目的として、スクリプトの追加完了後に管理者が手動で無効化に戻すことも可能です。</p>
+<p>(※1) <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/sharepoint/allow-or-prevent-custom-script#features-affected-when-custom-script-is-blocked">カスタム スクリプトを許可または禁止する - SharePoint in Microsoft 365 | Microsoft Learn</a>  </p>
+<p>(※2) <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/sharepoint/security-considerations-of-allowing-custom-script">カスタム スクリプトを許可する場合のセキュリティに関する考慮事項 - SharePoint in Microsoft 365 | Microsoft Learn</a></p>
+<p>(※3) カスタム スクリプトの無効化は、2024 年 4 月下旬に開始され、5 月上旬までに完了する予定です。最新の展開状況は<a target="_blank" rel="noopener" href="https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC714186">メッセージ センターの MC714186</a> をご確認ください。</p>
+<p>(※4) カスタム スクリプトの無効化は、以下のサイト テンプレートを除くすべての既存の SharePoint サイトと OneDrive サイトに適用されます。<br>BLANKINTERNETCONTAINER#0 = 従来の発行ポータル サイト<br>CMSPUBLISHING#0 = 公開サイト<br>BLANKINTERNET#0 = 発行サイト<br>GROUP#0 = チーム サイト<br>APPCATALOG#0 = アプリ・カタログ<br>CSPCONTAINER#0 = CSP コンテナー  </p>
+<h2 id="注意事項-例外"><a href="#注意事項-例外" class="headerlink" title="注意事項 (例外)"></a>注意事項 (例外)</h2><p>カスタム スクリプトのブロック後も、OneDrive サイトと SharePoint サイトの既存ページのスクリプトの実行は一般的に影響を受けません。<br>しかしながら、SharePoint Framework ソリューションにおいて、マニフェストで requiresCustomScript プロパティを True に設定している場合、カスタム スクリプトのブロックによりソリューションが動作しなくなることを確認しております。requiresCustomScript プロパティが True に設定されているソリューションの一例として、<a href="/blog/react-script-editor/README/">PnP の Modern Script Editor Web Part</a> があります。<br>requiresCustomScript プロパティが Ture に設定された SharePoint Framework ソリューションをご利用の場合は、ブロックの期限が迫っておりますので、カスタム スクリプトの無効化適用をあらかじめ延長することをご検討くださいますようお願いいたします。</p>
+<p>なお、この問題については、2024 年 4 月 10 日現在、開発部門にて調査が進められております。調査の進展があり次第、本記事を更新いたします。</p>
+<p>(*) requiresCustomScript プロパティの設定例が掲載された公開情報<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/build-a-hello-world-web-part#web-part-manifest">https://learn.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/build-a-hello-world-web-part#web-part-manifest</a></p>
+<h2 id="カスタム-スクリプトの無効化の延長について"><a href="#カスタム-スクリプトの無効化の延長について" class="headerlink" title="カスタム スクリプトの無効化の延長について"></a>カスタム スクリプトの無効化の延長について</h2><p>カスタム スクリプトの無効化を遅らせるための SharePoint 管理シェル コマンド DelayDenyAddAndCustomizePagesEnforcement が 4 月中旬までに展開されます。<br>SharePoint 管理者もしくは全体管理者で以下のコマンドを実行することで、カスタム スクリプトの無効化を 2024 年 11 月中旬まで遅らせることが可能です。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Set-SPOTenant</span> <span class="literal">-DelayDenyAddAndCustomizePagesEnforcement</span> <span class="variable">$True</span></span><br></pre></td></tr></table></figure>
+
+
+<p>今回の投稿は以上です。<br>不明な点などがありましたら、弊社サポートサービスまでお気軽にお問い合わせください。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>
+
+        
+        <a href="https://github.com/jpspsupport/blog/edit/main/articles/sharepoint-online/impact-of-custom-script-block.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../impact-of-msonline-retirement/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">MSOnline モジュールの廃止に伴う SharePoint アドインへの影響について</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">(MC714186) カスタム スクリプトのブロックによる影響について</a>
+          </li>
+        
+          <li>
+            <a href="../impact-of-msonline-retirement/">MSOnline モジュールの廃止に伴う SharePoint アドインへの影響について</a>
+          </li>
+        
+          <li>
+            <a href="../../sharepoint-server/clear-configcache/">構成キャッシュの再作成 (SharePoint Server)</a>
+          </li>
+        
+          <li>
+            <a href="../managementshell-clientcomponentsSDK/">SharePoint Online 管理シェルは SharePoint Online Client Components SDK がインストールされた端末で使用できません</a>
+          </li>
+        
+          <li>
+            <a href="../impact-of-tokenhelper-from-disabling-tls1.0/">TLS 1.0 や 1.1 廃止による TokenHelper アプリ専用トークン取得動作への影響について</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Server/" rel="tag">SharePoint Server</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/">SharePoint Online</a><span class="tag-list-count">10</span><ul></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Server/">SharePoint Server</a><span class="tag-list-count">1</span><ul></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/04/">2024 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/04/">2023 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/07/">2021 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/03/">2021 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/07/">2020 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/05/">2020 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/04/">2020 / 04</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/SharePoint-Online/" style="font-size: 20px;">SharePoint Online</a> <a href="../../tags/SharePoint-Server/" style="font-size: 10px;">SharePoint Server</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 SharePoint Support Japan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
