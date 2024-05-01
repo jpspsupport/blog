@@ -14,7 +14,7 @@
 <meta property="og:description" content="この投稿では、Microsoft 365 管理センターのメッセージ センターに MC714186 として掲載されている、SharePoint Online のカスタム スクリプトの無効化について記載します。多くの場合はカスタム スクリプトのブロックによる既存スクリプトへの影響はありませんが、特定の SharePoint Framework ソリューション（requiresCustomScript">
 <meta property="og:locale" content="ja_JP">
 <meta property="article:published_time" content="2024-04-09T15:00:00.000Z">
-<meta property="article:modified_time" content="2024-04-10T04:55:33.422Z">
+<meta property="article:modified_time" content="2024-05-01T08:16:47.740Z">
 <meta property="article:author" content="SharePoint Support Japan">
 <meta property="article:tag" content="SharePoint Online">
 <meta name="twitter:card" content="summary">
@@ -102,7 +102,7 @@
         
         <a href="https://github.com/jpspsupport/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+fad56aa9-ff1a-5056-85da-9a4f27318501%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%28MC714186%29+%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0+%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%81%AE%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF%E3%81%AB%E3%82%88%E3%82%8B%E5%BD%B1%E9%9F%BF%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fblog%2Fsharepoint-online%2Fimpact-of-custom-script-block%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-online%2Fimpact-of-custom-script-block.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-online%2Fimpact-of-custom-script-block.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpspsupport.github.io/blog/sharepoint-online/impact-of-custom-script-block/" data-id="clutc7g7l00020nji0nv3c6t3" class="article-share-link">共有</a>
+        <a data-url="https://jpspsupport.github.io/blog/sharepoint-online/impact-of-custom-script-block/" data-id="clvnjn4kl00020no0f0m9day4" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -115,7 +115,7 @@
 <p>(※2) <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/sharepoint/security-considerations-of-allowing-custom-script">カスタム スクリプトを許可する場合のセキュリティに関する考慮事項 - SharePoint in Microsoft 365 | Microsoft Learn</a></p>
 <p>(※3) カスタム スクリプトの無効化は、2024 年 4 月下旬に開始され、5 月上旬までに完了する予定です。最新の展開状況は<a target="_blank" rel="noopener" href="https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC714186">メッセージ センターの MC714186</a> をご確認ください。</p>
 <p>(※4) カスタム スクリプトの無効化は、以下のサイト テンプレートを除くすべての既存の SharePoint サイトと OneDrive サイトに適用されます。<br>BLANKINTERNETCONTAINER#0 = 従来の発行ポータル サイト<br>CMSPUBLISHING#0 = 公開サイト<br>BLANKINTERNET#0 = 発行サイト<br>GROUP#0 = チーム サイト<br>APPCATALOG#0 = アプリ・カタログ<br>CSPCONTAINER#0 = CSP コンテナー  </p>
-<h2 id="注意事項-例外"><a href="#注意事項-例外" class="headerlink" title="注意事項 (例外)"></a>注意事項 (例外)</h2><p>カスタム スクリプトのブロック後も、OneDrive サイトと SharePoint サイトの既存ページのスクリプトの実行は一般的に影響を受けません。<br>しかしながら、SharePoint Framework ソリューションにおいて、マニフェストで requiresCustomScript プロパティを True に設定している場合、カスタム スクリプトのブロックによりソリューションが動作しなくなることを確認しております。requiresCustomScript プロパティが True に設定されているソリューションの一例として、<a href="/blog/react-script-editor/README/">PnP の Modern Script Editor Web Part</a> があります。<br>requiresCustomScript プロパティが True に設定された SharePoint Framework ソリューションをご利用の場合は、ブロックの期限が迫っておりますので、カスタム スクリプトの無効化適用をあらかじめ延長することをご検討くださいますようお願いいたします。</p>
+<h2 id="注意事項-例外"><a href="#注意事項-例外" class="headerlink" title="注意事項 (例外)"></a>注意事項 (例外)</h2><p>カスタム スクリプトのブロック後も、OneDrive サイトと SharePoint サイトの既存ページのスクリプトの実行は一般的に影響を受けません。<br>しかしながら、SharePoint Framework ソリューションにおいて、マニフェストで requiresCustomScript プロパティを True に設定している場合、カスタム スクリプトのブロックによりソリューションが動作しなくなることを確認しております。requiresCustomScript プロパティが True に設定されているソリューションの一例として、PnP の Modern Script Editor Web Part (<a target="_blank" rel="noopener" href="https://github.com/pnp/sp-dev-fx-webparts/blob/main/samples/react-script-editor/README.md">https://github.com/pnp/sp-dev-fx-webparts/blob/main/samples/react-script-editor/README.md</a>) があります。<br>requiresCustomScript プロパティが True に設定された SharePoint Framework ソリューションをご利用の場合は、ブロックの期限が迫っておりますので、カスタム スクリプトの無効化適用をあらかじめ延長することをご検討くださいますようお願いいたします。</p>
 <p>なお、この問題については、2024 年 4 月 10 日現在、開発部門にて調査が進められております。調査の進展があり次第、本記事を更新いたします。</p>
 <p>(*) requiresCustomScript プロパティの設定例が掲載された公開情報<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/build-a-hello-world-web-part#web-part-manifest">https://learn.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/build-a-hello-world-web-part#web-part-manifest</a></p>
 <h2 id="カスタム-スクリプトの無効化の延長について"><a href="#カスタム-スクリプトの無効化の延長について" class="headerlink" title="カスタム スクリプトの無効化の延長について"></a>カスタム スクリプトの無効化の延長について</h2><p>カスタム スクリプトの無効化を遅らせるための SharePoint 管理シェル コマンド DelayDenyAddAndCustomizePagesEnforcement が 4 月中旬までに展開されます。<br>SharePoint 管理者もしくは全体管理者で以下のコマンドを実行することで、カスタム スクリプトの無効化を 2024 年 11 月中旬まで遅らせることが可能です。</p>
