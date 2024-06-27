@@ -2,93 +2,93 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/</loc>
+    <loc>https://jpspsupport.github.io/blog/sharepoint-online/use-sp-modernization-scanner/</loc>
     
-    <lastmod>2024-05-01</lastmod>
+    <lastmod>2024-06-27</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpspsupport.github.io/blog/sharepoint-online/use-sp-modernization-scanner/</loc>
+    <loc>https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/</loc>
     
-    <lastmod>2024-05-01</lastmod>
+    <lastmod>2024-06-27</lastmod>
     
   </url>
   
   <url>
     <loc>https://jpspsupport.github.io/blog/sharepoint-online/managementshell-clientcomponentsSDK/</loc>
     
-    <lastmod>2024-05-01</lastmod>
+    <lastmod>2024-06-27</lastmod>
     
   </url>
   
   <url>
     <loc>https://jpspsupport.github.io/blog/sharepoint-online/modern-experience-advantage/</loc>
     
-    <lastmod>2024-05-01</lastmod>
+    <lastmod>2024-06-27</lastmod>
     
   </url>
   
   <url>
     <loc>https://jpspsupport.github.io/blog/sharepoint-online/pnp-powershell-with-app-only-token/</loc>
     
-    <lastmod>2024-05-01</lastmod>
+    <lastmod>2024-06-27</lastmod>
     
   </url>
   
   <url>
     <loc>https://jpspsupport.github.io/blog/sharepoint-online/power-automate-assign-permission/</loc>
     
-    <lastmod>2024-05-01</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpspsupport.github.io/blog/sharepoint-online/impact-of-custom-script-block/</loc>
-    
-    <lastmod>2024-05-01</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpspsupport.github.io/blog/sharepoint-online/impact-of-msonline-retirement/</loc>
-    
-    <lastmod>2024-05-01</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpspsupport.github.io/blog/sharepoint-online/impact-of-tokenhelper-from-disabling-tls1.0/</loc>
-    
-    <lastmod>2024-05-01</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/</loc>
-    
-    <lastmod>2024-05-01</lastmod>
+    <lastmod>2024-06-27</lastmod>
     
   </url>
   
   <url>
     <loc>https://jpspsupport.github.io/blog/general/welcome/</loc>
     
-    <lastmod>2024-05-01</lastmod>
+    <lastmod>2024-06-27</lastmod>
     
   </url>
   
   <url>
     <loc>https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/</loc>
     
-    <lastmod>2024-05-01</lastmod>
+    <lastmod>2024-06-27</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpspsupport.github.io/blog/sharepoint-online/impact-of-custom-script-block/</loc>
+    
+    <lastmod>2024-06-27</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpspsupport.github.io/blog/sharepoint-online/impact-of-msonline-retirement/</loc>
+    
+    <lastmod>2024-06-27</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpspsupport.github.io/blog/sharepoint-online/impact-of-tokenhelper-from-disabling-tls1.0/</loc>
+    
+    <lastmod>2024-06-27</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/</loc>
+    
+    <lastmod>2024-06-27</lastmod>
     
   </url>
   
 
   <url>
     <loc>https://jpspsupport.github.io/blog</loc>
-    <lastmod>2024-05-01</lastmod>
+    <lastmod>2024-06-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -96,14 +96,14 @@
   
   <url>
     <loc>https://jpspsupport.github.io/blog/tags/SharePoint-Online/</loc>
-    <lastmod>2024-05-01</lastmod>
+    <lastmod>2024-06-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://jpspsupport.github.io/blog/tags/SharePoint-Server/</loc>
-    <lastmod>2024-05-01</lastmod>
+    <lastmod>2024-06-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
