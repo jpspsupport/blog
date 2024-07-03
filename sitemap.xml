@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/</loc>
+    
+    <lastmod>2024-07-03</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jpspsupport.github.io/blog/windows-365/create-custom-image/</loc>
     
     <lastmod>2024-07-03</lastmod>
@@ -10,13 +17,6 @@
   
   <url>
     <loc>https://jpspsupport.github.io/blog/sharepoint-online/use-sp-modernization-scanner/</loc>
-    
-    <lastmod>2024-07-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/</loc>
     
     <lastmod>2024-07-03</lastmod>
     
@@ -51,6 +51,20 @@
   </url>
   
   <url>
+    <loc>https://jpspsupport.github.io/blog/general/welcome/</loc>
+    
+    <lastmod>2024-07-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/</loc>
+    
+    <lastmod>2024-07-03</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jpspsupport.github.io/blog/sharepoint-online/impact-of-custom-script-block/</loc>
     
     <lastmod>2024-07-03</lastmod>
@@ -73,20 +87,6 @@
   
   <url>
     <loc>https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/</loc>
-    
-    <lastmod>2024-07-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpspsupport.github.io/blog/general/welcome/</loc>
-    
-    <lastmod>2024-07-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/</loc>
     
     <lastmod>2024-07-03</lastmod>
     
