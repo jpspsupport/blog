@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/Fiddler3-1.png">
 <meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/Fiddler4.png">
 <meta property="article:published_time" content="2020-06-07T15:00:00.000Z">
-<meta property="article:modified_time" content="2024-12-09T02:56:45.220Z">
+<meta property="article:modified_time" content="2024-12-09T03:35:27.690Z">
 <meta property="article:author" content="SharePoint Support Japan">
 <meta property="article:tag" content="SharePoint Online">
 <meta name="twitter:card" content="summary">
@@ -107,15 +107,15 @@
         
         <a href="https://github.com/jpspsupport/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+1442d1c6-cd82-5912-aac2-b6cf74ae4385%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BHTTP+%E8%AA%BF%E6%95%B4%E3%81%AE%E3%83%AA%E3%83%88%E3%83%A9%E3%82%A4%E3%83%AD%E3%82%B8%E3%83%83%E3%82%AF%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fblog%2Fsharepoint-online%2FTesting-backoff-logic%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-online%2FTesting-backoff-logic.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-online%2FTesting-backoff-logic.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/" data-id="cm4gfynwl00010nt4dtlhexho" class="article-share-link">共有</a>
+        <a data-url="https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/" data-id="cm4ghcfym00010nmm6b4248cl" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>HTTP 調整リトライ ロジックを実装した際に、特に弊社公開記事に記載されたカスタムコードを変更している場合は、論理テストを実施していただく必要があります。</p>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>HTTP 調整リトライ ロジックを実装した際に、特に弊社公開記事に記載されたカスタムコードを変更している場合は、論理テストを実施していただく必要があります。</p>
 <p>残念ながら、SharePoint Online に対して明示的に調整を発生させることはできないため、現実的なシナリオに即したテストなどを実施することはできません。<br>テストのためにクラウド側に不要な負荷をかけることも適切ではない行動となります。<br>そのため、基本的には論理テストを実施し、様々な想定シナリオに対するロジック テストをパスした後で、テスト済みのコードをマスターに組み込むという方法が現実的です。</p>
 <p>今回の記事では、その疑似的な論理テストを実施する方法の 1 つをご紹介します。</p>
-<h1 id="対処策"><a href="#対処策" class="headerlink" title="対処策"></a>対処策</h1><p>Fiddler の AutoResponder を使用して、CSOM などの通信に対して、任意の HTTP 応答を返して動作検証する方法があります。</p>
+<h2 id="対処策"><a href="#対処策" class="headerlink" title="対処策"></a>対処策</h2><p>Fiddler の AutoResponder を使用して、CSOM などの通信に対して、任意の HTTP 応答を返して動作検証する方法があります。</p>
 <p>まず、Fiddler を起動し、トレースを取得しておきます。</p>
 <p><img src="/blog/sharepoint-online/Testing-backoff-logic/Fiddler1.png" alt="Fiddler1"></p>
 <ol>
@@ -145,9 +145,7 @@
 </ol>
 <p>この後、Fiddler を起動してロジックをテストしてください。指定された間隔でリトライが実行されることが確認できます。</p>
 <p><img src="/blog/sharepoint-online/Testing-backoff-logic/Fiddler4.png" alt="Fiddler4"></p>
-<h1 id="参考リンク"><a href="#参考リンク" class="headerlink" title="参考リンク"></a>参考リンク</h1><p>タイトル : SharePoint Online で調整またはブロックを回避する方法<br>アドレス : <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/sharepoint/dev/general-development/how-to-avoid-getting-throttled-or-blocked-in-sharepoint-online">https://docs.microsoft.com/ja-jp/sharepoint/dev/general-development/how-to-avoid-getting-throttled-or-blocked-in-sharepoint-online</a></p>
-<p>タイトル : SharePoint Online の HTTP 調整 (応答コード 429, 503) に関して<br>アドレス : <a target="_blank" rel="noopener" href="https://social.msdn.microsoft.com/Forums/ja-JP/8e5a4116-c96a-4d3e-9bbf-6efb852b5d88/sharepoint-online-12398-http-3551925972-2454031572124671254012489-429-503?forum=sharepointsupportteamja">https://social.msdn.microsoft.com/Forums/ja-JP/8e5a4116-c96a-4d3e-9bbf-6efb852b5d88/sharepoint-online-12398-http-3551925972-2454031572124671254012489-429-503?forum=sharepointsupportteamja</a></p>
-<p>タイトル : [再改訂版] SharePoint Online HTTP 調整 (応答コード : 429) 対策の増分バックオフ リトライ<br>アドレス : <a target="_blank" rel="noopener" href="https://social.msdn.microsoft.com/Forums/sqlserver/ja-JP/21e2a628-44be-4541-bca9-b81c484ff59b/20877259133533029256-sharepoint-online-http-3551925972?forum=sharepointsupportteamja">https://social.msdn.microsoft.com/Forums/sqlserver/ja-JP/21e2a628-44be-4541-bca9-b81c484ff59b/20877259133533029256-sharepoint-online-http-3551925972?forum=sharepointsupportteamja</a></p>
+<h2 id="参考リンク"><a href="#参考リンク" class="headerlink" title="参考リンク"></a>参考リンク</h2><p>タイトル : SharePoint Online で調整またはブロックを回避する方法<br>アドレス : <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/sharepoint/dev/general-development/how-to-avoid-getting-throttled-or-blocked-in-sharepoint-online">https://docs.microsoft.com/ja-jp/sharepoint/dev/general-development/how-to-avoid-getting-throttled-or-blocked-in-sharepoint-online</a></p>
 <p>タイトル : jpspsupport/CSOMRetrySample<br>アドレス : <a target="_blank" rel="noopener" href="https://github.com/jpspsupport/CSOMRetrySample">https://github.com/jpspsupport/CSOMRetrySample</a></p>
 
       
