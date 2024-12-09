@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jpspsupport.github.io/blog/sharepoint-online/use-sp-modernization-scanner/</loc>
+    
+    <lastmod>2024-12-09</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/</loc>
     
     <lastmod>2024-12-09</lastmod>
@@ -10,20 +17,6 @@
   
   <url>
     <loc>https://jpspsupport.github.io/blog/windows-365/create-custom-image/</loc>
-    
-    <lastmod>2024-12-09</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpspsupport.github.io/blog/sharepoint-online/power-automate-assign-permission/</loc>
-    
-    <lastmod>2024-12-09</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpspsupport.github.io/blog/sharepoint-online/use-sp-modernization-scanner/</loc>
     
     <lastmod>2024-12-09</lastmod>
     
@@ -45,6 +38,13 @@
   
   <url>
     <loc>https://jpspsupport.github.io/blog/sharepoint-online/pnp-powershell-with-app-only-token/</loc>
+    
+    <lastmod>2024-12-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpspsupport.github.io/blog/sharepoint-online/power-automate-assign-permission/</loc>
     
     <lastmod>2024-12-09</lastmod>
     
