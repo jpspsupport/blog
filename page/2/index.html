@@ -82,6 +82,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-sharepoint-online/Testing-backoff-logic" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    <!-- post date -->
+    <div class="article-meta">
+      <a href="../../sharepoint-online/Testing-backoff-logic/" class="article-date">
+  <time datetime="2020-06-07T15:00:00.000Z" itemprop="datePublished">2020-06-08</time>
+</a>
+      
+    </div>
+
+    
+    <!-- post title -->
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../sharepoint-online/Testing-backoff-logic/">HTTP 調整のリトライロジックのテスト方法</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- post caption -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        背景HTTP 調整リトライ ロジックを実装した際に、特に弊社公開記事に記載されたカスタムコードを変更している場合は、論理テストを実施していただく必要があります。
+残念ながら、SharePoint Online に対して明示的に調整を発生させることはできないため、現実的なシナリオに即したテストなどを実施することはできません。テストのためにクラウド側に不要な負荷をかけることも適切ではない行動となります。そのため、基本的には論理テストを実施し、様々な想定シナリオに対するロジック テストをパスした後で、テスト済みのコードをマスターに組み込むという方法が現実的です。
+今回の記事では、その疑似的な論理テストを実施する方法の 1 つをご紹介します。
+対処策Fiddler の AutoResponder を使用して、CSOM などの通信に対して、任意の HTTP 応答を返して動作検証する方法があります。
+...
+        <p class="article-readmore">
+          <a href="../../sharepoint-online/Testing-backoff-logic/">Read more</a>
+        </p>
+      
+    </div>
+
+    <footer class="article-footer">
+      <!--a data-url="https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/" data-id="cm4i17dug00010nqh94yr2jvp" class="article-share-link">共有</a-->
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-sharepoint-online/pnp-powershell-with-app-only-token" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
@@ -121,7 +173,7 @@ Office 365 管理センターで指定した全体管理者または SharePoint 
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpspsupport.github.io/blog/sharepoint-online/pnp-powershell-with-app-only-token/" data-id="cm4gjfult000e0nmj0ae3ftml" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpspsupport.github.io/blog/sharepoint-online/pnp-powershell-with-app-only-token/" data-id="cm4i17dut000g0nqhbvqxdon7" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>
@@ -177,7 +229,7 @@ SharePoint Online は複数の機能において、現在モダン エクスペ�
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpspsupport.github.io/blog/sharepoint-online/modern-experience-advantage/" data-id="cm4gjfuls000b0nmj5b4d38tw" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpspsupport.github.io/blog/sharepoint-online/modern-experience-advantage/" data-id="cm4i17dus000e0nqha79b0v13" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>
@@ -235,7 +287,7 @@ Microsoft Stream
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpspsupport.github.io/blog/general/welcome/" data-id="cm4gjfulg00000nmj9guk05jq" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpspsupport.github.io/blog/general/welcome/" data-id="cm4i17dud00000nqh30jg44z6" class="article-share-link">共有</a-->
       
       
     </footer>
@@ -262,6 +314,10 @@ Microsoft Stream
       <ul>
         
           <li>
+            <a href="../../sharepoint-online/how-to-get-har-file/">HAR ファイルの取得方法について</a>
+          </li>
+        
+          <li>
             <a href="../../sharepoint-online/impact-of-custom-script-block/">(MC714186) カスタム スクリプトのブロックによる影響について</a>
           </li>
         
@@ -277,10 +333,6 @@ Microsoft Stream
             <a href="../../sharepoint-server/clear-configcache/">構成キャッシュの再作成 (SharePoint Server)</a>
           </li>
         
-          <li>
-            <a href="../../sharepoint-online/managementshell-clientcomponentsSDK/">SharePoint Online 管理シェルは SharePoint Online Client Components SDK がインストールされた端末で使用できません</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -291,7 +343,7 @@ Microsoft Stream
     <h3 class="widget-title">タグ</h3>
     <div class="widget">
       <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Server/" rel="tag">SharePoint Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/windows-365/" rel="tag">windows 365</a></li></ul>  -->
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/">SharePoint Online</a><span class="tag-list-count">10</span><ul></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Server/">SharePoint Server</a><span class="tag-list-count">1</span><ul></ul></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/">SharePoint Online</a><span class="tag-list-count">11</span><ul></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Server/">SharePoint Server</a><span class="tag-list-count">1</span><ul></ul></li></ul>
     </div>
   </div>
 
@@ -301,7 +353,7 @@ Microsoft Stream
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/09/">2024 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/07/">2024 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/04/">2023 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/07/">2021 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/03/">2021 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/07/">2020 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/05/">2020 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/04/">2020 / 04</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/12/">2024 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/09/">2024 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/07/">2024 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/04/">2023 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/07/">2021 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/03/">2021 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/07/">2020 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/05/">2020 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/04/">2020 / 04</a></li></ul>
     </div>
   </div>
 
