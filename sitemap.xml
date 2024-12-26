@@ -9,6 +9,20 @@
   </url>
   
   <url>
+    <loc>https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/</loc>
+    
+    <lastmod>2024-12-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpspsupport.github.io/blog/sharepoint-online/use-sp-modernization-scanner/</loc>
+    
+    <lastmod>2024-12-26</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/</loc>
     
     <lastmod>2024-12-26</lastmod>
@@ -16,7 +30,7 @@
   </url>
   
   <url>
-    <loc>https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/</loc>
+    <loc>https://jpspsupport.github.io/blog/sharepoint-online/managementshell-clientcomponentsSDK/</loc>
     
     <lastmod>2024-12-26</lastmod>
     
@@ -44,14 +58,21 @@
   </url>
   
   <url>
-    <loc>https://jpspsupport.github.io/blog/sharepoint-online/use-sp-modernization-scanner/</loc>
+    <loc>https://jpspsupport.github.io/blog/sharepoint-online/impact-of-tokenhelper-from-disabling-tls1.0/</loc>
     
     <lastmod>2024-12-26</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpspsupport.github.io/blog/sharepoint-online/managementshell-clientcomponentsSDK/</loc>
+    <loc>https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/</loc>
+    
+    <lastmod>2024-12-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpspsupport.github.io/blog/sharepoint-online/how-to-get-har-file/</loc>
     
     <lastmod>2024-12-26</lastmod>
     
@@ -72,20 +93,6 @@
   </url>
   
   <url>
-    <loc>https://jpspsupport.github.io/blog/sharepoint-online/impact-of-tokenhelper-from-disabling-tls1.0/</loc>
-    
-    <lastmod>2024-12-26</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpspsupport.github.io/blog/sharepoint-online/introduction-to-power-automate/</loc>
-    
-    <lastmod>2024-12-26</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpspsupport.github.io/blog/general/welcome/</loc>
     
     <lastmod>2024-12-26</lastmod>
@@ -94,13 +101,6 @@
   
   <url>
     <loc>https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/</loc>
-    
-    <lastmod>2024-12-26</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpspsupport.github.io/blog/sharepoint-online/how-to-get-har-file/</loc>
     
     <lastmod>2024-12-26</lastmod>
     
