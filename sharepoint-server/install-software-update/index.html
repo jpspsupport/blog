@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>SharePoint Server の更新プログラムの適用方法について | Japan SharePoint Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本記事では、オンプレミスの SharePoint Server 製品に対する一般的な更新プログラムの適用手順を説明します。 対象は、以下のオンプレミス環境です。  SharePoint Server Subscription Edition SharePoint Server 2019 SharePoint Server 2016  Microsoft 365 の SharePoint Onlin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SharePoint Server の更新プログラムの適用方法について">
+<meta property="og:url" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/index.html">
+<meta property="og:site_name" content="Japan SharePoint Support Blog">
+<meta property="og:description" content="本記事では、オンプレミスの SharePoint Server 製品に対する一般的な更新プログラムの適用手順を説明します。 対象は、以下のオンプレミス環境です。  SharePoint Server Subscription Edition SharePoint Server 2019 SharePoint Server 2016  Microsoft 365 の SharePoint Onlin">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/CU-example01.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/CU-example02.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/CU-example03.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/CU-download01.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/CU-download02.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/CU-download03.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/CU-download04.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/CU-Install01.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/Config-wizard01.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/Config-wizard02.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/Config-wizard03.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/Config-wizard04.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/Config-wizard05.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/Config-wizard06.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/Config-wizard07.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/CU-confirm01.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/CU-confirm02.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/CU-confirm03.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/CU-confirm04.png">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/CU-confirm05.png">
+<meta property="article:published_time" content="2024-12-26T15:00:00.000Z">
+<meta property="article:modified_time" content="2024-12-26T01:17:28.442Z">
+<meta property="article:author" content="SharePoint Support Japan">
+<meta property="article:tag" content="SharePoint Server">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/CU-example01.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan SharePoint Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpspsupport.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan SharePoint Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの SharePoint に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-sharepoint-server/install-software-update" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SharePoint Server の更新プログラムの適用方法について
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2024-12-26T15:00:00.000Z" itemprop="datePublished">2024-12-27</time>
+</a>
+        
+        
+        <a href="https://github.com/jpspsupport/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+07b5b6f2-2259-5ec3-8e81-4cb49efd6089%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BSharePoint+Server+%E3%81%AE%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AE%E9%81%A9%E7%94%A8%E6%96%B9%E6%B3%95%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fblog%2Fsharepoint-server%2Finstall-software-update%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-server%2Finstall-software-update.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-server%2Finstall-software-update.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpspsupport.github.io/blog/sharepoint-server/install-software-update/" data-id="cm54mwhqj000o0nta11yefha1" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本記事では、オンプレミスの SharePoint Server 製品に対する一般的な更新プログラムの適用手順を説明します。 <br>対象は、以下のオンプレミス環境です。</p>
+<ul>
+<li>SharePoint Server Subscription Edition</li>
+<li>SharePoint Server 2019</li>
+<li>SharePoint Server 2016</li>
+</ul>
+<p>Microsoft 365 の SharePoint Online は対象外となりますのでご注意ください。 </p>
+<span id="more"></span>
+
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
+<li><a href="#sharepoint-server-%E8%A3%BD%E5%93%81%E3%81%AE%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">SharePoint Server 製品の更新プログラムについて</a></li>
+<li><a href="#sharepoint-server-%E8%A3%BD%E5%93%81%E3%81%AE%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E9%81%A9%E7%94%A8%E6%89%8B%E9%A0%86">SharePoint Server 製品の更新プログラム適用手順</a><ul>
+<li><a href="#1-%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AE%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89">1. 更新プログラムのダウンロード</a></li>
+<li><a href="#2-%E6%9B%B4%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">2. 更新プログラムのインストール</a></li>
+<li><a href="#3-sharepoint-server-%E8%A3%BD%E5%93%81%E6%A7%8B%E6%88%90%E3%82%A6%E3%82%A3%E3%82%B6%E3%83%BC%E3%83%89%E3%81%AE%E5%AE%9F%E8%A1%8C">3. SharePoint Server 製品構成ウィザードの実行</a></li>
+<li><a href="#4-%E9%81%A9%E7%94%A8%E3%81%AE%E7%A2%BA%E8%AA%8D">4.適用の確認</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="SharePoint-Server-製品の更新プログラムについて"><a href="#SharePoint-Server-製品の更新プログラムについて" class="headerlink" title="SharePoint Server 製品の更新プログラムについて"></a>SharePoint Server 製品の更新プログラムについて</h2><p>毎月発行される SharePoint Server の更新プログラムは、累積的な更新プログラムです。<br>具体的には、ある月における SharePoint Server の更新プログラムには、それ以前の更新プログラムでリリースされた脆弱性の対応や不具合の修正も含まれています。そのため、過去の修正内容を適用するために過去の更新プログラムを適用する必要はありませんし、インストールされている更新プログラムより古いものは適用できないようになっています。 </p>
+<p>また、SharePoint Server では、<strong>言語に依存しない修正を含む更新プログラムと、言語に依存する修正を含んだ更新プログラム (“MUI / 言語パッチ”) の 2 種類が存在し、双方を適用する必要</strong>があります。前者は毎月リリースされますが、後者は必ずしも毎月リリースされるわけではありません。言語に依存しない更新プログラムがリリースされた月に “MUI / 言語パッチ” がリリースされていない場合は、 “MUI / 言語パッチ” については、その月以前にリリースされた最新版を適用します。 </p>
+<p>一方で、SharePoint Server Subscription Edition においては、2023 年 3 月以降、上記 2 種類の更新プログラムが統合された単一の更新プログラムがリリースされるようになりました。これによって、現在の SharePoint Server Subscription Edition 製品においては、毎月リリースされる単一の更新プログラムを適用すれば最新の状態に更新することが可能となっています。 </p>
+<p>適用する更新プログラムの例を、パターン別にご紹介します。</p>
+<p><strong><em>例 1 : “SharePoint Server Subscription Edition” を 2024 年 11 月時点の最新状態にする場合</em></strong><br>2024 年 11月リリースの KB 5002651 を適用します。<br>※ 現在の SharePoint Server Subscription Edition の更新プログラムは、言語に依存しない / 依存する更新プログラムの両方が含まれた単一の更新プログラムとなっています。<br><img src="/blog/sharepoint-server/install-software-update/CU-example01.png"></p>
+<p><strong><em>例 2 : “SharePoint Server 2019” を 2024 年 11 月時点の最新状態にする場合</em></strong><br>言語に依存しない更新プログラムとして、2024 年 11月リリースの KB 5002650 を適用します。<br>言語に依存する MUI / 言語パッチは 2024 年 11 月にリリースされていないため、最新の 2024 年 8 月リリースの KB 5002597 を適用します。<br><img src="/blog/sharepoint-server/install-software-update/CU-example02.png"></p>
+<p><strong><em>例 3 : “SharePoint Server 2016” を 2024 年 11 月時点の最新状態にする場合</em></strong><br>言語に依存しない更新プログラムとして、2024 年 11月リリースの KB 5002654 を適用します。<br>言語に依存する MUI / 言語パッチは 2024 年 11 月にリリースされていないため、最新の 2023 年 12 月リリースの KB 5002524 を適用します。<br><img src="/blog/sharepoint-server/install-software-update/CU-example03.png"></p>
+<h2 id="SharePoint-Server-製品の更新プログラム適用手順"><a href="#SharePoint-Server-製品の更新プログラム適用手順" class="headerlink" title="SharePoint Server 製品の更新プログラム適用手順"></a>SharePoint Server 製品の更新プログラム適用手順</h2><p>下記は、オンプレミスの SharePoint Server 製品における一般的な適用手順です。</p>
+<p>更新プログラム適用時のベスト プラクティスについては、弊社エンジニアの下記 Blog 記事をご参照ください。</p>
+<blockquote>
+<p>参照 : <a target="_blank" rel="noopener" href="https://blog.stefan-gossner.com/2020/02/11/sharepoint-patching-best-practices/">SharePoint Patching Best Practices – Stefan Goßner</a></p>
+</blockquote>
+<p>更新プログラムの適用にあたり、以下の注意事項をご確認ください。</p>
+<ul>
+<li><p>更新プログラムは個別にアンインストールできません。</p>
+</li>
+<li><p>更新プログラムを適用する前に、システムおよび SharePoint の完全なバックアップを実施することを強く推奨いたします。特に、カスタマイズや設定変更を実施されている場合は、更新プログラムの適用により現在の設定が既定の設定に置き換わる場合がありますので、カスタマイズや設定変更に関するバックアップも取得してください。<br><br>例：\Program Files\Common Files\Microsoft Shared\web server extensions\ フォルダ下のファイルを直接変更している、SharePoint に関連するレジストリ、データベースの権限を変更している等</p>
+</li>
+<li><p>SharePoint 製品とテクノロジに、独自に開発したカスタム Web パーツやワークフローなどのソリューションを組み込んでいる場合は、カスタマイズの内容が更新プログラムの適用に伴う動作変更や更新の影響を受ける可能性があります。検証環境において、事前の動作検証を実施することを推奨いたします。</p>
+</li>
+</ul>
+<h3 id="1-更新プログラムのダウンロード"><a href="#1-更新プログラムのダウンロード" class="headerlink" title="1. 更新プログラムのダウンロード"></a>1. 更新プログラムのダウンロード</h3><p>下記の公開情報から適用する更新プログラムを確認し、ダウンロードします。</p>
+<blockquote>
+<p>参照 : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/officeupdates/sharepoint-updates">SharePoint 更新プログラム - Office release notes | Microsoft Learn</a> </p>
+</blockquote>
+<ol>
+<li><p>上記公開情報から対象の更新プログラムをクリックし、説明ページを開きます。<br>例：<br><img src="/blog/sharepoint-server/install-software-update/CU-download01.png"></p>
+</li>
+<li><p>Microsoft ダウンロード センターのリンクをクリックします。<br>例：<br><img src="/blog/sharepoint-server/install-software-update/CU-download02.png"> </p>
+</li>
+<li><p>スタンドアロン の更新プログラム パッケージをダウンロードします。<br>例：<br><img src="/blog/sharepoint-server/install-software-update/CU-download03.png"></p>
+</li>
+</ol>
+<blockquote>
+<p><strong>NOTE</strong></p>
+<ul>
+<li>更新プログラムのダウンロード ボタン横にある言語選択は、更新プログラムに関わるものではなく、当該ページの表示言語を設定するものです。</li>
+<li>更新プログラムのファイル (.exe、.cab ファイル等) は、更新プログラムの種類ごとに全て同じディレクトリに展開及び配置したうえで、適用をご実施ください。</li>
+<li>既にインストールされている更新プログラムは、SharePoint サーバーの全体管理の アップグレードと移行 &gt; [製品および更新プログラムのインストール状態の確認] から確認できます。<br><img src="/blog/sharepoint-server/install-software-update/CU-download04.png"></li>
+</ul>
+</blockquote>
+<h3 id="2-更新プログラムのインストール"><a href="#2-更新プログラムのインストール" class="headerlink" title="2. 更新プログラムのインストール"></a>2. 更新プログラムのインストール</h3><ol>
+<li><p>すべての Web サーバー上でサービス 管理コンソール (services.msc) を起動し、World Wide Web 発行サービス (W3SVC) を停止してサーバー ファームからユーザーを切断します。<br><img src="/blog/sharepoint-server/install-software-update/CU-Install01.png" alt="サービス 管理コンソール"></p>
+</li>
+<li><p>サーバー ファーム内のすべての SharePoint サーバーに、更新プログラムをインストールします。</p>
+<ul>
+<li>更新プログラムをインストールするサーバーの順番は任意です。</li>
+<li>言語に依存する更新プログラムと MUI / 言語パッチの両方をインストールする場合、インストールする順番は任意です。</li>
+<li>インストール時に実行中のアプリケーションを閉じる必要があることを示すダイアログが表示された場合には、「セットアップの完了後、自動的にアプリケーションを閉じて再起動する」を選択して [OK] をクリックします。</li>
+<li>更新されるモジュールの実行状況によっては、サーバーの再起動を求められる場合があります。その場合は、サーバーを再起動してください。</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>NOTE</strong></p>
+<ul>
+<li><strong>すべての SharePoint サーバーに更新プログラムの適用が完了するまでは、SharePoint Server 製品構成ウィザードを開始しないでください。</strong><ul>
+<li>更新プログラムのインストール後に SharePoint 製品構成ウィザードが起動した場合には [キャンセル] をクリックします。</li>
+</ul>
+</li>
+<li>SharePoint Server Subscription Edition の場合、更新プログラムのインストールに時間がかかる場合があります。<ul>
+<li>弊社エンジニアの下記 Blog 記事にて、インストール時間を短縮するスクリプトをご紹介しています。<br>参照 : <a target="_blank" rel="noopener" href="https://blog.stefan-gossner.com/2024/03/08/solving-the-extended-install-time-for-spse-cus/">Solving the extended install time for SPSE CUs – Stefan Goßner</a></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="3-SharePoint-Server-製品構成ウィザードの実行"><a href="#3-SharePoint-Server-製品構成ウィザードの実行" class="headerlink" title="3. SharePoint Server 製品構成ウィザードの実行"></a>3. SharePoint Server 製品構成ウィザードの実行</h3><p>SharePoint 製品構成ウィザードの実行は、すべての SharePoint サーバーに更新プログラムをインストールした後に実施してください。SharePoint 製品構成ウィザードの実行は、以下の順番での実施を推奨します。</p>
+<ul>
+<li>SharePoint サーバーの全体管理 Web サイトをホストするアプリケーション サーバー</li>
+<li>他のアプリケーション サーバー (アプリケーション、分散キャッシュ、検索、カスタム)</li>
+<li>フロントエンド サーバー</li>
+</ul>
+<p>サーバーの役割は、SharePoint サーバーの全体管理の システム設定 &gt; [このファームのサーバーの管理] から確認することができます。<br><img src="/blog/sharepoint-server/install-software-update/Config-wizard01.png"></p>
+<ol>
+<li><p>スタート メニューから SharePoint 製品構成ウィザード を起動します。<br>例：SharePoint Server Subscription Edition の場合<br><img src="/blog/sharepoint-server/install-software-update/Config-wizard02.png"></p>
+</li>
+<li><p>製品構成ウィザードの [SharePoint 製品へようこそ] ページで [次へ] をクリックします。<br><br><img src="/blog/sharepoint-server/install-software-update/Config-wizard03.png"> </p>
+</li>
+<li><p>下図のような、一部のサービスの再起動が必要になる可能性があることを通知するダイアログ ボックスが表示されますので、 [はい] をクリックします。<br><img src="/blog/sharepoint-server/install-software-update/Config-wizard04.png"></p>
+</li>
+<li><p>[SharePoint 製品構成ウィザードの終了] ページで [次へ] をクリックし、構成を実行します。<br><img src="/blog/sharepoint-server/install-software-update/Config-wizard05.png"> <br><br><img src="/blog/sharepoint-server/install-software-update/Config-wizard06.png"></p>
+</li>
+<li><p>構成が完了したら、[完了] をクリックして SharePoint 製品構成ウィザードを終了します。<br><img src="/blog/sharepoint-server/install-software-update/Config-wizard07.png"> </p>
+</li>
+<li><p>サービス 管理コンソール (services.msc) を起動し、World Wide Web 発行サービスの状態を確認します。</p>
+<ul>
+<li>状態が 「停止中」 の場合は手動で開始し、ユーザーが Web サーバーを使用できるようにします。</li>
+<li>既に当該サービスが自動で開始されて状態が 「実行中」 の場合は、次の手順に進みます。</li>
+</ul>
+</li>
+</ol>
+<h3 id="4-適用の確認"><a href="#4-適用の確認" class="headerlink" title="4. 適用の確認"></a>4. 適用の確認</h3><ol>
+<li><p>SharePoint サーバーの全体管理から、アップグレードと移行 &gt; [製品および更新プログラムのインストール状態の確認] を開きます。<br><img src="/blog/sharepoint-server/install-software-update/CU-confirm01.png"></p>
+</li>
+<li><p>適用した 更新プログラムが表示されていることを確認します。更新プログラムが単一かどうかにかかわらず、下図のように、言語に依存しない更新プログラムと MUI / 言語パッチの２つが確認できます。(言語パッチは、インストールされている SharePoint の Language Pack の言語に合わせてインストールされます)<br><br>例：日本語パック (1041 Language Pack) がインストールされている場合<br><img src="/blog/sharepoint-server/install-software-update/CU-confirm02.png"></p>
+</li>
+<li><p>SharePoint サーバーの全体管理から、システム設定 &gt; [このファームのサーバーの管理] を開きます。<br><img src="/blog/sharepoint-server/install-software-update/CU-confirm03.png"></p>
+</li>
+<li><p>インストールした更新プログラムのバージョンが、構成データベースのバージョンとなっていることを確認します。<br>例：SharePoint Server Subscription Edition の KB 5002651 の場合<br><img src="/blog/sharepoint-server/install-software-update/CU-confirm04.png"><br><img src="/blog/sharepoint-server/install-software-update/CU-confirm05.png"></p>
+</li>
+</ol>
+<blockquote>
+<p><strong>NOTE</strong><br>SharePoint 2016 では、更新プログラムを適用しても構成データベースのバージョンが更新されない場合がありますが、本手順 1 と 2 にて更新プログラムがインストールされていることが確認できれば問題ありません。</p>
+</blockquote>
+<br>
+今回の記事は以上となります。
+ご不明点等がありましたら、弊社サポート サービスまでお気軽にお問い合わせください。
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SharePoint-Server/" rel="tag">SharePoint Server</a></li></ul>
+
+        
+        <a href="https://github.com/jpspsupport/blog/edit/main/articles/sharepoint-server/install-software-update.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../../sharepoint-online/how-to-get-har-file/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">HAR ファイルの取得方法について</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">SharePoint Server の更新プログラムの適用方法について</a>
+          </li>
+        
+          <li>
+            <a href="../../sharepoint-online/how-to-get-har-file/">HAR ファイルの取得方法について</a>
+          </li>
+        
+          <li>
+            <a href="../../sharepoint-online/impact-of-custom-script-block/">(MC714186) カスタム スクリプトのブロックによる影響について</a>
+          </li>
+        
+          <li>
+            <a href="../../windows-365/create-custom-image/">Windows 365 カスタム イメージの作成方法</a>
+          </li>
+        
+          <li>
+            <a href="../../sharepoint-online/impact-of-msonline-retirement/">MSOnline モジュールの廃止に伴う SharePoint アドインへの影響について</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Server/" rel="tag">SharePoint Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/windows-365/" rel="tag">windows 365</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/">SharePoint Online</a><span class="tag-list-count">11</span><ul></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Server/">SharePoint Server</a><span class="tag-list-count">2</span><ul></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/12/">2024 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/09/">2024 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/07/">2024 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/04/">2023 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/07/">2021 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/03/">2021 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/07/">2020 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/05/">2020 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/04/">2020 / 04</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/SharePoint-Online/" style="font-size: 20px;">SharePoint Online</a> <a href="../../tags/SharePoint-Server/" style="font-size: 15px;">SharePoint Server</a> <a href="../../tags/windows-365/" style="font-size: 10px;">windows 365</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 SharePoint Support Japan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
