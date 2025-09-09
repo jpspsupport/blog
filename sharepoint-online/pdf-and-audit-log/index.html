@@ -4,25 +4,20 @@
   <meta charset="utf-8">
   
   
-  <title>HTTP 調整のリトライロジックのテスト方法 | Japan SharePoint Support Blog</title>
+  <title>PDF を閲覧する際の監査ログ記録について | Japan SharePoint Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="背景HTTP 調整リトライ ロジックを実装した際に、特に弊社公開記事に記載されたカスタムコードを変更している場合は、論理テストを実施していただく必要があります。 残念ながら、SharePoint Online に対して明示的に調整を発生させることはできないため、現実的なシナリオに即したテストなどを実施することはできません。テストのためにクラウド側に不要な負荷をかけることも適切ではない行動となります">
+  <meta name="description" content="本記事では、SharePoint Online 上に保存された PDF ファイルを閲覧した場合に、Microsoft Purview の監査ログに記録されるアクティビティについて説明します。 監査ログの概要SharePoint Online 上でファイルを閲覧 (情報パネルのプレビュー表示を含む) またはダウンロードした場合、その結果、Microsoft Purview の監査ログにアクティビティ">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTTP 調整のリトライロジックのテスト方法">
-<meta property="og:url" content="https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/index.html">
+<meta property="og:title" content="PDF を閲覧する際の監査ログ記録について">
+<meta property="og:url" content="https://jpspsupport.github.io/blog/sharepoint-online/pdf-and-audit-log/index.html">
 <meta property="og:site_name" content="Japan SharePoint Support Blog">
-<meta property="og:description" content="背景HTTP 調整リトライ ロジックを実装した際に、特に弊社公開記事に記載されたカスタムコードを変更している場合は、論理テストを実施していただく必要があります。 残念ながら、SharePoint Online に対して明示的に調整を発生させることはできないため、現実的なシナリオに即したテストなどを実施することはできません。テストのためにクラウド側に不要な負荷をかけることも適切ではない行動となります">
+<meta property="og:description" content="本記事では、SharePoint Online 上に保存された PDF ファイルを閲覧した場合に、Microsoft Purview の監査ログに記録されるアクティビティについて説明します。 監査ログの概要SharePoint Online 上でファイルを閲覧 (情報パネルのプレビュー表示を含む) またはダウンロードした場合、その結果、Microsoft Purview の監査ログにアクティビティ">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/Fiddler1.png">
-<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/Fiddler2.png">
-<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/Fiddler3-1.png">
-<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/Fiddler4.png">
-<meta property="article:published_time" content="2020-06-07T15:00:00.000Z">
-<meta property="article:modified_time" content="2025-09-09T07:54:27.571Z">
+<meta property="article:published_time" content="2025-09-08T15:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-09T07:54:27.582Z">
 <meta property="article:author" content="SharePoint Support Japan">
 <meta property="article:tag" content="SharePoint Online">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/Fiddler1.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan SharePoint Support Blog" type="application/atom+xml">
   
@@ -84,7 +79,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-sharepoint-online/Testing-backoff-logic" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-sharepoint-online/pdf-and-audit-log" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -93,7 +88,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      HTTP 調整のリトライロジックのテスト方法
+      PDF を閲覧する際の監査ログ記録について
     </h1>
   
 
@@ -101,52 +96,24 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2020-06-07T15:00:00.000Z" itemprop="datePublished">2020-06-08</time>
+  <time datetime="2025-09-08T15:00:00.000Z" itemprop="datePublished">2025-09-09</time>
 </a>
         
         
-        <a href="https://github.com/jpspsupport/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+1442d1c6-cd82-5912-aac2-b6cf74ae4385%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BHTTP+%E8%AA%BF%E6%95%B4%E3%81%AE%E3%83%AA%E3%83%88%E3%83%A9%E3%82%A4%E3%83%AD%E3%82%B8%E3%83%83%E3%82%AF%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fblog%2Fsharepoint-online%2FTesting-backoff-logic%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-online%2FTesting-backoff-logic.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-online%2FTesting-backoff-logic.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jpspsupport/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+bbb3ba93-4a16-5be6-8803-2259e84dca0e%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BPDF%C2%A0%E3%82%92%E9%96%B2%E8%A6%A7%E3%81%99%E3%82%8B%E9%9A%9B%E3%81%AE%E7%9B%A3%E6%9F%BB%E3%83%AD%E3%82%B0%E8%A8%98%E9%8C%B2%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fblog%2Fsharepoint-online%2Fpdf-and-audit-log%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-online%2Fpdf-and-audit-log.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-online%2Fpdf-and-audit-log.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/" data-id="cmfc98xl300010np9go5cabfu" class="article-share-link">共有</a>
+        <a data-url="https://jpspsupport.github.io/blog/sharepoint-online/pdf-and-audit-log/" data-id="cmfc98xlh000k0np9erl46xx3" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>HTTP 調整リトライ ロジックを実装した際に、特に弊社公開記事に記載されたカスタムコードを変更している場合は、論理テストを実施していただく必要があります。</p>
-<p>残念ながら、SharePoint Online に対して明示的に調整を発生させることはできないため、現実的なシナリオに即したテストなどを実施することはできません。<br>テストのためにクラウド側に不要な負荷をかけることも適切ではない行動となります。<br>そのため、基本的には論理テストを実施し、様々な想定シナリオに対するロジック テストをパスした後で、テスト済みのコードをマスターに組み込むという方法が現実的です。</p>
-<p>今回の記事では、その疑似的な論理テストを実施する方法の 1 つをご紹介します。</p>
-<h2 id="対処策"><a href="#対処策" class="headerlink" title="対処策"></a>対処策</h2><p>Fiddler の AutoResponder を使用して、CSOM などの通信に対して、任意の HTTP 応答を返して動作検証する方法があります。</p>
-<p>まず、Fiddler を起動し、トレースを取得しておきます。</p>
-<p><img src="/blog/sharepoint-online/Testing-backoff-logic/Fiddler1.png" alt="Fiddler1"></p>
-<ol>
-<li>応答を書き換えたい通信を、画面左ペインから選択します。</li>
-<li>[AutoResponder] タブをクリックします。</li>
-<li>Enable Rules と Unmatched requests passthrough がチェックされていることを確認します。</li>
-<li>[Add Rule] をクリックします。</li>
-</ol>
-<p>次に緑の欄の設定に移ります。</p>
-<p><img src="/blog/sharepoint-online/Testing-backoff-logic/Fiddler2.png" alt="Fiddler2"></p>
-<ol start="5">
-<li>Rule Editor の下のセレクトボックスで [Create New Response…] をプルダウンから選択します。</li>
-<li>[Save] をクリックすると、ダイアログがポップアップされます。</li>
-</ol>
-<p><img src="/blog/sharepoint-online/Testing-backoff-logic/Fiddler3-1.png" alt="Fiddler3-1"></p>
-<ol start="7">
-<li><p>[Raw] タブをクリックします。</p>
-</li>
-<li><p>HTTP 応答のステータス コードに 429 TOO MANY REQUESTS を指定します。</p>
-</li>
-<li><p>HTTP 応答ヘッダーに Retry-After を指定して、任意の数値を指定します。<br>テスト用ですので、短い値でも問題ありません。</p>
-</li>
-<li><p>[Save] をクリックします。</p>
-</li>
-<li><p>ダイアログを [x] を押して閉じます。</p>
-</li>
-</ol>
-<p>この後、Fiddler を起動してロジックをテストしてください。指定された間隔でリトライが実行されることが確認できます。</p>
-<p><img src="/blog/sharepoint-online/Testing-backoff-logic/Fiddler4.png" alt="Fiddler4"></p>
-<h2 id="参考リンク"><a href="#参考リンク" class="headerlink" title="参考リンク"></a>参考リンク</h2><p>タイトル : SharePoint Online で調整またはブロックを回避する方法<br>アドレス : <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/sharepoint/dev/general-development/how-to-avoid-getting-throttled-or-blocked-in-sharepoint-online">https://docs.microsoft.com/ja-jp/sharepoint/dev/general-development/how-to-avoid-getting-throttled-or-blocked-in-sharepoint-online</a></p>
-<p>タイトル : jpspsupport/CSOMRetrySample<br>アドレス : <a target="_blank" rel="noopener" href="https://github.com/jpspsupport/CSOMRetrySample">https://github.com/jpspsupport/CSOMRetrySample</a></p>
+        <p>本記事では、SharePoint Online 上に保存された PDF ファイルを閲覧した場合に、Microsoft Purview の監査ログに記録されるアクティビティについて説明します。</p>
+<h2 id="監査ログの概要"><a href="#監査ログの概要" class="headerlink" title="監査ログの概要"></a>監査ログの概要</h2><p>SharePoint Online 上でファイルを閲覧 (情報パネルのプレビュー表示を含む) またはダウンロードした場合、その結果、Microsoft Purview の監査ログにアクティビティが記録されます。  <br>通常、ファイルを閲覧した場合は <strong>FileAccessed</strong>、ダウンロードした場合は <strong>FileDownloaded</strong> のアクティビティが記録されます。</p>
+<p>詳細については、以下の公開情報をご参照ください：<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/purview/audit-log-activities">監査ログ アクティビティ | Microsoft Learn</a>  </p>
+<h2 id="PDF-の動作について"><a href="#PDF-の動作について" class="headerlink" title="PDF の動作について"></a>PDF の動作について</h2><p>SharePoint Online 上で PDF ファイルをプレビュー表示した場合、他の Office ファイルとは異なり、監査ログには <strong>FileDownloaded</strong> と記録されます。  <br>これは、PDF ファイルを閲覧する際に内部的にファイルをダウンロードする API が呼び出される仕様によるためです。端末にファイルが保存されることはありませんが、実際にはダウンロード処理が行われるため、<strong>FileDownloaded</strong> のアクティビティが記録されます。</p>
+<p>なお、ファイルのダウンロード権限を持たないユーザーが PDF を閲覧した場合は、内部的なダウンロード処理は行われず、プレビュー用のデータがサービス側で生成・取得されますため、監査ログには <strong>FileAccessed</strong> が記録されます。</p>
+<h2 id="留意事項"><a href="#留意事項" class="headerlink" title="留意事項"></a>留意事項</h2><p>上記の挙動は SharePoint Online の既知の仕様であり、変更の予定も現状ございません。  <br>監査ログをご利用の際は、本仕様をご理解いただくようお願いいたします。</p>
+<p>今回の記事は以上となります。 ご不明点等がありましたら、弊社サポート サービスまでお気軽にお問い合わせください。</p>
 
       
       
@@ -163,7 +130,7 @@
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>
 
         
-        <a href="https://github.com/jpspsupport/blog/edit/main/articles/sharepoint-online/Testing-backoff-logic.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jpspsupport/blog/edit/main/articles/sharepoint-online/pdf-and-audit-log.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -171,19 +138,19 @@
     
 <nav id="article-nav">
   
-    <a href="../use-sp-modernization-scanner/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="../Unable-to-open-Teams-link/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">次の記事</strong>
       <div class="article-nav-title">
         
-          SharePoint Modernization Scanner を使用して、移行対象のワークフローを抽出する
+          Teams に投稿された SharePoint リンクが開かない問題について
         
       </div>
     </a>
   
   
-    <a href="../pnp-powershell-with-app-only-token/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../multibyte-url/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">PnP PowerShell でテナントのフルコントロール権限を使用して接続する方法について</div>
+      <div class="article-nav-title">サブサイトまたはライブラリの URL にマルチバイト文字を含めるとアクセスできない場合があります</div>
     </a>
   
 </nav>
@@ -206,7 +173,7 @@
           </li>
         
           <li>
-            <a href="../pdf-and-audit-log/">PDF を閲覧する際の監査ログ記録について</a>
+            <a href="">PDF を閲覧する際の監査ログ記録について</a>
           </li>
         
           <li>
