@@ -4,25 +4,20 @@
   <meta charset="utf-8">
   
   
-  <title>HTTP 調整のリトライロジックのテスト方法 | Japan SharePoint Support Blog</title>
+  <title>Teams に投稿された SharePoint リンクが開かない問題について | Japan SharePoint Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="背景HTTP 調整リトライ ロジックを実装した際に、特に弊社公開記事に記載されたカスタムコードを変更している場合は、論理テストを実施していただく必要があります。 残念ながら、SharePoint Online に対して明示的に調整を発生させることはできないため、現実的なシナリオに即したテストなどを実施することはできません。テストのためにクラウド側に不要な負荷をかけることも適切ではない行動となります">
+  <meta name="description" content="特定の条件下で、Teams に投稿された SharePoint へのハイパーリンクが開かない事象が発生することがあります。これは複数の製品が関係しており、特定の URL 構造とセキュリティ機能が影響しています。 前提条件この問題は、以下の条件が重なった場合に発生する可能性があります。    SharePoint サイトのフォルダー名が「数字+ピリオド+日本語」の形式である   Teamsクライアン">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTTP 調整のリトライロジックのテスト方法">
-<meta property="og:url" content="https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/index.html">
+<meta property="og:title" content="Teams に投稿された SharePoint リンクが開かない問題について">
+<meta property="og:url" content="https://jpspsupport.github.io/blog/sharepoint-online/Unable-to-open-Teams-link/index.html">
 <meta property="og:site_name" content="Japan SharePoint Support Blog">
-<meta property="og:description" content="背景HTTP 調整リトライ ロジックを実装した際に、特に弊社公開記事に記載されたカスタムコードを変更している場合は、論理テストを実施していただく必要があります。 残念ながら、SharePoint Online に対して明示的に調整を発生させることはできないため、現実的なシナリオに即したテストなどを実施することはできません。テストのためにクラウド側に不要な負荷をかけることも適切ではない行動となります">
+<meta property="og:description" content="特定の条件下で、Teams に投稿された SharePoint へのハイパーリンクが開かない事象が発生することがあります。これは複数の製品が関係しており、特定の URL 構造とセキュリティ機能が影響しています。 前提条件この問題は、以下の条件が重なった場合に発生する可能性があります。    SharePoint サイトのフォルダー名が「数字+ピリオド+日本語」の形式である   Teamsクライアン">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/Fiddler1.png">
-<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/Fiddler2.png">
-<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/Fiddler3-1.png">
-<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/Fiddler4.png">
-<meta property="article:published_time" content="2020-06-07T15:00:00.000Z">
-<meta property="article:modified_time" content="2025-09-09T04:38:43.519Z">
+<meta property="article:published_time" content="2025-09-08T15:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-09T04:38:43.520Z">
 <meta property="article:author" content="SharePoint Support Japan">
 <meta property="article:tag" content="SharePoint Online">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/Fiddler1.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan SharePoint Support Blog" type="application/atom+xml">
   
@@ -84,7 +79,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-sharepoint-online/Testing-backoff-logic" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-sharepoint-online/Unable-to-open-Teams-link" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -93,7 +88,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      HTTP 調整のリトライロジックのテスト方法
+      Teams に投稿された SharePoint リンクが開かない問題について
     </h1>
   
 
@@ -101,53 +96,59 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2020-06-07T15:00:00.000Z" itemprop="datePublished">2020-06-08</time>
+  <time datetime="2025-09-08T15:00:00.000Z" itemprop="datePublished">2025-09-09</time>
 </a>
         
         
-        <a href="https://github.com/jpspsupport/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+1442d1c6-cd82-5912-aac2-b6cf74ae4385%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BHTTP+%E8%AA%BF%E6%95%B4%E3%81%AE%E3%83%AA%E3%83%88%E3%83%A9%E3%82%A4%E3%83%AD%E3%82%B8%E3%83%83%E3%82%AF%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fblog%2Fsharepoint-online%2FTesting-backoff-logic%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-online%2FTesting-backoff-logic.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-online%2FTesting-backoff-logic.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jpspsupport/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+96b8edc6-71ac-551d-91df-b5e336cfdd0b%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BTeams+%E3%81%AB%E6%8A%95%E7%A8%BF%E3%81%95%E3%82%8C%E3%81%9F+SharePoint+%E3%83%AA%E3%83%B3%E3%82%AF%E3%81%8C%E9%96%8B%E3%81%8B%E3%81%AA%E3%81%84%E5%95%8F%E9%A1%8C%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fblog%2Fsharepoint-online%2FUnable-to-open-Teams-link%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-online%2FUnable-to-open-Teams-link.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-online%2FUnable-to-open-Teams-link.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpspsupport.github.io/blog/sharepoint-online/Testing-backoff-logic/" data-id="cmfc2986q00010nrternf0z3h" class="article-share-link">共有</a>
+        <a data-url="https://jpspsupport.github.io/blog/sharepoint-online/Unable-to-open-Teams-link/" data-id="cmfc2986r00020nrthepicwxv" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>HTTP 調整リトライ ロジックを実装した際に、特に弊社公開記事に記載されたカスタムコードを変更している場合は、論理テストを実施していただく必要があります。</p>
-<p>残念ながら、SharePoint Online に対して明示的に調整を発生させることはできないため、現実的なシナリオに即したテストなどを実施することはできません。<br>テストのためにクラウド側に不要な負荷をかけることも適切ではない行動となります。<br>そのため、基本的には論理テストを実施し、様々な想定シナリオに対するロジック テストをパスした後で、テスト済みのコードをマスターに組み込むという方法が現実的です。</p>
-<p>今回の記事では、その疑似的な論理テストを実施する方法の 1 つをご紹介します。</p>
-<h2 id="対処策"><a href="#対処策" class="headerlink" title="対処策"></a>対処策</h2><p>Fiddler の AutoResponder を使用して、CSOM などの通信に対して、任意の HTTP 応答を返して動作検証する方法があります。</p>
-<p>まず、Fiddler を起動し、トレースを取得しておきます。</p>
-<p><img src="/blog/sharepoint-online/Testing-backoff-logic/Fiddler1.png" alt="Fiddler1"></p>
-<ol>
-<li>応答を書き換えたい通信を、画面左ペインから選択します。</li>
-<li>[AutoResponder] タブをクリックします。</li>
-<li>Enable Rules と Unmatched requests passthrough がチェックされていることを確認します。</li>
-<li>[Add Rule] をクリックします。</li>
-</ol>
-<p>次に緑の欄の設定に移ります。</p>
-<p><img src="/blog/sharepoint-online/Testing-backoff-logic/Fiddler2.png" alt="Fiddler2"></p>
-<ol start="5">
-<li>Rule Editor の下のセレクトボックスで [Create New Response…] をプルダウンから選択します。</li>
-<li>[Save] をクリックすると、ダイアログがポップアップされます。</li>
-</ol>
-<p><img src="/blog/sharepoint-online/Testing-backoff-logic/Fiddler3-1.png" alt="Fiddler3-1"></p>
-<ol start="7">
-<li><p>[Raw] タブをクリックします。</p>
+        <p>特定の条件下で、Teams に投稿された SharePoint へのハイパーリンクが開かない事象が発生することがあります。これは複数の製品が関係しており、特定の URL 構造とセキュリティ機能が影響しています。</p>
+<h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><p>この問題は、以下の条件が重なった場合に発生する可能性があります。</p>
+<ul>
+<li>  SharePoint サイトのフォルダー名が「数字+ピリオド+日本語」の形式である</li>
+<li>  Teamsクライアントに絶対パスの URL を貼り付けて投稿した際、URLに xsdata 以降の文字列が自動的に付与される(*)</li>
+</ul>
+<p>(*) xsdata 以降の文字列は、Microsoft Defender for Office 365 の ATP（Advanced Threat Protection） による既定の動作です。</p>
+<h2 id="Teams-ATP（Advanced-Threat-Protection）とは？"><a href="#Teams-ATP（Advanced-Threat-Protection）とは？" class="headerlink" title="Teams ATP（Advanced Threat Protection）とは？"></a>Teams ATP（Advanced Threat Protection）とは？</h2><p>ATP は、Microsoft Defender for Office 365 の一部として提供されるセキュリティ機能で、Microsoft Teams、SharePoint Online、OneDrive にアップロード・共有されるファイルやリンクに対して、マルウェアや悪意あるリンクの検出・防御を行います。<br>Teams で共有される SharePoint Online のリンクはブラウザで開かれるため、Safe Links 機能による検査が必要です。</p>
+<h2 id="再現手順"><a href="#再現手順" class="headerlink" title="再現手順"></a>再現手順</h2><ol>
+<li><p>SharePoint のライブラリを作成し、以下のようなフォルダー構成を用意します。</p>
+<p> 「10.TESTフォルダー」 → 「2025年度」 → 「7月出張」</p>
 </li>
-<li><p>HTTP 応答のステータス コードに 429 TOO MANY REQUESTS を指定します。</p>
+<li><p>「2025年度」フォルダーに移動した状態で、「7月出張」フォルダーの [・・・] → [詳細] → [パス] の右にある [直接リンクをコピーする] をクリックして、「7月出張」フォルダーの絶対パスを取得します。</p>
 </li>
-<li><p>HTTP 応答ヘッダーに Retry-After を指定して、任意の数値を指定します。<br>テスト用ですので、短い値でも問題ありません。</p>
+<li><p>  取得した URL を Teams クライアントに貼り付けて投稿します。</p>
 </li>
-<li><p>[Save] をクリックします。</p>
-</li>
-<li><p>ダイアログを [x] を押して閉じます。</p>
+<li><p> Teams 上でリンクをクリックし、ブラウザーで SharePoint サイトを開きます</p>
 </li>
 </ol>
-<p>この後、Fiddler を起動してロジックをテストしてください。指定された間隔でリトライが実行されることが確認できます。</p>
-<p><img src="/blog/sharepoint-online/Testing-backoff-logic/Fiddler4.png" alt="Fiddler4"></p>
-<h2 id="参考リンク"><a href="#参考リンク" class="headerlink" title="参考リンク"></a>参考リンク</h2><p>タイトル : SharePoint Online で調整またはブロックを回避する方法<br>アドレス : <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/sharepoint/dev/general-development/how-to-avoid-getting-throttled-or-blocked-in-sharepoint-online">https://docs.microsoft.com/ja-jp/sharepoint/dev/general-development/how-to-avoid-getting-throttled-or-blocked-in-sharepoint-online</a></p>
-<p>タイトル : jpspsupport/CSOMRetrySample<br>アドレス : <a target="_blank" rel="noopener" href="https://github.com/jpspsupport/CSOMRetrySample">https://github.com/jpspsupport/CSOMRetrySample</a></p>
-
+<h2 id="現象"><a href="#現象" class="headerlink" title="現象"></a>現象</h2><p>リンク内の日本語部分が Unicode エスケープされることで、以下の問題が発生します</p>
+<ul>
+<li>  「レンダリングで不明なエラーが発生しました」と表示される</li>
+<li>  フォルダー名の日本語部分が Unicode エスケープされた状態で表示される</li>
+</ul>
+<h2 id="期待される動作"><a href="#期待される動作" class="headerlink" title="期待される動作"></a>期待される動作</h2><ul>
+<li>  日本語部分が Unicode エスケープされず、正しいフォルダー名が表示される   </li>
+<li>  レンダリング エラーが発生しない</li>
+</ul>
+<h2 id="対処方法"><a href="#対処方法" class="headerlink" title="対処方法"></a>対処方法</h2><ol>
+<li><p> フォルダー名に「数字 + ピリオド + 日本語」の組み合わせを使用することを避ける</p>
+</li>
+<li><p>フォルダー URL の取得方法を変更する（絶対パスではなく、以下の方法を推奨）：</p>
+<p> a) フォルダーの [・・・] → [リンクのコピー] をクリック</p>
+<p> b) 表示される選択画面上で、リンクの種類を選択します。</p>
+<ul>
+<li>共有する範囲を変更したくない場合、[既存のアクセス権をもつユーザー専用] を選択します。</li>
+</ul>
+<p> c) [適用] → [リンクのコピー] をクリックします。</p>
+</li>
+</ol>
+<br>
+今回の記事は以上となります。 ご不明点等がありましたら、弊社サポート サービスまでお気軽にお問い合わせください。
       
       
         <div class="article-disclaimer">
@@ -163,7 +164,7 @@
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>
 
         
-        <a href="https://github.com/jpspsupport/blog/edit/main/articles/sharepoint-online/Testing-backoff-logic.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jpspsupport/blog/edit/main/articles/sharepoint-online/Unable-to-open-Teams-link.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -171,19 +172,10 @@
     
 <nav id="article-nav">
   
-    <a href="../use-sp-modernization-scanner/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">次の記事</strong>
-      <div class="article-nav-title">
-        
-          SharePoint Modernization Scanner を使用して、移行対象のワークフローを抽出する
-        
-      </div>
-    </a>
   
-  
-    <a href="../pnp-powershell-with-app-only-token/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../multibyte-url/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">PnP PowerShell でテナントのフルコントロール権限を使用して接続する方法について</div>
+      <div class="article-nav-title">サブサイトまたはライブラリの URL にマルチバイト文字を含めるとアクセスできない場合があります</div>
     </a>
   
 </nav>
@@ -202,7 +194,7 @@
       <ul>
         
           <li>
-            <a href="../Unable-to-open-Teams-link/">Teams に投稿された SharePoint リンクが開かない問題について</a>
+            <a href="">Teams に投稿された SharePoint リンクが開かない問題について</a>
           </li>
         
           <li>
