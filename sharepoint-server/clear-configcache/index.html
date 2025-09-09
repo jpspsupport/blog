@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/05_cache_ini_after.png">
 <meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/06_start-timer-service.png">
 <meta property="article:published_time" content="2022-06-19T15:00:00.000Z">
-<meta property="article:modified_time" content="2025-09-09T07:54:27.588Z">
+<meta property="article:modified_time" content="2025-09-09T08:17:22.365Z">
 <meta property="article:author" content="SharePoint Support Japan">
 <meta property="article:tag" content="SharePoint Server">
 <meta name="twitter:card" content="summary">
@@ -109,7 +109,7 @@
         
         <a href="https://github.com/jpspsupport/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+e633b98b-02d3-5ffb-b6bc-94f8a50b5c7d%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E6%A7%8B%E6%88%90%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%81%AE%E5%86%8D%E4%BD%9C%E6%88%90+%28SharePoint+Server%29%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fblog%2Fsharepoint-server%2Fclear-configcache%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-server%2Fclear-configcache.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-server%2Fclear-configcache.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/" data-id="cmfc98xlk000s0np9hpiy445h" class="article-share-link">共有</a>
+        <a data-url="https://jpspsupport.github.io/blog/sharepoint-server/clear-configcache/" data-id="cmfca2dxy000s0no0hi64cupb" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -214,6 +214,16 @@
 </ul>
 </li>
 </ol>
+<blockquote>
+<p><strong>補足: IIS の再起動について</strong><br>SharePoint Server では、これまで iisreset コマンドをご案内しており、実際に多くのお客様環境で問題なくご利用いただいていますが、厳密には公式なサポート対象外となっております。<br>そのため、より確実で推奨される方法としては、IIS マネージャーを使用して以下の手順で再起動いただくことをおすすめいたします。</p>
+<p><strong>IIS サービスの再起動 (IIS マネージャーを使用する場合)</strong></p>
+<ol>
+<li>SharePoint サーバーに管理者権限でログインします。</li>
+<li>IIS マネージャーを起動します。</li>
+<li>サーバー名を選択し、画面右側の [操作] ウィンドウで [再起動] をクリックします。</li>
+</ol>
+<p>IIS の再起動中は一時的にユーザーがサイトにアクセスできなくなりますので、ユーザー影響の少ない時間帯に実施ください。</p>
+</blockquote>
 <hr>
 <h2 id="スクリプトを使用した構成キャッシュの再作成手順"><a href="#スクリプトを使用した構成キャッシュの再作成手順" class="headerlink" title="スクリプトを使用した構成キャッシュの再作成手順"></a>スクリプトを使用した構成キャッシュの再作成手順</h2><p>ここでは、<a href="#%E6%89%8B%E5%8B%95%E3%81%AB%E3%82%88%E3%82%8B%E6%A7%8B%E6%88%90%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%81%AE%E5%86%8D%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86">手動による構成キャッシュの再作成手順</a> と同等の手順を実施するための PowerShell スクリプトをご案内いたします。<br>なお、本スクリプトでは、<a href="#%E6%89%8B%E5%8B%95%E3%81%AB%E3%82%88%E3%82%8B%E6%A7%8B%E6%88%90%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%81%AE%E5%86%8D%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86">手動による構成キャッシュの再作成手順</a> における IISRESET コマンド (手順 5-2) の処理は含まれておりませんため、管理者様にて別途ご実施いただく必要がございます。</p>
 <h3 id="作業による影響-1"><a href="#作業による影響-1" class="headerlink" title="作業による影響"></a>作業による影響</h3><p><a href="#%E6%89%8B%E5%8B%95%E3%81%AB%E3%82%88%E3%82%8B%E6%A7%8B%E6%88%90%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%81%AE%E5%86%8D%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86">手動による構成キャッシュの再作成手順</a> をご参考ください。</p>
