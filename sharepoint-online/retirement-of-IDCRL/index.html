@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>(MC1184649) IDCRL 認証の廃止について | Japan SharePoint Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="この投稿では、Microsoft 365 管理センターのメッセージ センターに MC1184649 として掲載されている IDCRL 認証の廃止について記載します。SharePointOnlineCredentials クラスなどの IDCRL プロトコルを使ったソリューションをご利用の場合は、先進認証に切り替える必要がありますのでご確認ください。※IDCRL 認証の廃止に関する最新の情報は、メッ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(MC1184649) IDCRL 認証の廃止について">
+<meta property="og:url" content="https://jpspsupport.github.io/blog/sharepoint-online/retirement-of-IDCRL/index.html">
+<meta property="og:site_name" content="Japan SharePoint Support Blog">
+<meta property="og:description" content="この投稿では、Microsoft 365 管理センターのメッセージ センターに MC1184649 として掲載されている IDCRL 認証の廃止について記載します。SharePointOnlineCredentials クラスなどの IDCRL プロトコルを使ったソリューションをご利用の場合は、先進認証に切り替える必要がありますのでご確認ください。※IDCRL 認証の廃止に関する最新の情報は、メッ">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpspsupport.github.io/blog/sharepoint-online/retirement-of-IDCRL/IDCRLSuccessSignInActivity.png">
+<meta property="article:published_time" content="2025-11-17T15:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-18T08:24:28.104Z">
+<meta property="article:author" content="SharePoint Support Japan">
+<meta property="article:tag" content="SharePoint Online">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpspsupport.github.io/blog/sharepoint-online/retirement-of-IDCRL/IDCRLSuccessSignInActivity.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan SharePoint Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpspsupport.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan SharePoint Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの SharePoint に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-sharepoint-online/retirement-of-IDCRL" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      (MC1184649) IDCRL 認証の廃止について
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2025-11-17T15:00:00.000Z" itemprop="datePublished">2025-11-18</time>
+</a>
+        
+        
+        <a href="https://github.com/jpspsupport/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+d01ec795-bb8d-56b3-875a-fc8b6efe34d2%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%28MC1184649%29+IDCRL+%E8%AA%8D%E8%A8%BC%E3%81%AE%E5%BB%83%E6%AD%A2%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpspsupport.github.io%2Fblog%2Fsharepoint-online%2Fretirement-of-IDCRL%2F%29%0A*+Content+Source%3A+%5Barticles%2Fsharepoint-online%2Fretirement-of-IDCRL.md%5D%28https%3A%2F%2Fgithub.com%2Fjpspsupport%2Fblog%2Fblob%2Fmain%2Farticles%2Fsharepoint-online%2Fretirement-of-IDCRL.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpspsupport.github.io/blog/sharepoint-online/retirement-of-IDCRL/" data-id="cmi4b55vl000q0njzdmc68t12" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>この投稿では、Microsoft 365 管理センターのメッセージ センターに MC1184649 として掲載されている IDCRL 認証の廃止について記載します。<br>SharePointOnlineCredentials クラスなどの IDCRL プロトコルを使ったソリューションをご利用の場合は、先進認証に切り替える必要がありますのでご確認ください。<br>※IDCRL 認証の廃止に関する最新の情報は、メッセージ センターにて MC1184649 をご確認ください。</p>
+<span id="more"></span>
+
+<h2 id="IDCRL-認証の廃止について"><a href="#IDCRL-認証の廃止について" class="headerlink" title="IDCRL 認証の廃止について"></a>IDCRL 認証の廃止について</h2><p>SharePoint Online および OneDrive for Business では、従来の IDCRL (Identity Client Run Time Library) 認証を使用することで、ユーザー/パスワード ベースの認証が可能でした。<br>しかしながら、このような従来の認証方式では、条件付きアクセスや多要素認証 (MFA) などの最新のセキュリティ技術を使用することができないため、先進認証への切り替えが推奨されていました。<br>今後は、従来の認証方式によるセキュリティ リスクを軽減するため、IDCRL 認証がブロックされる動作となります。</p>
+<h3 id="IDCRL-認証の廃止のスケジュール"><a href="#IDCRL-認証の廃止のスケジュール" class="headerlink" title="IDCRL 認証の廃止のスケジュール"></a>IDCRL 認証の廃止のスケジュール</h3><p>2026/1/31 以降は既定で IDCRL 認証がブロックされます。Set-SPOTenant コマンドで AllowLegacyAuthProtocolsEnabledSetting と LegacyAuthProtocolsEnabled を True に設定することで、2026/4/30 までは IDCRL 認証を使用できます。<br>2026/5/1 以降は、IDCRL 認証がテナント全体で完全にブロックされます。<br>最新のスケジュールはメッセージ センターの MC1184649 をご確認ください。</p>
+<h2 id="IDCRL-認証の使用状況を確認する方法"><a href="#IDCRL-認証の使用状況を確認する方法" class="headerlink" title="IDCRL 認証の使用状況を確認する方法"></a>IDCRL 認証の使用状況を確認する方法</h2><p>テナントで IDCRL 認証が使用されているかどうかは Microsoft Purview 監査ログの “IDCRLSuccessSignIn” アクティビティを検索することでご確認いただけます。</p>
+<ol>
+<li>管理者アカウントで、Microsoft Purview (<a target="_blank" rel="noopener" href="https://purview.microsoft.com/">https://purview.microsoft.com/</a>)  にサインインします。</li>
+<li>左側メニュー [監査] をクリックします。</li>
+<li>アクティビティで “IDCRLSuccessSignIn” を指定します。</li>
+<li>検索の開始日と終了日を指定して、[検索] をクリックします。</li>
+<li>検索ジョブが登録されますので、しばらくして “ジョブの状態” が “完了済み” になりましたら、検索名をクリックして内容を確認します。</li>
+<li>“IDCRLSuccessSignIn” アクティビティが記録されている場合、IDCRL 認証が使用されていると判断できます。<br><img src="/blog/sharepoint-online/retirement-of-IDCRL/IDCRLSuccessSignInActivity.png" alt="IDCRLSuccessSignInActivity.png"></li>
+</ol>
+<p>下記のブログ記事も合わせてご確認ください。</p>
+<p>タイトル : Migrating from IDCRL authentication to modern authentication in SharePoint<br>アドレス : <a target="_blank" rel="noopener" href="https://devblogs.microsoft.com/microsoft365dev/migrating-from-idcrl-authentication-to-modern-authentication-in-sharepoint/">https://devblogs.microsoft.com/microsoft365dev/migrating-from-idcrl-authentication-to-modern-authentication-in-sharepoint/</a></p>
+<h2 id="IDCRL-認証から先進認証への移行方法"><a href="#IDCRL-認証から先進認証への移行方法" class="headerlink" title="IDCRL 認証から先進認証への移行方法"></a>IDCRL 認証から先進認証への移行方法</h2><p>先進認証への移行では、Microsoft Authentication Library (MSAL) を利用し、OAuth ベースでトークンを取得する方法が推奨されます。<br>CSOM で先進認証を使用する手順については、以下の公開情報をご参照ください。</p>
+<p>タイトル : CSOM for .NET Framework の代わりに CSOM for .NET Standard を使用する<br>アドレス : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/sharepoint/dev/sp-add-ins/using-csom-for-dotnet-standard">https://learn.microsoft.com/ja-jp/sharepoint/dev/sp-add-ins/using-csom-for-dotnet-standard</a></p>
+<h3 id="SharePointOnlineCredentials-クラスを使って先進認証に対応する"><a href="#SharePointOnlineCredentials-クラスを使って先進認証に対応する" class="headerlink" title="SharePointOnlineCredentials クラスを使って先進認証に対応する"></a>SharePointOnlineCredentials クラスを使って先進認証に対応する</h3><p>CSOM の SharePointOnlineCredentials クラスで IDCRL 認証を使用している場合は、Microsoft.SharePointOnline.CSOM パッケージを 16.1.26615.12013 以降にアップグレードすることで先進認証に対応できます。<br>最新のパッケージは NuGet Gallery よりダウンロードいただけます。</p>
+<p>タイトル : NuGet Gallery | Microsoft.SharePointOnline.CSOM<br>アドレス : <a target="_blank" rel="noopener" href="https://www.nuget.org/packages/Microsoft.SharePointOnline.CSOM">https://www.nuget.org/packages/Microsoft.SharePointOnline.CSOM</a></p>
+<p>パッケージのアップグレード後、認証部分を以下のように書き換えます。<br>※ ユーザーの多要素認証 (MFA) が有効な場合は 4 つ目の引数 (interactiveAuth パラメータ) に True を指定します。</p>
+<p>PowerShell の例</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$credentials</span> = <span class="built_in">New-Object</span> Microsoft.SharePoint.Client.SharePointOnlineCredentials(&#123;username&#125;, &#123;password&#125;, &#123;useModernAuth:true&#125;, &#123;interactiveAuth:true/false&#125;);</span><br></pre></td></tr></table></figure>
+<p>実行例</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$credentials</span> = <span class="built_in">New-Object</span> Microsoft.SharePoint.Client.SharePointOnlineCredentials(<span class="variable">$user</span>, <span class="variable">$password</span>, <span class="variable">$true</span>, <span class="variable">$false</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="PnP-PowerShell-を使って先進認証に対応する"><a href="#PnP-PowerShell-を使って先進認証に対応する" class="headerlink" title="PnP PowerShell を使って先進認証に対応する"></a>PnP PowerShell を使って先進認証に対応する</h3><p>Microsoft Entra ID に登録したアプリケーションを介して認証を行いたい場合は、PnP PowerShell を使用する方法が最も工数の少ない切り替え方法になります。<br>具体的には、Connect-PnPOnline コマンドで SharePoint Online に接続後、Get-PnPContext コマンドで ClientContext クラスのオブジェクトを取得することで、後述の CSOM スクリプトを実行することが可能です。</p>
+<ol>
+<li>CSOM スクリプトの認証部分を以下のように書き換えます。</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Connect-PnPOnline</span> <span class="literal">-Url</span> <span class="string">&quot;https://&lt;tenant&gt;.sharepoint.com/sites/&lt;SiteName&gt;&quot;</span> <span class="literal">-ClientId</span> <span class="string">&quot;&lt;アプリケーション (クライアント) ID &gt;&quot;</span> <span class="literal">-Tenant</span> <span class="string">&quot;&lt;テナント ドメイン&gt;&quot;</span> <span class="literal">-Interactive</span></span><br></pre></td></tr></table></figure>
+
+<p>実行例</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Connect-PnPOnline</span> <span class="literal">-Url</span> <span class="string">&quot;https://contoso.sharepoint.com/sites/test&quot;</span> <span class="literal">-ClientId</span> <span class="string">&quot;11111111-2222-3333-4444-555555555555&quot;</span> <span class="literal">-Tenant</span> <span class="string">&quot;contoso.onmicrosoft.com&quot;</span> <span class="literal">-Interactive</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>Get-PnPContext コマンドで ClientContext クラスのオブジェクトを取得します。</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ctx</span> = <span class="built_in">Get-PnPContext</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>後続の処理を実行します。以下は、サイト名を取得するサンプル スクリプトです。</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$web</span> = <span class="variable">$ctx</span>.Web;</span><br><span class="line"><span class="variable">$ctx</span>.Load(<span class="variable">$web</span>);</span><br><span class="line"><span class="variable">$ctx</span>.ExecuteQuery();</span><br><span class="line"><span class="built_in">Write-Host</span> <span class="string">&quot;サイト タイトル: <span class="variable">$</span>(<span class="variable">$web</span>.Title)&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="PnP-の補足情報"><a href="#PnP-の補足情報" class="headerlink" title="PnP の補足情報"></a>PnP の補足情報</h4><p>PnP PowerShell は、Microsoft が主導するオープンソース プロジェクトとして開発が行われております。<br>ベストプラクティスに沿った、すぐに利用できる多数のコマンドが多数あり、開発/運用コストの削減のメリットから、多くのお客様が利用している実績もございます。<br>ただし、コミュニティを介してサポートが提供される形態となっており、一般的な利用方法や利用時の問題等の全般的な質問については、はじめに GitHub のコミュニティ上で開発者と直接やり取りし情報収集をしていただく必要がございます。<br>この点につきましては、予めご了承くださいますようお願いいたします。</p>
+<p>タイトル : PnP PowerShell の概要<br>アドレス : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/powershell/sharepoint/sharepoint-pnp/sharepoint-pnp-cmdlets">https://learn.microsoft.com/ja-jp/powershell/sharepoint/sharepoint-pnp/sharepoint-pnp-cmdlets</a></p>
+<h4 id="PnP-PowerShell-の利用開始手順は、以下のドキュメントをご参照ください。"><a href="#PnP-PowerShell-の利用開始手順は、以下のドキュメントをご参照ください。" class="headerlink" title="PnP PowerShell の利用開始手順は、以下のドキュメントをご参照ください。"></a>PnP PowerShell の利用開始手順は、以下のドキュメントをご参照ください。</h4><p>タイトル : PnP PowerShell<br>アドレス : <a target="_blank" rel="noopener" href="https://pnp.github.io/powershell/">https://pnp.github.io/powershell/</a></p>
+<p>タイトル : Authentication<br>アドレス : <a target="_blank" rel="noopener" href="https://pnp.github.io/powershell/articles/authentication.html">https://pnp.github.io/powershell/articles/authentication.html</a></p>
+<p>今回の記事は以上となります。 ご不明点等がありましたら、弊社サポート サービスまでお気軽にお問い合わせください。  </p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li></ul>
+
+        
+        <a href="https://github.com/jpspsupport/blog/edit/main/articles/sharepoint-online/retirement-of-IDCRL.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../Unable-to-open-Teams-link/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Teams に投稿された SharePoint リンクが開かない問題について</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">(MC1184649) IDCRL 認証の廃止について</a>
+          </li>
+        
+          <li>
+            <a href="../Unable-to-open-Teams-link/">Teams に投稿された SharePoint リンクが開かない問題について</a>
+          </li>
+        
+          <li>
+            <a href="../pdf-and-audit-log/">PDF を閲覧する際の監査ログ記録について</a>
+          </li>
+        
+          <li>
+            <a href="../../sharepoint-server/clear-configcache/">構成キャッシュの再作成 (SharePoint Server)</a>
+          </li>
+        
+          <li>
+            <a href="../multibyte-url/">サブサイトまたはライブラリの URL にマルチバイト文字を含めるとアクセスできない場合があります</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/" rel="tag">SharePoint Online</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Server/" rel="tag">SharePoint Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/windows-365/" rel="tag">windows 365</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Online/">SharePoint Online</a><span class="tag-list-count">15</span><ul></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/SharePoint-Server/">SharePoint Server</a><span class="tag-list-count">2</span><ul></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/11/">2025 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/09/">2025 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/12/">2024 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/09/">2024 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/07/">2024 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/04/">2023 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/07/">2021 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2021/03/">2021 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/07/">2020 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/06/">2020 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/05/">2020 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/04/">2020 / 04</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/SharePoint-Online/" style="font-size: 20px;">SharePoint Online</a> <a href="../../tags/SharePoint-Server/" style="font-size: 15px;">SharePoint Server</a> <a href="../../tags/windows-365/" style="font-size: 10px;">windows 365</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2025 SharePoint Support Japan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
