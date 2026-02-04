@@ -39,6 +39,8 @@ SharePoint Online および OneDrive for Business では、従来の IDCRL (Iden
 タイトル : Migrating from IDCRL authentication to modern authentication in SharePoint
 アドレス : https://devblogs.microsoft.com/microsoft365dev/migrating-from-idcrl-authentication-to-modern-authentication-in-sharepoint/
 
+※（2026/2/4 追記）公開情報のタイトルに「CSOM for .NET Framework の代わりに CSOM for .NET Standard を使用する」と記載がありますが、CSOM for .NET Framework でも OAuth ベースの認証を使用することは可能です。
+
 ## IDCRL 認証から先進認証への移行方法
 
 先進認証への移行では、Microsoft Authentication Library (MSAL) を利用し、OAuth ベースでトークンを取得する方法が推奨されます。
@@ -113,3 +115,4 @@ PnP PowerShell は、Microsoft が主導するオープンソース プロジェ
 アドレス : https://pnp.github.io/powershell/articles/authentication.html
 
 今回の記事は以上となります。 ご不明点等がありましたら、弊社サポート サービスまでお気軽にお問い合わせください。  
+
